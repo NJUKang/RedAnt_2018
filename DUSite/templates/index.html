@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>红蚂蚁实验室</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/index.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <!-- 可选的Bootstrap主题文件（一般不使用） -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="top_background">
+        <div class="col-md-4 column">
+            <img id="logo" src="/static/images/redant.png">
+        </div>
+        <div class="col-md-2 column">
+            <a id="modal-384686" href="#modal-login" role="button" class="btn" data-toggle="modal">登录</a>
+            <div class="modal fade" id="modal-login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel"> 登录 </h4>
+                        </div>
+                        <div class="modal-body">
+                            <label for="account">邮箱</label>
+                            <div class="input-group modal-group">
+                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <label for="password">密码</label>
+                            <div class="input-group modal-group">
+                                <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">登录</button>
+                            <button type="button" class="btn btn-link">忘记密码</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="navbar">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 项目组 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="/webTeam/">网站组</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 课程展示 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="#">设置栏目</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 论坛 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="#">设置栏目</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 联系我们 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="#">设置栏目</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 个人中心 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="#">设置栏目</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> 用户管理 <span class="caret"></span> </a>
+                <ul class="dropdown-menu">
+                    <li> <a href="#">操作</a> </li>
+                    <li class="divider"></li>
+                    <li> <a href="#">设置栏目</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="col-md-8 column">
+                <img class="img-left content-item" src="/static/images/about1.jpg">
+                <p class="content-item">
+                    Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa.
+                </p>
+            </div>
+            <div class="col-md-3 column">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">14</span> news
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span> news
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span> news
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-8 column">
+                <p class="content-item">
+                    Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa.
+                </p>
+            </div>
+            <div class="col-md-8 column">
+                <img class="img-left content-item" src="/static/images/about1.jpg">
+                <p class="content-item">
+                    Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse sollicitudin velit sed leo. Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla. Donec porta diam eu massa.
+                </p>
+            </div>
+            <div class="col-md-3 column">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <span class="badge">14</span> news
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">1</span> news
+                    </li>
+                    <li class="list-group-item">
+                        <span class="badge">2</span> news
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer">
+            <h3 class="footer-item">contact us</h3>
+            <p class="footer-item">Etiam cursus leo vel metus. Nulla facilisi. </p>
+            <p class="footer-item">Designed &amp; developed by RedAnt Lab &amp; Students</p>
+            <p class="footer-item"> Copyright © RedAnt Lab, 2017-2018</p>
+            <div class="footer-item">
+                <a id="contact" href="#modal-contact" role="button" class="btn btn-info" data-toggle="modal">contact</a>
+                <div class="modal fade" id="modal-contact" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h4 class="modal-title" id="myModalLabel"> send a email to us </h4>
+                            </div>
+                            <div class="modal-body">
+                                <label for="account">邮箱</label>
+                                <div class="input-group modal-group">
+                                    <input type="text" class="form-control" placeholder="email" aria-describedby="basic-addon1">
+                                </div>
+                                <label for="password">内容</label>
+                                <div class="input-group modal-group">
+                                    <input type="text" class="form-control e-context" placeholder="context" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+                                <button type="button" class="btn btn-primary">send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

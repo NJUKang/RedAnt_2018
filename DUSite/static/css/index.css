@@ -1,0 +1,82 @@
+body{
+		
+}
+.nav{
+
+	height: 3.5em;
+}
+#navbar{
+
+}
+#logo{
+	margin: 2em;
+}
+
+.dropdown{
+
+	width: 15%;
+	font-size: 1.15em;
+	text-align: center;
+	
+}
+.dropdown-menu{
+	
+}
+.content-item{
+	margin:0 2rem 0 2rem;
+}
+.img-left{
+	float: left;
+	
+}
+.img-right{
+	float: right;
+	
+}
+.content{
+	width: 100%;
+	margin: 3rem 0 0;
+	padding: 4rem 0 2rem;
+	background-color: rgba(228, 228, 228, 1);
+}
+.top_background{
+	background-color: rgba(39, 68, 114, 1);
+	height: 8.5em;
+	width: 100%;
+}
+#modal-384686{
+	font-size: 1em;
+	color: white;
+	float: right;
+}
+.col-md-2{
+	float: right;
+}
+.col-md-3{
+	float: right;
+}
+.col-md-8{
+  margin-bottom: 3em;
+}
+.footer{
+	background-color: rgba(39, 68, 114, 1);
+	width: 100%;
+	padding: 3em;
+	
+}
+.footer-item{
+	color: white;
+	text-align: center;
+}
+.send{
+	display: flex;
+	justify-content: center;
+}
+
+.modal-group{
+	width: 90%;
+}
+
+.e-context{
+	height: 10em;
+}
