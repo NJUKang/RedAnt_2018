@@ -1,0 +1,98 @@
+/*导航栏*/
+nav{
+	margin: 0;
+	padding: 0;
+	font-size: 1.6rem;
+	font-weight: 600;
+	background-color: #009966;
+	opacity: 0.8;
+	z-index: 100;
+	position: relative;
+}
+ul.navbar-menu{
+	width: 100%;
+	margin: 0;
+	height: 5rem;
+	box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	display: flex;
+	padding: 0;
+	justify-content: space-around;
+}
+ul.navbar-menu>li{
+	float: left;
+	width: 10rem;
+	height: 3.5rem;
+	list-style: none;
+	text-align: center;
+	/*margin: 0 6rem;*/
+	vertical-align: middle;
+	padding-top: 1.2rem;
+	z-index: 100;
+	display:block;/*这个比较关键，因为a本身就是联级元素，本身不具有宽高，用这个把它变成块级元素，这样前面设置的宽和高就能起作用了*/
+}
+ul.navbar-menu .dropdown-menu{
+	height: 0;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	width: 20rem;
+	display:block;
+    transition: height 3s ease;
+    z-index: 100;
+}
+ul.navbar-menu .dropdown:hover .dropdown-menu{
+	height: auto;
+}
+ul.navbar-menu li a{
+	text-decoration: none;
+	color: black;
+	font-weight: 595;
+}
+ul.navbar-menu li a:hover{
+	color: white ;
+	font-weight: 600;
+}
+.dropdown:hover .dropdown-menu{
+	overflow: visible;
+}
+ul.dropdown-menu li{
+	position:relative;
+	width: 100%;
+	height: 3rem;
+	margin: 0;
+	right: auto;
+	left: 20%;
+	padding-top: 1.2rem;
+	display: block;
+	background-color: #009966;
+    transition: background-color 0.8s ease;
+}
+ul.dropdown-menu li:hover{
+	background-color: #DCDCDC;
+}
+ul.dropdown-menu li.lastmenuli{
+	border-radius: 0px 0px 10px 10px;
+	box-shadow: 0 0.2rem 1.5px #CDC9C9;
+}
+.caret {
+    display: inline-block;
+    width: 0px;
+    height: 0px;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.dropdown:hover .caret{
+    border-bottom: 4px dashed;
+    border-top: 0;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+    vertical-align: middle;
+}
+/*.thisleaf {
+	display: block;
+	height: 3.2rem !important;
+	border-bottom: 6px solid orange;
+}*/

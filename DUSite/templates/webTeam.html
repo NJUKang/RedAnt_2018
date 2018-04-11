@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>网站组</title>
+
+<link rel="alternate" type="application/rss+xml" title="" href="/index/">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+<link rel="stylesheet" type="text/css" href="/static/WebTeam/css/index.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/essaystyle.css">
+<!--<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/base.css">-->
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/index.css">
+<!-- <link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/bootstrap.min.css"> 
+ --><link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/animate.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/jindutiao.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/liebiao.css">
+
+<link rel="stylesheet" type="text/css" href="/static/index/css/home1com.css">
+<link rel="stylesheet" href="/static/index/css/jquery.tiles.min.css">
+<link rel="stylesheet" href="/static/index/css/normalize.css">
+<script src="/static/index/js/jquery.tiles.js"></script>
+<script src="/static/index/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+</head>
+<body>
+    <!-- <script>
+            window.onload=function(){
+                var i=document.getElementsByTagName('input').length;
+                for(var n=0;n<i;n++){
+                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
+                        document.getElementsByTagName('input')[n].value='';
+                    }
+                }
+                var check=document.getElementsByClassName("check");
+                for(var x=0;x<check.length;x++){
+                    check[x].style.opacity="0";
+                }
+            }
+        </script> -->
+        <div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                <p>Our Lab :</p>
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+            	<div class="person">
+            		<a href="/myaccount/">
+            	    	<img src="/static/images/23.jpg" alt="用户头像">
+            	    </a>
+            	    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/myaccount/">
+	                		<sapn id="member-name">个人中心</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+                    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/index/logout/">
+	                		<sapn id="member-name">注销</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+            	</div>
+            </div>
+        </div>
+        <!-- 导航栏 -->
+        <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown"><a href="#" title="Button">项目组 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/webTeam/">网站组 </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/course/">视频、PPT</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="#" title="Button">论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/" title="Button" target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+    
+<div class="wrapper">
+<section>
+  <div class="container">
+  <!--侧边页面内导航栏-->
+    <ul class="docs-nav">
+      <li><h3>网站组</h3></li>
+      <li><a href="#1" class="cc-active">项目组简介</a></li>
+      <li><a href="#2" class="cc-active">项目进度</a></li>
+        
+      <li><a href="#3" class="cc-active">项目组日志</a></li>
+        {% if perms.RedAnt.add_blog %}
+      <li><a href="#4" class="cc-active">编写日志</a></li>
+        {% endif %}
+      <li><a href="#5" class="cc-active">学习资源</a></li>
+      <li class="separator"></li>
+    </ul>
+    <div class="docs-content">
+      <h3 id="1"> 网站组简介 </h3>
+      <br><br>
+      <p>
+              大清早，去寻我大哥；他立在堂门外看天，我便走到他背后，拦住门，格外沉静，格外和气的对他说，<br><br>
+        　　“大哥，我有话告诉你。”<br><br>
+        　　“你说就是，”他赶紧回过脸来，点点头。<br><br>
+        　　“我只有几句话，可是说不出来。大哥，大约当初野蛮的人，都吃过一点人。后来因为心思不同，有的不吃人了，一味要好，便变了人，变了真的人。有的却还吃，——也同虫子一样，有的变了鱼鸟猴子，一直变到人。有的不要好，至今还是虫子。这吃人的人比不吃人的人，何等惭愧。怕比虫子的惭愧猴子，还差得很远很远。<br><br>
+      </p>
+      <hr>
+      <h3 id="2">项目进度</h3>
+      <br><br>
+      <div class="sub">
+        <div class="subbg">
+            <!-- 通过js控制div的宽度实现进度条的进度，用动画控制前进效果 -->
+          <div style="width:220.8666666666667px;"><span></span></div>
+            <!-- /宽度为25+81x等级x70% -->
+        </div>
+        <div class="subnum">
+            <div class="divison"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="divnum">
+                <ul>
+                    <!-- / .ov已过等级样式 .on达到等级样式 -->
+                    <li class="z-ov">0</li>
+                    <li class="z-ov">1</li>
+                    <li class="z-on">2</li>
+                    <li class="">3</li>
+                    <li class="">4</li>
+                    <li class="">5</li>
+                    <li class="">6</li>
+                    <li class="">7</li>
+                    <li class="">8</li>
+                    <li class="">9</li>
+                    <li class="">10</li>
+                </ul>
+            </div>
+
+        </div>
+      </div>
+      <br><br>
+
+     <br><br><br>
+     
+      <h3 id="3">日志</h3>
+      <ul class="cbp_tmtimeline" style=" margin-top: 4rem; width: 90rem">
+
+          {% for blog in blogs %}
+              <li>
+              <time class="cbp_tmtime" ><span id="11.8"><td>{{ blog.modify_time|date:"m-d" }}</td></span> <span><td>{{ blog.modify_time|date:"Y" }}</td></span></time>
+              <div class="cbp_tmicon"></div>
+              <div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s" style="padding-bottom: 1rem;    padding-top: 1rem;    margin-left: 15rem;    height: 18rem; ">
+              <h4>{{ blog.Name }}</h4>
+              <p><span class="blogpic"><img src="{{ blog.ImagePath }}"></span>{{ blog.Description }}</p>
+              <a href='{{ blog.Content}}' target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+              </div>
+              </li>
+          {% endfor %}
+
+      </ul>
+      <hr>
+    {% if perms.RedAnt.add_blog %}
+      <h3 id="4">编写日志</h3>
+      {{ form.media }}
+      <br><br>
+        <form action="" method="post">
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit">
+            </form>
+        <hr>
+    {% endif %}
+      <hr>
+      <h3 id="5">学习资源</h3>
+      <ol class="rectangle-list">
+
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+      </ol>
+    </div>
+  </div>
+  <a href="#" class="backTop">返回顶部</a>
+</section>
+</div>
+<footer>
+  <div class="">
+  <hr>
+    <p> Copyright 红蚂蚁实验室</p>
+  <hr>
+  </div>
+</footer>
+<script src="/static/WebTeam/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/prettify/prettify.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/index.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/layout.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/jquery.js"></script>
+</body>
+</html>

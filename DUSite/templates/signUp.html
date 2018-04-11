@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>注册</title>
+	<meta charset="utf-8">
+	<meta name="autor" content="LHM">
+	<link rel="stylesheet" type="text/css" href="/static/css/signUp.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+	<!-- <script src="jquery-1.12.4.min.js"></script> -->
+	<!-- <script type="text/javascript" src="jquery.cookie.js"></script> -->
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.form.js"></script>
+</head>
+<body>
+	<script>
+	    window.onload=function(){
+	    	var i=document.getElementsByTagName('input').length;
+	    	for(var n=0;n<i;n++){
+	    		if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
+	    			document.getElementsByTagName('input')[n].value='';
+	    		}
+	    	}
+	    }
+	</script>
+	<header class="sign-up-header"><a href="/index/">返回</a></header>
+	<div id="sign-up-container" class="sign-up-container">
+		<div id="sign-up-title">用户注册</div>
+		<form id="sign-up" class="sign-up" method="post" style="vertical-align: middle;">
+			<div id="sign-up-mail" class="sign-up-mail show">
+				<span>&nbsp &nbsp &nbsp &nbsp邮箱：</span>
+				<input id='mail' type="text" name="mail" placeholder="请输入注册邮箱" onchange="checkMail(this)" >
+				<span class="check check-mail"><i class="fa fa-exclamation-circle" id="tip"></i><span id="check-mail"></span></span>
+			</div>
+			<div id="sign-up-name" class="sign-up-name show">
+				<span>&nbsp &nbsp &nbsp &nbsp姓名：</span>
+				<input id="name" type="text" name="name" placeholder="请输入注册姓名（2-10个字符）" maxlength="10" minlength="2" onchange="checkAccount(this)">
+				<span class="check check-name"><i class="fa fa-exclamation-circle"></i><span id="check-name"></span></span>
+			</div>
+			<div id="sign-up-psw" class="sign-up-password show">
+				<span>&nbsp &nbsp &nbsp &nbsp密码：</span>
+				<input id="psw" type="password" name="password" placeholder="6-20位密码 (字母、数字、横线及下划线)" maxlength="20" minlength="6" onchange="checkPsw(this)" >
+				<span class="check check-psw"><i class="fa fa-exclamation-circle"></i><span id="check-psw"></span></span>
+			</div>
+			<div id="confirm-psw" class="sign-up-password show check-psw">
+				<span>确认密码：</span>
+				<input id="cf-psw" type="password" name="password" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
+				<span class="check check-cf-psw"><i class="fa fa-exclamation-circle"></i><span id="check-cf-psw"></span></span>
+			</div>
+			<!-- <fieldset>
+				<input type="checkbox" id="showPwd">
+	            <label for="showPwd">显示密码</label>
+        	</fieldset> -->
+			<input type="submit" href="/index/" name="提交" value="注册" id="sign-up-btn" class="sign-up-btn">
+		</form>
+	</div>
+	<footer>@大连理工大学红蚂蚁实验室</footer>
+	<script type="text/javascript" src="/static/js/signUp.js"></script>
+</body>
+</html>

@@ -69,7 +69,8 @@
 	margin: 130px 0 0 0; 
 	padding: 0; 
 	list-style: none; 
-	position: relative; 
+	position: relative;
+	left: -6%;
 }
 .cbp_tmtimeline:before { 
 	content: ''; 
@@ -88,7 +89,8 @@
 	width: 100px; 
 	padding-right: 30px; 
 	position: absolute; 
-	margin-left: 20px 
+	margin-left: 20px ;
+
 }
 .cbp_tmtimeline > li .cbp_tmtime span { 
 	display: block; 
@@ -150,7 +152,7 @@
 	border-radius: 50%;
 	box-shadow: 0 0 0 3px #f2deb8; 
 	text-align: center; 
-	left: 17%; 
+	left: 24%;
 	top: 15px; 
 	margin: 0 0 0 -25px; 
 }

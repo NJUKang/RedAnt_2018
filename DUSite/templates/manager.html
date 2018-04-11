@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>用户管理</title>
+	<meta charset="utf-8">
+	<meta>
+	<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/manager.css">
+	<script src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+</head>
+<body>
+	<!-- 修改密码，管理参与的项目 -->
+	<script type="text/javascript">
+		
+	</script>
+	<div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                <p>Our Lab :</p>
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+            	<div class="person">
+            		<a href="/myaccount/">
+            	    	<img src="/static/images/23.jpg" alt="用户头像">
+            	    </a>
+            	    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/myaccount/">
+	                		<sapn id="member-name">个人中心</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+                    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/index/logout/">
+	                		<sapn id="member-name">注销</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+            	</div>
+            </div>
+        </div>
+        <!-- 导航栏 -->
+        <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown"><a href="#" title="Button">项目组 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/webTeam/">网站组 </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/course/">视频、PPT</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="#" title="Button">论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/" title="Button" target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="main-container" id="main">
+        	<div class="vacant left"></div>
+        	<div class="vacant right"></div>
+        	<div class="sidebar">
+                <div class="rw-nav-title"></div>
+	            <div class="reverse-nav">
+	                <ul>
+	                    <li class="leaf thisleaf"><a href="/manage/">普通用户 </a>
+	                    </li>
+	                    <li class="leaf"><a href="/manage/powerUser/">高级用户 </a>
+	                    </li>
+	                    <li class="leaf"><a href="#">用户日志 </a>
+	                    </li>
+	                </ul>
+	            </div>
+        	</div><!--该注释行用于解决inline-block的间距问题
+        	 --><div class="manager">
+        		<div class="manage-btn">
+                    <input type="button" name="delete" value=" 删 除 " class="btn btn-full" id="delete">
+                    <input type="button" name="change-rank" value=" 升级为高级用户 " class="btn btn-half prim" id="change-rank">
+                </div>
+                <div class="prim-list">
+                    <table>
+                        <tr>
+                            <th><input type="checkbox" name="all" class="select-all"></th>
+                            <th>用户名</th>
+                            <th>用户邮箱</th>
+{#                            <th>用户Id</th>#}
+                        </tr>
+                        {% for u in users %}
+                        <tr>
+                            <td><input type="checkbox" name="select"></td>
+                            <td>{{ u }}</td>
+                            <td>{{ u.email }}</td>
+{#                            <td>2018030211</td>#}
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    <div id="hide-del" style="display: none;"></div>
+                </div>
+        	</div>
+        </div>
+        <footer>@大连理工大学红蚂蚁实验室</footer>
+</body>
+<script type="text/javascript" src="/static/js/manager.js"></script>
+</html>

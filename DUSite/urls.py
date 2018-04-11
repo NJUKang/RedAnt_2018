@@ -16,8 +16,16 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^ueditor/',include('DjangoUeditor.urls')),
     url(r'^index/$', RedAnt.views.index),
+    url(r'^index/sign_in/$', RedAnt.views.sign_in),
+    url(r'^index/sign_up/$', RedAnt.views.sign_up),
+    url(r'^index/logout/$', RedAnt.views.logout_system),
     url(r'^webTeam/$', RedAnt.views.webTeam),
     url(r'^webTeam/(?P<name>.*)$', RedAnt.views.readmore),
+    url(r'^course/$', RedAnt.views.course),
+    url(r'^manage/$', RedAnt.views.manage),
+    url(r'^manage/powerUser/$', RedAnt.views.vip_manage),
+    url(r'^edit_blog/(?P<name>.*)/$', RedAnt.views.edit_blog),
+    url(r'^myaccount/$', RedAnt.views.account_manager),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>个人中心</title>
+	<meta charset="utf-8">
+	<meta>
+	<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+	<script src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+</head>
+<body>
+	<!-- 修改密码，管理参与的项目 -->
+	<script type="text/javascript">
+		window.onload=function(){
+                var username=document.getElementById('username');
+                username.value='{{ user }}';
+                var uImag=document.getElementById('main').getElementsByClassName('change')[0].getElementsByTagName('img')[0];
+                uImag.src="/static/images/23.jpg";
+            }
+	</script>
+	<div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                <p>Our Lab :</p>
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+            	<div class="person">
+            		<a href="/myaccount/">
+            	    	<img src="/static/images/23.jpg" alt="用户头像">
+            	    </a>
+            	    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/myaccount/">
+	                		<sapn id="member-name">个人中心</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+                    <span class="drop-menu" id="drop-menu">
+	            	    <a href="/index/logout/">
+	                		<sapn id="member-name">注销</sapn>
+	                	</a>
+	                	<!-- <i class="fa fa-angle-down"></i>
+	                	<ul id="personal-set" class="personal-set">
+	                		<li>
+	                			<a>aaa</a>
+	                		</li>
+	                		<li>
+	                			<a>bbb</a>
+	                		</li>
+	                		<li>
+	                			<a>ccc</a>
+	                		</li>
+	                		<li>
+	                			<a>ddd</a>
+	                		</li>
+	                		<li>
+	                			<a>fff</a>
+	                		</li>
+	                		<li>
+	                			<a>lll</a>
+	                		</li>
+	                	</ul> -->
+                	</span>
+            	</div>
+            </div>
+        </div>
+    <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown"><a href="#" title="Button">项目组 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/webTeam/">网站组 </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="lastmenuli"><a href="/course/">视频、PPT</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="#" title="Button">论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/" title="Button" target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="main-container" id="main">
+        	<div class="vacant left"></div>
+        	<div class="vacant right"></div>
+        	<div class="sidebar">
+	            <div class="reverse-nav">
+	                <ul>
+	                    <li class="leaf"><a href="#">资 &nbsp;源</a>
+	                    </li>
+	                    <li class="leaf"><a href="#">论 &nbsp;坛 </a>
+	                    </li>
+	                    <li class="leaf thisleaf"><a href="#">个人设置 </a>
+	                    </li>
+	                	<li class="leaf"><a href="#">消 &nbsp;息 </a>
+	                	</li>
+	                </ul>
+	            </div>
+        	</div><!--该注释行用于解决inline-block的间距问题
+        	 --><div class="change">
+        		<table>
+        			<tr><td>
+        				<img  alt="用户头像"></td>
+        				<td><a class="btn btn-half"><input type="file" unselectable='on' class="hide change-userImag"  accept="image/*">更改头像</a>
+        			</td></tr>
+        			<tr class="name"><td class="setting-title">
+        				<span>用户名</span></td>
+        				<td>
+        					<input type="text" name="username" id="username" onchange="checkAccount(this)" disabled="disabled">
+        					<i class="check fa fa-close" id="check-name"><span></span></i>
+        					<a href="javascript:void(0)" class="disable">修改用户名</a>
+        			</td></tr>
+{#        			<tr><td class="setting-title">#}
+{#        				<span>用户id</span></td>#}
+{#        				<td><span class="setted">{{ user.first_name }}</span>#}
+{#        				<span class="setted-tip"><i class="fa fa-check"></i>自动绑定</span>#}
+{#        			</td></tr>#}
+        			<tr><td class="setting-title">
+        				<span>账号密码</span></td>
+        				<td>
+        					<!-- ??? -->
+        					<span class="change-only"><a href="javascript:void(0)" id="showSetPsw">修改密码</a></span>
+        					<div class="set-psw">
+        						<div class="show">
+									<span>新密码：&nbsp &nbsp </span>
+									<input id="psw" type="password" name="password" placeholder="6-20位密码" maxlength="20" minlength="6" onchange="checkPsw(this)"  onfocus="setPsw(this)" onblur="blurPsw(this)">
+									<span class="check check-psw" id="psw-tip"><i class="fa fa-exclamation-circle"></i><span id="check-psw"></span></span>
+								</div>
+								<div id="confirm-psw" class="show check-psw">
+									<span>确认密码：</span>
+									<input id="cf-psw" type="password" name="password" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
+									<span class="check check-cf-psw" id="conf-tip"><i class="fa fa-exclamation-circle"></i><span id="check-cf-psw"></span></span>
+								</div>
+								<a href="javascript:void(0)" id="hideSetPsw">取消</a>
+        					</div>
+        			</td></tr>
+        			<tr class="mail"><td class="setting-title">
+        				<span>邮箱</span></td>
+        				<td><span class="setted" id="mail">{{ user.email }}</span>
+        				<span class="setted-tip"><i class="fa fa-check"></i>已绑定</span>
+        				<a href="javascript:void(0)">更换邮箱</a>
+        			</td></tr>
+        			<tr><td class="setting-title">
+        				<span>参与项目</span></td>
+        				<td>
+        					<ul class="pro-list" id="pro-list">
+        						<li>
+        							<span>信息发布网站开发</span>
+        							<i class="fa fa-minus-square remove"> 移除 </i>
+        						</li>
+        						<li>
+        							<span>Android应用开发</span>
+        							<i class="fa fa-minus-square remove"> 移除 </i>
+        						</li>
+        						<li>
+        							<span>论文检测</span>
+        							<i class="fa fa-minus-square remove"> 移除 </i>
+        						</li>
+        					</ul>
+        					<!-- <span class="change-only"><a href="#">管理项目</a></span> -->
+        			</td></tr>
+        		</table>
+        		<input type="submit" name="save" value="保存" class="save btn btn-full" id="save">
+        	</div>
+        </div>
+        <footer>@大连理工大学红蚂蚁实验室</footer>
+        <script type="text/javascript" src="/static/js/personalCenter.js"></script>
+</body>
+</html>

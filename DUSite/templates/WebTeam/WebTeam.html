@@ -8,54 +8,57 @@
 <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>网站组</title>
 
-<link rel="alternate" type="application/rss+xml" title="" href="../index.html">
+<link rel="alternate" type="application/rss+xml" title="" href="/index/">
 <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/css/index.css">
+<link rel="stylesheet" type="text/css" href="/static/WebTeam/css/index.css">
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 
-<link rel="stylesheet" href="/static/css/xiangmuzu/essaystyle.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/base.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/index.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/bootstrap.min.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/animate.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/jindutiao.css">
-<link rel="stylesheet" href="/static/css/xiangmuzu/liebiao.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/essaystyle.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/base.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/index.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/bootstrap.min.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/animate.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/jindutiao.css">
+<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/liebiao.css">
 </head>
 <body>
-<div class="top_background">
+    <div class="top_background">
         <div class="col-md-4 column">
-            <img id="logo" src="/static/images/redant.png">
+            <img id="logo" src="/static/WebTeam/images/redant.png">
         </div>
-        <div class="col-md-8 column">
-            <a id="modal-384686" href="#modal-login" role="button" class="btn" data-toggle="modal">登录</a>
-            <div class="modal fade" id="modal-login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <h4 class="modal-title" id="myModalLabel"> 登录 </h4>
-                        </div>
-                        <div class="modal-body">
-                            <label for="account">邮箱</label>
-                            <div class="input-group modal-group">
-                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                            </div>
-                            <label for="password">密码</label>
-                            <div class="input-group modal-group">
-                                <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">登录</button>
-                            <button type="button" class="btn btn-link">忘记密码</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-2 column">
+            <span class="spe-enlight">欢迎您，</span>
+            <span> {{ name }} </span>
+            <span class="spe-enlight"><a href="/index/logout/">注销</a></span>
+{#            <a id="modal-384686" href="#modal-login" role="button" class="btn" data-toggle="modal">登录</a>#}
+{#            <div class="modal fade" id="modal-login" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">#}
+{#                <div class="modal-dialog">#}
+{#                    <div class="modal-content">#}
+{#                        <div class="modal-header">#}
+{#                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>#}
+{#                            <h4 class="modal-title" id="myModalLabel"> 登录 </h4>#}
+{#                        </div>#}
+{#                        <div class="modal-body">#}
+{#                            <label for="account">邮箱</label>#}
+{#                            <div class="input-group modal-group">#}
+{#                                <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">#}
+{#                            </div>#}
+{#                            <label for="password">密码</label>#}
+{#                            <div class="input-group modal-group">#}
+{#                                <input type="password" class="form-control" placeholder="password" aria-describedby="basic-addon1">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="modal-footer">#}
+{#                            <button type="button" class="btn btn-primary">登录</button>#}
+{#                            <button type="button" class="btn btn-link">忘记密码</button>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
         </div>
-</div>
+    </div>
 <div class="container" id="navbar">
         <ul class="nav nav-pills">
             <li role="presentation" class="dropdown">
@@ -116,7 +119,9 @@
       <li><h3>网站组</h3></li>
       <li><a href="#1" class="cc-active">项目组简介</a></li>
       <li><a href="#2" class="cc-active">项目进度</a></li>
+        {% if perms.RedAnt.add_blog %}
       <li><a href="#3" class="cc-active">Ueditor</a></li>
+        {% endif %}
       <li><a href="#4" class="cc-active">项目组日志</a></li>
       <li><a href="#5" class="cc-active">学习资源</a></li>
       <li class="separator"></li>
@@ -134,7 +139,6 @@
       <hr>
       <h3 id="2">项目进度</h3>
       <br><br>
-      <h4>项目一</h4>
       <div class="sub">
         <div class="subbg">
             <!-- 通过js控制div的宽度实现进度条的进度，用动画控制前进效果 -->
@@ -145,6 +149,7 @@
             <div class="divison"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="divnum">
                 <ul>
+                    <!-- / .ov已过等级样式 .on达到等级样式 -->
                     <li class="z-ov">0</li>
                     <li class="z-ov">1</li>
                     <li class="z-on">2</li>
@@ -158,96 +163,14 @@
                     <li class="">10</li>
                 </ul>
             </div>
-          <!-- / .ov已过等级样式 .on达到等级样式 -->
+
         </div>
       </div>
       <br><br>
-      <h4>项目二</h4>
-      <div class="sub">
-        <div class="subbg">
-            <!-- 通过js控制div的宽度实现进度条的进度，用动画控制前进效果 -->
-          <div style="width:520.8666666666667px;"><span></span></div>
-            <!-- /宽度为25+81x等级x70% -->
-        </div>
-        <div class="subnum">
-            <div class="divison"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="divnum">
-                <ul>
-                    <li class="z-ov">0</li>
-                    <li class="z-ov">1</li>
-                    <li class="z-ov">2</li>
-                    <li class="z-ov">3</li>
-                    <li class="z-ov">4</li>
-                    <li class="z-ov">5</li>
-                    <li class="z-on">6</li>
-                    <li class="">7</li>
-                    <li class="">8</li>
-                    <li class="">9</li>
-                    <li class="">10</li>
-                </ul>
-            </div>
-          <!-- / .ov已过等级样式 .on达到等级样式 -->
-        </div>
-      </div>
-     <br>
-     <br>
-     <h4>项目三</h4>
-     <div class="sub">
-        <div class="subbg">
-            <!-- 通过js控制div的宽度实现进度条的进度，用动画控制前进效果 -->
-          <div style="width:620.8666666666667px;"><span></span></div>
-            <!-- /宽度为25+81x等级x70% -->
-        </div>
-        <div class="subnum">
-            <div class="divison"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="divnum">
-                <ul>
-                    <li class="z-ov">0</li>
-                    <li class="z-ov">1</li>
-                    <li class="z-ov">2</li>
-                    <li class="z-ov">3</li>
-                    <li class="z-ov">4</li>
-                    <li class="z-ov">5</li>
-                    <li class="z-ov">6</li>
-                    <li class="z-on">7</li>
-                    <li class="">8</li>
-                    <li class="">9</li>
-                    <li class="">10</li>
-                </ul>
-            </div>
-          <!-- / .ov已过等级样式 .on达到等级样式 -->
-        </div>
-     </div>
-     <br><br>
-     <h4>项目四</h4>
-     <div class="sub">
-        <div class="subbg">
-            <!-- 通过js控制div的宽度实现进度条的进度，用动画控制前进效果 -->
-          <div style="width:800px;"><span></span></div>
-            <!-- /宽度为25+81x等级x70% -->
-        </div>
-        <div class="subnum">
-            <div class="divison"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="divnum">
-                <ul>
-                    <li class="z-ov">0</li>
-                    <li class="z-ov">1</li>
-                    <li class="z-ov">2</li>
-                    <li class="z-ov">3</li>
-                    <li class="z-ov">4</li>
-                    <li class="z-ov">5</li>
-                    <li class="z-ov">6</li>
-                    <li class="z-ov">7</li>
-                    <li class="z-ov">8</li>
-                    <li class="z-on">9</li>
-                    <li class="">10</li>
-                </ul>
-            </div>
-          <!-- / .ov已过等级样式 .on达到等级样式 -->
-        </div>
-     </div>
+
      <br><br><br>
      <hr>
+    {% if perms.RedAnt.add_blog %}
       <h3 id="3">编写日志</h3>
       {{ form.media }}
       <br><br>
@@ -258,6 +181,7 @@
             <input type="submit" value="Submit">
             </form>
         <hr>
+    {% endif %}
       <h3 id="4">日志</h3>
       <ul class="cbp_tmtimeline" style=" margin-top: 4rem; width: 90rem">
 
@@ -268,7 +192,7 @@
               <div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s" style="padding-bottom: 1rem;    padding-top: 1rem;    margin-left: 15rem;    height: 18rem; ">
               <h4>{{ blog.Name }}</h4>
               <p><span class="blogpic"><img src="{{ blog.ImagePath }}"></span>{{ blog.Description }}</p>
-              <a href='{{ blog.Name}}' target="_blank" class="readmore">阅读全文&gt;&gt;</a>
+              <a href='{{ blog.Content}}' target="_blank" class="readmore">阅读全文&gt;&gt;</a>
               </div>
               </li>
           {% endfor %}
@@ -318,7 +242,10 @@
   <hr>
   </div>
 </footer>
-<script src="/static/js/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/prettify/prettify.js"></script>
+<script src="/static/WebTeam/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/prettify/prettify.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/index.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/layout.js"></script>
+<script type="text/javascript" src="/static/WebTeam/js/jquery.js"></script>
 </body>
 </html>

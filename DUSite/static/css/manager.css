@@ -1,0 +1,35 @@
+.main-container .manager{
+	height: 100%;
+	overflow: hidden;
+	outline: none;
+	position: relative;
+	margin: 0;
+	width: 40%;
+	display: inline-block;
+	left: -5%;
+}
+.main-container .manager table{
+	text-align: center;
+}
+.main-container .manager table th{
+	min-width: 15rem;
+}
+.main-container .manager table th:first-child{
+	min-width: auto;
+}
+.main-container .manager input[type='button']{
+	margin: 2rem;
+	margin-left: 1rem;
+	/*left: 2rem;
+	position: relative;*/
+}
+.main-container .manager .btn-full{
+	background-color: #ea6f5a;
+	border-color: #ea6f5a;
+}
+.main-container .manager table tr:hover{
+	background-color: #EEE;
+}
+.main-container .manager table tr:first-child:hover{
+	background-color: white;
+}
