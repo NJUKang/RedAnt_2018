@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>{{ team.Name }}</title>
+
+<link rel="alternate" type="application/rss+xml" title="" href="/index/">
+<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+<link rel="stylesheet" type="text/css" href="/static/css/projectTeamIndex.css">
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+
+<link rel="stylesheet" href="/static/css/essaystyle.css">
+<!--<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/base.css">-->
+<link rel="stylesheet" href="/staticcss/projectTeamIndex.css">
+<!-- <link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/bootstrap.min.css"> 
+ -->
+<link rel="stylesheet" href="/static/css/animate.css">
+<link rel="stylesheet" href="/static/css/jindutiao.css">
+<link rel="stylesheet" href="/static/css/liebiao.css">
+
+<!--<link rel="stylesheet" type="text/css" href="/static/css/home1com.css">-->
+<link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+<link rel="stylesheet" href="/static/css/jquery.tiles.css">
+<link rel="stylesheet" href="/static/css/normalize.css">
+<script src="/static/js/jquery.tiles.js"></script>
+<script src="/static/js/jquery-1.8.3.min.js"></script>
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+</head>
+<body>
+    <!-- <script>
+            window.onload=function(){
+                var i=document.getElementsByTagName('input').length;
+                for(var n=0;n<i;n++){
+                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
+                        document.getElementsByTagName('input')[n].value='';
+                    }
+                }
+                var check=document.getElementsByClassName("check");
+                for(var x=0;x<check.length;x++){
+                    check[x].style.opacity="0";
+                }
+            }
+        </script> -->
+        <div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+              <div class="person">
+                <a href="/myaccount/">
+                    <img src="/static/images/23.jpg" alt="用户头像">
+                  </a>
+                    <div><span class="drop-menu" id="drop-menu">
+                        <a href="/myaccount/">
+                            个人中心
+                        </a>
+                    </span>
+                    <span class="drop-menu" id="drop-menu">
+                        <a href="/index/logout/">
+                            注销
+                        </a>
+                    </span>
+                    </div>
+                  
+              </div>
+            </div>
+        </div>
+        <!-- 导航栏 -->
+       <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown">项目组 <span class="caret"></span>
+                        <ul class="dropdown-menu pull-right">
+
+                        {% for team in teams %}
+                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
+                        {% endfor %}
+                        {% if perms.RedAnt.add_projectteam %}
+                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
+                         {% endif %}
+
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
+                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
+                            <li class="lastmenuli"><a href="#">添加课程</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="#" >论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+    
+<div class="wrapper">
+<section>
+  <div class="container">
+  <!--侧边页面内导航栏-->
+    <ul class="docs-nav">
+      <li><h3>{{ team.Name }}</h3></li>
+      <li><a href="#1" class="cc-active">项目组简介</a></li>
+        
+      <li><a href="#3" class="cc-active">项目组日志</a></li>
+        {% if perms.RedAnt.add_blog %}
+      <li><a href="#4" class="cc-active">编写日志</a></li>
+        {% endif %}
+      <li><a href="#5" class="cc-active">学习资源</a></li>
+      <li class="separator"></li>
+    </ul>
+    <div class="docs-content">
+      <h3 id="1"> {{ team.TeamName }} </h3>
+      <br><br>
+      <p>
+          {% autoescape off %}
+              {{ team.Introduction }}
+          {% endautoescape %}
+      </p>
+    {% if perms.RedAnt.change_projectteam %}
+        <button onclick="window.location.href='edit/'" class="edit"><i class="fa fa-pencil"></i>编辑</button>
+    {% endif %}
+
+      <hr>
+     
+      <h3 id="3">日志</h3>
+      <ul class="cbp_tmtimeline" style=" margin-top: 4rem; width: 90rem">
+
+           {% for blog in blogs %}
+           <li>
+            <time class="cbp_tmtime" ><span id="11.8"><td>{{ blog.modify_time|date:"m-d" }}</td></span> <span><td>{{ blog.modify_time|date:"Y" }}</td></span></time>
+            <div class="cbp_tmlabel" data-scroll-reveal="enter right over 1s">
+             <h4>{{ blog.Name }}</h4>
+             <span class="blogpic"><img src="{{ blog.ImagePath }}"></span><p id="content">
+                {% autoescape off %}
+                    {{ blog.Content }}
+                {% endautoescape %}
+            </p>
+            {% if perms.RedAnt.delete_blog %}
+                            <button onclick="window.location.href='delete/article={{ blog.Name }}/'" class="edit"><i class="fa fa-pencil"></i>删除</button>
+            {% endif %}
+            {% if perms.RedAnt.change_blog %}
+                             <button onclick="window.location.href='article={{ blog.Name }}/'" class="edit"><i class="fa fa-pencil"></i>编辑</button>
+            {% endif %}
+             <br>
+             <br>
+            </div>
+            </li>
+          {% endfor %}
+
+      </ul>
+      <hr>
+    {% if perms.RedAnt.add_blog %}
+      <h3 id="4">编写日志</h3>
+      {{ form.media }}
+      <br><br>
+        <form action="" method="post">
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Submit">
+            </form>
+        <hr>
+    {% endif %}
+      <hr>
+      <h3 id="5">学习资源</h3>
+      <ol class="rectangle-list">
+
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+         <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+        <li><a href="">List item</a></li>
+      </ol>
+    </div>
+    <a href="#" class="backTop">返回顶部</a>
+  </div>
+  
+</section>
+</div>
+<footer>
+  <div class="">
+  <hr>
+    <p> Copyright 红蚂蚁实验室</p>
+  <hr>
+  </div>
+</footer>
+<script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/prettify.js"></script>
+<script type="text/javascript" src="/static/js/index.js"></script>
+<script type="text/javascript" src="/static/js/layout.js"></script>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript">
+     function init(){
+        var len = 100;      //默认显示字数
+        var ctn = document.getElementById("content");  //获取div对象
+        var content = ctn.innerHTML;                   //获取div里的内容
+
+        //alert(content);
+        var span = document.createElement("span");     //创建<span>元素
+        var a = document.createElement("a");           //创建<a>元素
+        span.innerHTML = content.substring(0,len);     //span里的内容为content的前len个字符
+
+        a.innerHTML = content.length>len?"... 展开":"";  ////判断显示的字数是否大于默认显示的字数    来设置a的显示        
+        a.href = "javascript:void(0)";//让a链接点击不跳转
+
+        a.onclick = function(){
+            if(a.innerHTML.indexOf("展开")>0){      //如果a中含有"展开"则显示"收起"
+              a.innerHTML = "<<&nbsp;收起";
+              span.innerHTML = content;
+            }else{
+                a.innerHTML = "... 展开";
+                span.innerHTML = content.substring(0,len);
+            }
+        }
+        // 设置div内容为空，span元素 a元素加入到div中
+        ctn.innerHTML = "";
+        ctn.appendChild(span);
+        ctn.appendChild(a);
+     }
+     init();
+  </script>
+</body>
+</html>

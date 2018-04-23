@@ -3,7 +3,7 @@ from django.contrib import admin
 from RedAnt.models import *
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ("Name","Description","Content","ImagePath")
+    list_display = ("Name","Content","ImagePath")
 
 
 #注册管理

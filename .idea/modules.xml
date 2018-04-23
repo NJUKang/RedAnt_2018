@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/DjangoUeditor.iml" filepath="$PROJECT_DIR$/.idea/DjangoUeditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/RedAnt.iml" filepath="$PROJECT_DIR$/.idea/RedAnt.iml" />
     </modules>
   </component>
 </project>
-

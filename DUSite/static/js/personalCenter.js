@@ -152,7 +152,7 @@ removeList();
 function setUserName(){
 	var btn=$("table tr.name a");
 	var input=$("table tr.name input");
-	var init=$(input).val();
+	var init;
 	btn.on("click",function(){
 		if ($(btn).hasClass("disable")) {
 			$(input).css("border","1px solid #c8c8c8");
@@ -161,6 +161,7 @@ function setUserName(){
 			$(input).attr("disabled",false);
 			this.innerHTML="取消";
 			this.className="abled";
+			init=$(input).val();
 		}
 		else{
 				$(input).css("border","none");
@@ -177,41 +178,45 @@ function setUserName(){
 
 setUserName();
 
-var userImg;
-var Image=$(".change .change-userImag");
-console.log(Image);
-$(".change .change-userImag").on("change",function(){
-	userImg=Image.get(0).files[0];
-	console.log(userImg);
-	if(userImg.length == 0){
-	   alert('请选择文件');
-	   return;
-	}else{
-	   var reader = new FileReader();//新建一个FileReader
-	   reader.readAsText(userImg, "UTF-8");//读取文件 
-	   reader.onload = function(evt){ //读取完文件之后会回来这里
-	       var fileString = evt.target.result;
-	       // form.file.value = fileString; //设置隐藏input的内容
-	   		$(".change img").url=userImg.url;
-	$.ajax({
-		type:"POST",
-        url:"/setChanging",
-        cache:false,
-        data:{
-            "userImg": userImg
-        },
-        success:function(data){
-			$(".change img").url=fileString;
-        },
-        fail: function() {
-            alert("failed");
-        },
-        error: function(response) {
-            alert("error");
-        }
-	});}
-	   }
-});
+// var userImg;
+// var Image=$(".change .change-userImag");
+// console.log(Image);
+// $(".change .change-userImag").on("change",function(){
+// 	userImg=Image.get(0).files[0];
+// 	console.log(userImg);
+// 	if(userImg.length == 0){
+// 	   alert('请选择文件');
+// 	   return;
+// 	}else{
+// 	   var reader = new FileReader();//新建一个FileReader
+// 	   reader.readAsText(userImg, "UTF-8");//读取文件 
+// 	   reader.onload = function(evt){ //读取完文件之后会回来这里
+// 	       var fileString = evt.target.result;
+// 	       // form.file.value = fileString; //设置隐藏input的内容
+// 	   		$(".change img").url=userImg.url;
+// 	$.ajax({
+// 		type:"POST",
+//         url:"/setChanging",
+//         cache:false,
+//         data:{
+//             "userImg": userImg
+//         },
+//         success:function(data){
+// 			$(".change img").url=fileString;
+//         },
+//         fail: function() {
+//             alert("failed");
+//         },
+//         error: function(response) {
+//             alert("error");
+//         }
+// 	});}
+// 	   }
+// });
+
+
+
+
 
 	$("#save").click(function(e){
 		e.preventDefault();
@@ -236,15 +241,14 @@ $(".change .change-userImag").on("change",function(){
 	        data:{
                 "username": name,
                 "password": psw,
-                "userImg": userImg,
+                // "userImg": userImg,
                 "email": mail,
                 "project": project
 	        },
 	        success:function(data){
 	        	if(data.code) {
 	        		location.href="/myaccount/";
-					alert(data.info);
-					// $('#sign-up-container').load("sign-upJump.txt");
+					// alert(data.info);
 				}
 				else {
                     alert(data.info);
@@ -254,8 +258,6 @@ $(".change .change-userImag").on("change",function(){
                 alert("failed");
             },
             error: function(response) {
-            	// console.log(document.getElementById("login").href);//file://......./user-id.html
-            	// console.log($("#login").attr('href'));//user-id.html
                 alert("error");
             }
 	    });

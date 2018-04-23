@@ -12,17 +12,17 @@
 	    var mail = node.value;
 	    if( ! isEmail(mail) ){
 	    	tip.style.opacity='1';
-	    	tip.className='check fa fa-close';
+	    	tip.className='check fa fa-close red';
 	    	cm=false;
 	    	return false;
 	    }
 	    else{
 	    	cm=true;
-	    	tip.className='check fa fa-check';
+	    	tip.className='check fa fa-check green';
 	    	tip.style.opacity='1';
 	    }
 	    if (mail=='') {
-	    	tip.className='check fa';
+	    	// tip.className='check fa';
 	    	cm=true;
 	    	tip.style.opacity='0';
 	    }
@@ -41,17 +41,17 @@
 	    var pwd = node.value;
 	    if( ! isPsw(pwd) ){
 	    	tip.style.opacity='1';
-	    	tip.className='check fa fa-close';
+	    	tip.className='check fa fa-close red';
 	    	cp=false;
 	    	return false;
 	    }
 	    else{
 	    	cp=true;
-	    	tip.className='check fa fa-check';
+	    	tip.className='check fa fa-check green';
 	    	tip.style.opacity='1';
 	    }
 	    if (pwd=='') {
-	    	tip.className='check fa';
+	    	// tip.className='check fa';
 	    	cp=true;
 	    	tip.style.opacity='0';
 	    }
@@ -77,7 +77,7 @@
 	        	if(data.code) {
 	        		// $('.enter').load($("#login").attr('href'));
 	        		location.href="/index/";
-					alert(data.info);
+					// alert(data.info);
 					// $('#sign-up-container').load("sign-upJump.txt");
 				}
 				else {
@@ -96,3 +96,19 @@
             }
 	    });
 	});
+
+
+	$("#sign-btn").click(function(){
+		$("#model").css("display","block");
+		// $("#model .model-container").css("top","25%");
+		$("#model .model-container").css("opacity",1);
+	})
+	$("#model .model-container .fa-close").click(function(){
+		$("#model").css("display","none");
+		var input=$("#model .model-body input");
+		var i=input.length;
+        for(var n=0;n<i-1;n++){
+            input[n].value='';
+            $("#model .model-body i").css("opacity",0);
+        }
+	})

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>课程展示</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <!-- [if lt IE 9]><script src="js/html5.js"></script><![endif] -->
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/jquery.tiles.js"></script>
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/home1com.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/wheel1.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/coursebase.css">
+
+    <!--videojs-->
+    <link href="/static/css/video-js.css" rel="stylesheet">
+    <script src="/static/js/videojs-ie8.min.js"></script>
+    <script src="/static/js/video.min.js"></script>
+
+    <!--sideBar-->
+    <link href="/static/css/jquery-accordion-menu.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/font-awesome.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+    
+    <script src="/static/js/jquery-accordion-menu.js" type="text/javascript"></script>
+    <script type="text/javascript"></script>
+</head>
+    
+  
+<body>
+        <script>
+            window.onload=function(){
+                var i=document.getElementsByTagName('input').length;
+                for(var n=0;n<i;n++){
+                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
+                        document.getElementsByTagName('input')[n].value='';
+                    }
+                }
+                var check=document.getElementsByClassName("check");
+                for(var x=0;x<check.length;x++){
+                    check[x].style.opacity="0";
+                }
+            }
+        </script>
+        <div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+                <div class="person">
+                    <a href="/myaccount/">
+                        <img src="/static/images/23.jpg" alt="用户头像">
+                    </a>
+                    <div><span class="drop-menu" id="drop-menu">
+                        <a href="/myaccount/">
+                            个人中心
+                        </a>
+                    </span>
+                    <span class="drop-menu" id="drop-menu">
+                        <a href="/index/logout/">
+                            注销
+                        </a>
+                    </span>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- 导航栏 -->
+        <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown">项目组 <span class="caret"></span>
+                        <ul class="dropdown-menu pull-right">
+
+                        {% for team in teams %}
+                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
+                        {% endfor %}
+                        {% if perms.RedAnt.add_projectteam %}
+                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
+                         {% endif %}
+
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
+                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
+                            <li class="lastmenuli"><a href="#">添加课程</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="#" title="Button">论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/" title="Button" target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+                
+        <!--sidebar-->
+        
+<div><div class="wrapper">
+            <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+                <div class="jquery-accordion-menu-header" id="form">
+                    <form class="filterform" action="#"><input class="filterinput" type="text"></form>
+                </div>
+                <ul id="demo-list">
+                 
+                   
+                   <!--  <li><a href="#"><i class="fa fa-envelope"></i>Messages </a><span class="jquery-accordion-menu-label">
+                       12 </span></li> -->
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li><li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li><li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-calendar"></i>Course </a>
+                        <ul class="submenu">
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a></li>
+                            <li><a href="#">Video </a>
+                                <ul class="submenu">
+                                    <li><a href="#">Doc </a></li>
+                                    <li><a href="#">Slides </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="" class="addPart"><button class="addSlides">添加课件</button><button class="addVideo">添加视频</button><button class="addDoc">添加文档</button></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+        </div>
+
+        
+
+        <!--course-->
+        <div class="course">
+            <div class="intr">
+                <div class="couvideo" id="couvideo">
+                <div>
+                	<div class="coutitle">
+                		<h3>1.1 章节</h3>
+                	</div>
+                        <p>To view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser that
+                        
+                        </p>
+                            <p>
+                            <button class="edit"><i class="fa fa-pencil"></i>编辑</button>
+                            </p>
+                        <hr>
+                </div>
+                    
+                        <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="640" height="264" poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
+
+                            <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+							<source src="http://vjs.zencdn.net/v/oceans.webm" type="video/webm">
+							<source src="http://vjs.zencdn.net/v/oceans.ogv" type="video/ogg">
+
+                        <track kind="captions" src="../shared/example-captions.vtt" srclang="en" label="English"></track>
+                        <!-- Tracks need an ending tag thanks to IE9 -->
+                        <track kind="subtitles" src="../shared/example-captions.vtt" srclang="en" label="English"></track>
+                        <!-- Tracks need an ending tag thanks to IE9 -->
+                        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                        </video>
+
+
+                        
+                        <hr>
+                        <!--课件播放-->
+                        <div style="margin-top: 35px"><div class="coutitle"><h3>课件播放</h3></div>
+                        <p>To view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser thatTo view this video please enable JavaScript, and consider upgrading to a web browser that
+                        </p>
+                            <p>
+                            <button class="edit"><i class="fa fa-pencil"></i>编辑</button>
+                            </p>
+                        <hr>
+                    </div>
+                        <div id="wheel-container" class="wheel-container">
+                        <div id="wheel" class="wheel">
+                            <div id="photo" class="photo">
+                                <div id="pre" class="pre">
+                                    <i class="fa fa-angle-left"></i>
+                                </div>
+                                <img src="/static/images/8.jpg" alt="轮播图片">
+                                <img src="/static/images/9.jpg" alt="轮播图片">
+                                <img src="/static/images/10.jpg" alt="轮播图片">
+                                <div id="after" class="after">
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                            </div>
+                            <div id="wheel-spot" class="wheel-spot">
+                                <div class="spot active-spot"></div>
+                                <div class="spot"></div>
+                                <div class="spot"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+            
+            <div class="clear"></div>
+    
+         <br><br><br>
+         </div></div></div>
+        
+       
+
+
+
+        <!--contact-->
+        <div class="contact">
+            <div class="title-contact">Contact Us</div>
+            <div class="line-con"><div class="line"></div></div>
+            <div class="intr-contact">
+                <p>
+                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</span>
+                </p>
+            </div>
+            <div id="u189" class="ax_default primary_button" data-label="send">
+                <div id="u190" class="text" style="visibility: visible;">
+                  <p><span>SEND US A MESSAGE</span></p>
+                </div>
+            </div>
+            <div id="u193" class="ax_default ax_default_hidden contact-hidden" data-label="contact " style="display: none; visibility: hidden;">
+                <div class="input-container">
+                    <div id="u196" class="ax_default text_field">
+                        <input id="u196_input" type="text" placeholder="&nbsp;Your name."/>
+                    </div>
+                    <div id="u197" class="ax_default text_field">
+                        <input id="u197_input" type="text" placeholder="&nbsp;Youemail..."/>
+                    </div>
+                    <div id="u198" class="ax_default text_field">
+                        <textarea id="u198_input" class="text-3" type="text" placeholder="The massage send to us"></textarea>
+                    </div>
+                    <div id="u199" class="ax_default primary_button send2" data-label="send2">
+                        <div id="u199_div" class=""></div>
+                        <div id="u200" class="text">
+                            <p><span>Send</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="u201" class="ax_default ax_default_hidden close" data-label="close">
+                    <div id="u204" class="ax_default contact-icon primary_button">
+                        <img id="u204_img" class="img" src="/static/CourseShow/images/u204.png"/>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-tip" style="visibility: hidden;display: none;">
+                <div> 已发送！</div>
+            </div>
+        </div>
+    <script type="text/javascript" src="/static/js/signIn.js"></script>
+    <script type="text/javascript" src="/static/js/contact.js"></script>
+    <script type="text/javascript" src="/static/js/wheel1.js"></script>
+    <script type="text/javascript" src="/static/js/news.js"></script>
+    <script type="text/javascript">
+    jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
+    </script>
+        <footer>@大连理工大学红蚂蚁实验室</footer>
+    </body>
+</html>

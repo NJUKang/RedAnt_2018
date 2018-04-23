@@ -78,8 +78,8 @@ var afterButtonClick=function(){
 
 //函数调用
 init();
-autoWheel();
+//autoWheel();
 document.getElementById('photo').addEventListener("mouseover",stop,false);//不能直接用images.
-document.getElementById('photo').addEventListener("mouseout",autoWheel,false);
+//document.getElementById('photo').addEventListener("mouseout",autoWheel,false);
 preButton.addEventListener("click",preButtonClick);
 afterButton.addEventListener("click",afterButtonClick);

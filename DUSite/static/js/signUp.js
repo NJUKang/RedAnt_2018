@@ -115,7 +115,7 @@
 
 	$("#sign-up").on("submit",function(e){
 		e.preventDefault();
-		if(cm==false || ca==false || cp==false ||cf==false){
+		if(cm!=true || ca!=true || cp!=true ||cf!=true){
 			alert("请完善表单");
 			return false;
 		}

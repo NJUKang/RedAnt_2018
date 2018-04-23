@@ -22,91 +22,61 @@
 	<div class="Top-bar">
             <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
             <div class="LabSlogan">
-                <p>Our Lab :</p>
+                
                 <span> 遇到问题立即沟通 !<br></span>
                 <span class="secondslo"> 我是最后负责人 !</span>
             </div>
             <div class="enter">
-            	<div class="person">
-            		<a href="/myaccount/">
-            	    	<img src="/static/images/23.jpg" alt="用户头像">
-            	    </a>
-            	    <span class="drop-menu" id="drop-menu">
-	            	    <a href="/myaccount/">
-	                		<sapn id="member-name">个人中心</sapn>
-	                	</a>
-	                	<!-- <i class="fa fa-angle-down"></i>
-	                	<ul id="personal-set" class="personal-set">
-	                		<li>
-	                			<a>aaa</a>
-	                		</li>
-	                		<li>
-	                			<a>bbb</a>
-	                		</li>
-	                		<li>
-	                			<a>ccc</a>
-	                		</li>
-	                		<li>
-	                			<a>ddd</a>
-	                		</li>
-	                		<li>
-	                			<a>fff</a>
-	                		</li>
-	                		<li>
-	                			<a>lll</a>
-	                		</li>
-	                	</ul> -->
-                	</span>
+                <div class="person">
+                    <a href="/myaccount/">
+                        <img src="/static/images/23.jpg" alt="用户头像">
+                    </a>
+                    <div><span class="drop-menu" id="drop-menu">
+                        <a href="/myaccount/">
+                            个人中心
+                        </a>
+                    </span>
                     <span class="drop-menu" id="drop-menu">
-	            	    <a href="/index/logout/">
-	                		<sapn id="member-name">注销</sapn>
-	                	</a>
-	                	<!-- <i class="fa fa-angle-down"></i>
-	                	<ul id="personal-set" class="personal-set">
-	                		<li>
-	                			<a>aaa</a>
-	                		</li>
-	                		<li>
-	                			<a>bbb</a>
-	                		</li>
-	                		<li>
-	                			<a>ccc</a>
-	                		</li>
-	                		<li>
-	                			<a>ddd</a>
-	                		</li>
-	                		<li>
-	                			<a>fff</a>
-	                		</li>
-	                		<li>
-	                			<a>lll</a>
-	                		</li>
-	                	</ul> -->
-                	</span>
-            	</div>
+                        <a href="/index/logout/">
+                            注销
+                        </a>
+                    </span>
+                    </div>
+                    
+                </div>
             </div>
         </div>
+    <!--导航栏-->
     <nav role="navigation">
             <div class="region region-navigation">
                 <ul class="navbar-menu">
                     <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
                     </li>
-                    <li class="dropdown"><a href="#" title="Button">项目组 <span class="caret"></span></a>
+                    <li class="dropdown">项目组 <span class="caret"></span>
                         <ul class="dropdown-menu pull-right">
-                            <li class="lastmenuli"><a href="/webTeam/">网站组 </a></li>
+
+                        {% for team in teams %}
+                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
+                        {% endfor %}
+                        {% if perms.RedAnt.add_projectteam %}
+                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
+                         {% endif %}
+
                         </ul>
                     </li>
                     <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
-                            <li class="lastmenuli"><a href="/course/">视频、PPT</a></li>
+                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
+                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
+                            <li class="lastmenuli"><a href="#">添加课程</a></li>
                         </ul>
                     </li>
-                    <li class="leaf"><a href="#" title="Button">论 &nbsp;坛 </a>
+                    <li class="leaf"><a href="#" >论 &nbsp;坛 </a>
                     </li>
                     <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
                     </li>
                    {% if perms.auth.change_user %}
-                <li class="last leaf"><a href="/manage/" title="Button" target="_blank">用户管理 </a></li>
+                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
                    {% endif %}
                 </ul>
             </div>
@@ -117,10 +87,10 @@
         	<div class="sidebar">
 	            <div class="reverse-nav">
 	                <ul>
-	                    <li class="leaf"><a href="#">资 &nbsp;源</a>
+	                    <!-- <li class="leaf"><a href="#">资 &nbsp;源</a>
 	                    </li>
 	                    <li class="leaf"><a href="#">论 &nbsp;坛 </a>
-	                    </li>
+	                    </li> -->
 	                    <li class="leaf thisleaf"><a href="#">个人设置 </a>
 	                    </li>
 	                	<li class="leaf"><a href="#">消 &nbsp;息 </a>
@@ -138,8 +108,8 @@
         				<span>用户名</span></td>
         				<td>
         					<input type="text" name="username" id="username" onchange="checkAccount(this)" disabled="disabled">
-        					<i class="check fa fa-close" id="check-name"><span></span></i>
         					<a href="javascript:void(0)" class="disable">修改用户名</a>
+                            <i class="check fa fa-close" id="check-name"><span></span></i>
         			</td></tr>
 {#        			<tr><td class="setting-title">#}
 {#        				<span>用户id</span></td>#}

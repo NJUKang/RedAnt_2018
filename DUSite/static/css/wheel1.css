@@ -9,6 +9,7 @@ body{
 	width: 100%;
 	height: 40rem;
 	position: relative;
+	/* padding-left: 2%; */
 	top: 50%;
 	background-color: transparent;
 }
@@ -19,6 +20,7 @@ body{
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	border: black;
 	transform: translate(-50%,-50%);
 }
 .wheel-container #pre.pre{
@@ -30,7 +32,6 @@ body{
 .wheel-container #pre.pre,.wheel-container #after.after{
 	position: absolute;
 	height: 100%;
-	background-color: black;
 	opacity: 0;
 	width: 5rem;
 	z-index: 100;
@@ -57,7 +58,7 @@ body{
 	display: inline-block;
 	top: 0;
 	left: 0;
-	/*opacity: 0;*//*2*/
+	opacity: 0;/*2*/
 	opacity: 1;
 }
 .wheel-container #wheel-spot.wheel-spot{
@@ -101,10 +102,6 @@ body{
 	100%{
 		opacity: 0.6;
 	}
-}
-.wheel-container #photo.photo .trans-eff{
-	/*transition: opacity 0.6s linear;/*2*/
-	transition: left 0.6s linear;
 }
 .wheel-container #photo.photo .curr-img{/*2*/
 	opacity: 1;
