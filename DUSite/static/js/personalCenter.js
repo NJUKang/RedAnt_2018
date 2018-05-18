@@ -11,10 +11,10 @@
 // 	});
 // });
 
-var cp='',cf='',ca='';
+var cp='',cf='',ca='',cpre='';
 //验证密码
 	function isPsw(strPsw) {
-	    if (strPsw.search(/^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{6,20}$/) != -1 || strPsw==""){
+	    if (strPsw.search(/^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{6,20}$/) != -1){
 	    // if(strPsw.length!=0){
 	        return true;
 	    }
@@ -24,73 +24,131 @@ var cp='',cf='',ca='';
 	}
 
 	function checkPsw(node) {
-	    var errorMsg = document.getElementById("check-psw");
-	    var tip = document.getElementById("psw-tip").getElementsByTagName('i');
+	    var tip = $("#psw").siblings(".check")[0];
 	    var pwd = node.value;
+	    if(pwd==""){
+	    	tip.style.opacity='0';
+	    	cp=false;
+	    	if(conf!=""){
+		    	confirmPsw(document.getElementById("cf-psw"));
+		    }
+	    	return false;
+	    }
 	    if( ! isPsw(pwd) ){
-	    	tip[0].style.opacity='1';
-	    	errorMsg.innerHTML = "密码格式不正确";
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
 	    	cp=false;
 	    	return false;
 	    }
 	    else{
 	    	cp=true;
-	    	errorMsg.innerHTML ="";
-	    	tip[0].style.opacity='0';
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-check check";
+	    	tip.style.color="green";
 	    }
 	    var conf=document.getElementById("cf-psw").value;
 	    if(conf!=""){
 	    	confirmPsw(document.getElementById("cf-psw"));
 	    }
+	    if(pwd==""){
+	    	confirmPsw(document.getElementById("cf-psw"));
+	    }
 	}
 	//确认密码
 	function confirmPsw(node){
-		var errorMsg = document.getElementById("check-cf-psw");
-	    var tip = document.getElementById("conf-tip").getElementsByTagName('i');
+		var tip = document.getElementById("confirm-psw").getElementsByClassName("check")[0];
 	    var pwd = node.value;
 	    var proto=document.getElementById("psw").value;
-	    // if(proto==""){
-	    // 	checkPsw(document.getElementById("psw"));
-	    // 	tip[0].style.opacity='1';
-	    // 	cf=false;
-	    // 	errorMsg.innerHTML = "请在上栏中输入密码";
-	    // }
-	    if( pwd == proto || pwd==""){
-	    	errorMsg.innerHTML="";
+	    if(pwd==""){
+	    	tip.style.opacity='0';
+	    	cf=false;
+	    	return false;
+	    }
+	    if(proto==""&&pwd!=""){
+	    	tip.style.opacity='0';
+	    	cf=false;
+	    	return false;
+	    }
+	    if( pwd == proto){
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-check check";
+	    	tip.style.color="green";
 	    	cf=true;
-	    	tip[0].style.opacity='0';
+	    	if(proto==""){
+	    		tip.style.opacity='0';
+	    		cf=false;
+	    	}
 	    }
 	    else{
-	    	if(proto!=""){
-		    	tip[0].style.opacity='1';
-	    		errorMsg.innerHTML = "密码与上次输入不匹配";
-	    	}
-	    	else{
-	    		tip[0].style.opacity='0';
-	    		errorMsg.innerHTML = "";
-	    	}
-		    cf=false;
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
+	    	cf=false;
 	    	return false;
 	    }
 	}
-function setPsw(node){
-	var Msg = document.getElementById("check-psw");
-	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
-	var pwd = node.value;
-	    if(isPsw(pwd)){
-	    	Msg.innerHTML ="可输入数字、字母、横线、下划线";
-	    	tip[0].style.opacity='1';
-	    }
+function checkPrepsw(node){
+	var initPsw="123456";//后端传未更改之前的密码
+	var input=node.value;
+	var tip = $("#prePsw").siblings(".check")[0];
+	if(input==''){
+		tip.style.opacity='0';
+		cpre=false;
+		return false;
+	}
+	if(initPsw!=input){
+		tip.style.opacity='1';
+    	tip.className="fa fa-close check";
+    	tip.style.color="red";
+		cpre=false;
+		return false;
+	}
+	else{
+		tip.style.opacity='1';
+    	tip.className="fa fa-check check";
+    	tip.style.color="green";
+		cpre=true;
+	}
 }
-function blurPsw(node){
-	var Msg = document.getElementById("check-psw");
-	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
-	var pwd = node.value;
-	if(isPsw(pwd)){
-	    	Msg.innerHTML ="";
-	    	tip[0].style.opacity='0';
-	    }
+var showHint=function(e){
+	var id=e.name;
+	var getHint="hint-"+id;
+	var hintEl=document.getElementById(getHint);
+	$(e).siblings("span.hint").css("opacity","1");
+	if(id=="psw"){
+		hintEl.innerHTML="可包含字母、数字、横线或下划线";
+		$(hintEl).siblings("i").css("opacity","1");
+	}
+	else;
 }
+var hideHint=function(e){
+	var id=e.name;
+	var getHint="hint-"+id;
+	var hintEl=document.getElementById(getHint);
+	$(e).siblings("span.hint").css("opacity","0");
+	$(hintEl).siblings("i").css("opacity","0");
+}
+
+
+// function setPsw(node){
+// 	var Msg = document.getElementById("hint-psw");
+// 	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
+// 	var pwd = node.value;
+// 	    if(isPsw(pwd)){
+// 	    	Msg.innerHTML ="可输入数字、字母、横线、下划线";
+// 	    	tip[0].style.opacity='1';
+// 	    }
+// }
+// function blurPsw(node){
+// 	var Msg = document.getElementById("check-psw");
+// 	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
+// 	var pwd = node.value;
+// 	if(isPsw(pwd)){
+// 	    	Msg.innerHTML ="";
+// 	    	tip[0].style.opacity='0';
+// 	    }
+// }
 
 var showBtn=document.getElementById('showSetPsw');
 var hideBtn=document.getElementById('hideSetPsw');
@@ -102,15 +160,14 @@ var form=document.getElementsByClassName('change')[0].getElementsByClassName('se
 	hideBtn.onclick=function(){
 		$(form).css("display","none");
 		$(showBtn).css("display","block");
-		var errorMsg=new Array(2),tip=new Array(2);
-		errorMsg[0] = document.getElementById("check-psw");
-	    tip[0] = document.getElementById("psw-tip").getElementsByTagName('i')[0];
-	    errorMsg[1] = document.getElementById("check-cf-psw");
-	    tip[1] = document.getElementById("conf-tip").getElementsByTagName('i')[0];
 		var num=form.getElementsByTagName('input').length;
+		var errorMsg=new Array(num),tip=new Array(num),el=new Array(num);
+		for(var i=0;i<num;i++){
+			el[i]="#"+form.getElementsByTagName('input')[i].name;
+			tip[i]=$(el[i]).siblings(".check")[0];
+		}
 		for(var i=0;i<num;i++){
 			form.getElementsByTagName('input')[i].value='';
-			errorMsg[i].innerHTML='';
 			tip[i].style.opacity='0';
 		}
 	}
@@ -222,17 +279,19 @@ setUserName();
 		e.preventDefault();
 		if($('#psw').value!=undefined)
 			checkPsw($('#psw'));
-		if($('#cf-psw').val()!="")
+		if($('#cf-psw').val()!=undefined)
 			confirmPsw($('#cf-psw'));
+		if ($("#prePsw").val()!=undefined)
+			checkPrepsw($("#prePsw"));
 		checkAccount($('#username'));
-		// if(cp==false||cf==false || ca==false){
-		// 	console.log("1");
+		// if(cp!=true||cf!=true || ca!=true||cpre!=true){
 		// 	return false;
 		// }
 		var name = $("#username").val();
 		var mail = $("#mail").val();
+        var prePsw = $("#prePsw").val();
         var psw = $("#psw").val();
-        var project =  $("#pro-list").val();
+        var project =  jsonfy($("#pro-list li"));
 		$.ajax({
 	        type:"POST",
 	        url:"/myaccount/",
@@ -240,6 +299,7 @@ setUserName();
 	        cache:false,
 	        data:{
                 "username": name,
+                "prePassword": prePsw,
                 "password": psw,
                 // "userImg": userImg,
                 "email": mail,
@@ -247,18 +307,34 @@ setUserName();
 	        },
 	        success:function(data){
 	        	if(data.code) {
-	        		location.href="/myaccount/";
-					// alert(data.info);
+	        		alertInfoWithJump(data.info,"/myaccount/");//修改成功改为保存成功，因为有时候没有修改
+	        		// location.href=;
 				}
 				else {
-                    alert(data.info);
+                    alertInformation(data.info);
                 }
 	        },
             fail: function() {
-                alert("failed");
+                alertInformation("failed");
             },
             error: function(response) {
-                alert("error");
+                alertInformation("error");
             }
 	    });
 	});
+
+
+var jsonfy=function (el){
+	var proList="{project list:";
+	for(var i=0;i<$(el).length;i++){
+		proList+="['";
+		proList+=document.getElementById("pro-list").getElementsByTagName("li")[i].getElementsByTagName("span")[0].innerHTML;
+		if(i==$(el).length-1)
+			proList+="']";
+		else
+			proList+="'],";
+	}
+	proList+="}";
+	console.log(proList);
+	return proList;
+}

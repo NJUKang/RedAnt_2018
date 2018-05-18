@@ -22,7 +22,6 @@ def account_manager(request):
         email = request.POST['email']
         password = request.POST['password']
         project = request.POST.get("project", False)
-        print(project)
         try:
             user = User.objects.get(username=username)
             if(request.user == user):
@@ -90,9 +89,6 @@ def vip_manage(request):
         userlist = request.POST.get("userList")
         status = request.POST.get("status")
         names = re.findall(r"'username':'(.+?)'", userlist)
-        print(userlist)
-        print(status)
-        print(names)
         try:
             if status == 'changeRank':
                 for username in names:

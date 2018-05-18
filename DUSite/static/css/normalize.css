@@ -366,6 +366,12 @@ textarea {
  */
 
 table {
+    width: 90%;
     border-collapse: collapse;
     border-spacing: 0;
+    margin: auto;
+}
+
+#id_content{
+  display: block;
 }

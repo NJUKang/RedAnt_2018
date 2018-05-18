@@ -130,10 +130,6 @@ hr {
     display: inline-block;
 }
 
-body > div.wrapper > section > div > div > ul > li{
-    width:875px;
-}
-
 blockquote {
     margin: 1em 0;
     border-left: 3px solid #ccc;
@@ -383,7 +379,7 @@ body > div.wrapper > section > div > a{
     background-color: #26abe2;
     color: white;
     float: right;
-    margin-right: 5%;
+    margin-right: 4%;
     padding: 5px;
     border-radius: 5px;
     text-decoration: none;
@@ -401,7 +397,7 @@ body > div.wrapper > section > div > div > form > input[type="submit"]{
     border-color: #43add8;
     border-radius: 4px;
     color: white;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 
 @media only screen and (min-width: 400px) {
@@ -447,7 +443,7 @@ body > div.wrapper > section > div > div > form > input[type="submit"]{
     }
 
     .docs-content {
-        padding-left: 24%;
+        padding-left: 20%;
     }
 
 
@@ -457,8 +453,8 @@ body > div.wrapper > section > div > div > form > input[type="submit"]{
     }
 
     .container {
-        max-width: 1300px;
-        padding: 0 20px;
+        max-width:95%;
+        margin: auto;
     }
 
     section { padding: 3em 0; text-align: left;   background: #fff;}

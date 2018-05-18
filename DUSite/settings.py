@@ -178,3 +178,5 @@ LOGIN_URL = '/index/sign_in/'
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
+
+AUTH_PROFILE_MODULE = 'RedAnt.Profile'

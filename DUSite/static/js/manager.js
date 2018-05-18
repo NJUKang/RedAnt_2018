@@ -71,11 +71,11 @@ var submitList=function(table,status){
             "status": status
         },
         success:function(data){
-        	if(data.code) {
-					alert(data.info);
+        	if(data.code == 1) {
+					alertInformation(data.info);
 				}
 				else {
-                    alert(data.info);
+                    alertInformation(data.info);
                 }
         },
         fail: function() {

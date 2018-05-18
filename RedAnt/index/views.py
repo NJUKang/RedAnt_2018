@@ -39,8 +39,7 @@ def sign_in(request):
             data = {'code': '0', 'info': u'邮箱或密码错误'}
             return JsonResponse(data)
     else:
-        teams = ProjectTeam.objects.all()
-        return render(request, 'signIn.html',{'teams':teams})
+        return render(request, 'signIn.html',{'teams':ProjectTeam.objects.all()})
 
 def logout_system(request):
     """
@@ -53,9 +52,10 @@ def logout_system(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        username = request.POST.get("username")
-        email = request.POST.get("email")
+        username = request.POST.get("username",False)
+        email = request.POST.get("email",False)
         password = request.POST['password']
+        team = request.POST['project']
         try:
             User.objects.get(username=username)
             data = {'code': '0', 'info': u'用户名冲突'}
@@ -68,9 +68,7 @@ def sign_up(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 if user is not None:
-                    # user.is_active = False
-                    first_name = datetime.datetime.now().strftime('%Y%m%d')+str(random.randint(100,999))
-                    user.first_name = first_name
+                    user.first_name = team
                     group = Group.objects.get(name='ordUser')
                     user.groups.add(group)
                     user.save()
@@ -78,7 +76,29 @@ def sign_up(request):
                     data = {'code': '1', 'info': u'注册成功'}
                     return JsonResponse(data)
     else:
-        return render(request,'signUp.html')
+        return render(request,'signUp.html',{'teams':ProjectTeam.objects.all()})
+
+def emailCheck(request):
+    if request.method == 'POST':
+        email = request.POST.get("email", False)
+        try:
+            User.objects.get(email = email)
+            data = {'code': '0', 'info': u'邮箱已注册'}
+            return JsonResponse(data)
+        except:
+            data = {'code': '1', 'info': u'邮箱可用'}
+            return JsonResponse(data)
+
+def userCheck(request):
+    if request.method == 'POST':
+        username = request.POST.get("username", False)
+        try:
+            User.objects.get(username = username)
+            data = {'code': '0', 'info': u'用户名已注册'}
+            return JsonResponse(data)
+        except:
+            data = {'code': '1', 'info': u'用户名可用'}
+            return JsonResponse(data)
 
 @login_required
 def index(request):

@@ -70,6 +70,8 @@
 	padding: 0; 
 	list-style: none; 
 	position: relative; 
+	margin-top: 4rem;
+	width: 87%;
 }
 .cbp_tmtimeline:before { 
 	content: ''; 
@@ -84,11 +86,11 @@
 	position: relative; 
 }
 .cbp_tmtimeline > li .cbp_tmtime { 
-	display: block; 
-	width: 100px; 
-	padding-right: 30px; 
-	position: absolute; 
-	margin-left: 0px 
+	display: block;
+	width: 7%;
+	padding-right: 2%;
+	position: absolute;
+	margin-left: 5%;
 }
 .cbp_tmtimeline > li .cbp_tmtime span { 
 	display: block; 
@@ -111,7 +113,7 @@
 	padding-right: 2em;
 	position: relative;
 	border-radius: 10px;
-	width: 86%;
+	width: 85%;
 	display: inline-table;
 	height: 150px;
 	padding-bottom: 1rem;
@@ -197,9 +199,44 @@ a.readmore {
 	margin-right:  15px;
 	padding-left: 10px;
 	padding-right: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 	background-color: #26abe2;
 	border-width: 0;
 	border-color: #43add8;
 	border-radius: 4px;
 	color: #f0f0f0;
+}
+
+.article{
+	display: block;
+	height: 150px;
+	overflow-y: hidden;
+	line-height: 142%;
+}
+.fold{
+	display: none;
+}
+.fa{
+	margin-right: inherit;
+}
+
+.foldbutton{
+    margin: auto;
+    border: 0;
+    background: inherit;
+    font-size: 20px;
+    color: #26abe2;
+}
+
+.introduce{
+	width: 90%;
+	margin: auto;
+}
+.introduce>p{
+	font-size: 20px;
+}
+
+.docs-content > form> table{
+	margin-bottom: 10px;
 }

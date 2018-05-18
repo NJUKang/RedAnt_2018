@@ -47,9 +47,11 @@ ul.navbar-menu li a{
 	text-decoration: none;
 	color: black;
 	font-weight: 595;
+	width: 100%;
+	display: inline-block;
 }
 ul.navbar-menu li a:hover{
-	color: #38557a;
+	color: white ;
 	font-weight: 600;
 }
 .dropdown:hover .dropdown-menu{
@@ -61,11 +63,11 @@ ul.dropdown-menu li{
 	height: 3rem;
 	margin: 0;
 	right: auto;
-	left: 20%;
+	left: 20%;/*20%*/
 	padding-top: 1.2rem;
 	display: block;
 	background-color: #009966;
-	transition: background-color 0.3s ease;
+    transition: background-color 0.8s ease;
 }
 ul.dropdown-menu li:hover{
 	background-color: #DCDCDC;

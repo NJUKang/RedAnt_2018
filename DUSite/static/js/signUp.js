@@ -1,33 +1,70 @@
 'use strict';
 
-	var cm='',cp='',ca='',cf='';
+	var cm='',cp='',ca='',cf='',cg='',ci='';
 	//验证邮箱
 	function isEmail(strEmail) {
-	    if ((strEmail.search(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/) != -1)|| strEmail=='')
+	    if (strEmail.search(/^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/) != -1)
 	        return true;
 	    else
 	        return false;
 	}
 
 	function checkMail(node) {
-	    var errorMsg = document.getElementById("check-mail");
-	    var tip = document.getElementById("sign-up-mail").getElementsByTagName('i');
+	    var tip = document.getElementById("sign-up-mail").getElementsByClassName("check")[0];
 	    var mail = node.value;
-	    errorMsg.innerHTML = isEmail(mail) ? "" : "邮箱格式不正确";
+	    if(mail==""){
+	    	tip.style.opacity='0';
+	    	cm=false;
+	    	return false;
+	    }
 	    if( ! isEmail(mail) ){
-	    	tip[0].style.opacity='1';
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
 	    	cm=false;
 	    	return false;
 	    }
 	    else{
-	    	cm=true;
-	    	tip[0].style.opacity='0';
+		    $.ajax({
+		        type:"POST",
+		        url:"/index/emailCheck/",
+		        async:false,
+		        cache:false,
+		        data:{
+	                "email": mail
+		        },
+		        success:function(data){
+		        	if(data.code == 1) {
+					    	tip.style.opacity='1';
+					    	tip.className="fa fa-check check";
+					    	tip.style.color="green";
+				    		cm=true;
+					    }
+					else {
+					    	//("#hint-mail").html("邮箱已注册");
+					    	alertInformation(data.info);
+					    	tip.style.opacity='1';
+					    	tip.className="fa fa-close check";
+					    	tip.style.color="red";
+					    	cm=false;
+	                }
+		        },
+	            fail: function() {
+					e.preventDefault();
+	                alertInformation("failed");
+	            },
+	            error: function(response) {
+					e.preventDefault();
+	                alertInformation("error");
+	                // $("html").load("test.php");
+	            }
+		    });
 	    }
 	}
 
 	//验证密码
 	function isPsw(strPsw) {
-	    if (strPsw.search(/^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{6,20}$/) != -1 || strPsw==""){
+	    if (strPsw.search(/^[\\u4e00-\\u9fa5_a-zA-Z0-9-]{6,20}$/) != -1){
 	    // if(strPsw.length!=0){
 	        return true;
 	    }
@@ -37,153 +74,225 @@
 	}
 
 	function checkPsw(node) {
-	    var errorMsg = document.getElementById("check-psw");
-	    var tip = document.getElementById("sign-up-psw").getElementsByTagName('i');
+	    var tip = document.getElementById("sign-up-psw").getElementsByClassName("check")[0];
 	    var pwd = node.value;
+	    if(pwd==""){
+	    	tip.style.opacity='0';
+	    	cp=false;
+	    	return false;
+	    }
 	    if( ! isPsw(pwd) ){
-	    	tip[0].style.opacity='1';
-	    	errorMsg.innerHTML = "密码格式不正确";
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
 	    	cp=false;
 	    	return false;
 	    }
 	    else{
 	    	cp=true;
-	    	errorMsg.innerHTML ="";
-	    	tip[0].style.opacity='0';
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-check check";
+	    	tip.style.color="green";
 	    }
 	    var conf=document.getElementById("cf-psw").value;
 	    if(conf!=""){
 	    	confirmPsw(document.getElementById("cf-psw"));
 	    }
+	    if(pwd==""){
+	    	confirmPsw(document.getElementById("cf-psw"));
+	    }
 	}
 	//确认密码
 	function confirmPsw(node){
-		var errorMsg = document.getElementById("check-cf-psw");
-	    var tip = document.getElementById("confirm-psw").getElementsByTagName('i');
+		var tip = document.getElementById("confirm-psw").getElementsByClassName("check")[0];
 	    var pwd = node.value;
 	    var proto=document.getElementById("psw").value;
-	    // if(proto==""){
-	    // 	checkPsw(document.getElementById("psw"));
-	    // 	tip[0].style.opacity='1';
-	    // 	cf=false;
-	    // 	errorMsg.innerHTML = "请在上栏中输入密码";
-	    // }
-	    if( pwd == proto || pwd==""){
-	    	errorMsg.innerHTML="";
+	    if(pwd==""){
+	    	tip.style.opacity='0';
+	    	cf=false;
+	    	return false;
+	    }
+	    if( pwd == proto){
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-check check";
+	    	tip.style.color="green";
 	    	cf=true;
-	    	tip[0].style.opacity='0';
+	    	if(proto==""){
+	    		tip.style.opacity='0';
+	    		cf=false;
+	    	}
 	    }
 	    else{
-	    	if(proto!=""){
-		    	tip[0].style.opacity='1';
-		    	cf=false;
-	    		errorMsg.innerHTML = "密码与上次输入不匹配";
-	    	}
-	    	else{
-	    		tip[0].style.opacity='0';
-		    	cf=false;
-	    		errorMsg.innerHTML = "";
-	    	}
+	    	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
+	    	cf=false;
 	    	return false;
 	    }
 	}
 
 	//验证账号
 	function checkAccount(node) {
-	    var errorMsg = document.getElementById("check-name");
-	    var tip = document.getElementById("sign-up-name").getElementsByTagName('i');
+	   	var tip = document.getElementById("sign-up-name").getElementsByClassName("check")[0];
 	    var account = $.trim(node.value);
-	    if (account.length < 2 && account.length>0) {
-	        errorMsg.innerHTML = "用户名最少两位";
-	        tip[0].style.opacity='1';
+	    var name= node.value;
+	    if(name==""){
+	    	tip.style.opacity='0';
 	        ca=false;
 	        return false;
 	    }
-	    else if (account.length > 10) {
-	        errorMsg.innerHTML = "用户名不能超过10位";
-	        tip[0].style.opacity='1';
+	    if (name.length < 2||name.length > 10) {
+	       	tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
 	        ca=false;
 	        return false;
 	    }
 	    else {
-	        errorMsg.innerHTML = "";
-	        tip[0].style.opacity='0';
-	        ca=true;
+	    	$.ajax({
+		        type:"POST",
+		        url:"/index/userCheck/",
+		        async:false,
+		        cache:false,
+		        data:{
+	                "username": name
+		        },
+		        success:function(data){
+		        	if(data.code == 1) {
+					    	tip.style.opacity='1';
+					    	tip.className="fa fa-check check";
+					    	tip.style.color="green";
+				    		ca=true;
+					    }
+					else{
+					    	//("#hint-name").html("用户名冲突");
+							alertInformation(data.info);
+					    	tip.style.opacity='1';
+					    	tip.className="fa fa-close check";
+					    	tip.style.color="red";
+					    	ca=false;
+					    }
+					},
+				fail: function() {
+					e.preventDefault();
+	                alertInformation("failed");
+	            },
+				error: function(response) {
+                    e.preventDefault();
+                    alertInformation("error");
+                    // $("html").load("test.php");
+                }
+		    });
 	    }
+	}
+
+
+	function checkInv(node){
+		var tip = document.getElementById("invitation").getElementsByClassName("check")[0];
+		if(node.value==""){
+			tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
+	        ci=false;
+			return false;
+		}
+		else{
+			tip.style.opacity='0';
+	    	tip.className="fa check";
+	    	ci=true;
+		}
+	}
+	function checkPro(node){
+		var tip = document.getElementById("project").getElementsByClassName("check")[0];
+		if(node.value=="----"){
+			tip.style.opacity='1';
+	    	tip.className="fa fa-close check";
+	    	tip.style.color="red";
+	        cg=false;
+			return false;
+		}
+		else{
+			tip.style.opacity='0';
+	    	tip.className="fa check";
+	    	tip.style.color="green";
+	    	cg=true;
+		}
+	}
+
+
+	var showHint=function(e){
+		var id=e.name;
+		var getHint="hint-"+id;
+		var hintEl=document.getElementById(getHint);
+		$(e).siblings("span.hint").css("opacity","1");
+		if(id=="mail"){
+			hintEl.innerHTML="";
+		}
+		else if(id=="name"){
+			hintEl.innerHTML="请输入2-10个字符（不包含空格）组成的用户名";
+			$(hintEl).siblings("i").css("opacity","1");
+		}
+		else if(id=="password"){
+			hintEl.innerHTML="请输入6-20位密码，可包含字母、数字、横线或下划线";
+			$(hintEl).siblings("i").css("opacity","1");
+		}
+		else if(id=="confirm-password"){
+			hintEl.innerHTML="";
+		}
+		else
+			hintEl.innerHTML="";
+	}
+	var hideHint=function(e){
+		var id=e.name;
+		var getHint="hint-"+id;
+		var hintEl=document.getElementById(getHint);
+		$(e).siblings("span.hint").css("opacity","0");
+		$(hintEl).siblings("i").css("opacity","0");
 	}
 
 
 	$("#sign-up").on("submit",function(e){
 		e.preventDefault();
-		if(cm!=true || ca!=true || cp!=true ||cf!=true){
-			alert("请完善表单");
+		if(cm!=true || ca!=true || cp!=true ||cf!=true ||ci!=true ||cg!=true){
+			alertInformation("请完善表单!");
 			return false;
 		}
-		var name = $("#name").val();
-		var mail = $("#mail").val();
+		var username = $("#name").val();
+		var email = $("#mail").val();
         var psw = $("#psw").val();
+        var project=$("#proGroup").val();
+        var invitation=$("#invcode").val();
 		$.ajax({
 	        type:"POST",
 	        url:"/index/sign_up/",
 	        async:false,
 	        cache:false,
 	        data:{
-	            "username": name,
-                "email": mail,
-                "password": psw
+	            "username": username,
+                "email": email,
+                "password": psw,
+                "project" : project,
+                "invitation" : invitation
 	        },
 	        success:function(data){
-	        	if(data.code) {
-	        		$('#sign-up-container').load("sign-upJump.txt");
-					location.href="/index/";
-					alert(data.info);
+	        	if(data.code == 1) {
+	        		// $('#sign-up-container').load("sign-upJump.txt");
+					// location.href=;
+					alertInfoWithJump(data.info,"/index/");
 					// $('#sign-up-container').load("sign-upJump.txt");
 				}
 				else {
-                    alert(data.info);
+                    alertInformation(data.info);
                 }
 	        },
             fail: function() {
 				e.preventDefault();
-                alert("failed");
+                alertInformation("failed");
             },
             error: function(response) {
 				e.preventDefault();
-                alert("error");
+                alertInformation("error");
                 // $("html").load("test.php");
             }
 	    });
 	});
-
-
-
-	//表单总校验
-	// function check(){
-	// 	if(cm==false || ca==false || cp==false ||cf==false){
-	// 		e.preventDefault();
-	// 		return false;
-	// 	}
-	// 	console.log("111");
-	//     $.ajax({
-	//         type:"POST",
-	//         url:"test.php",
-	//         async:true,
-	//         cache:false,
-	//         data:{
-	//             "username": $('#name').value,
- //                "email": $('#mail').value,
- //                "password": $('#psw').value
-	//         },
-	//         success:function(data){
-	//         	alert("注册成功");
-	//             $('#sign-up-container').load("sign-upJump.txt");
-	//         },
- //            fail: function() {
- //                alert("failed");
- //            },
- //            error: function(response) {
- //                alert("error");
- //                // $("html").load("test.php");
- //            }
-	//     });
-	// }

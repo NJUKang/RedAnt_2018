@@ -10,6 +10,7 @@
     <!-- [if lt IE 9]><script src="js/html5.js"></script><![endif] -->
     <script src="/static/js/jquery-1.8.3.min.js"></script>
     <script src="/static/js/jquery.tiles.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
     <link rel="stylesheet" href="/static/css/normalize.css">
     <link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
     <link rel="stylesheet" type="text/css" href="/static/css/home.css">
@@ -35,9 +36,9 @@
                 <span class="secondslo"> 我是最后负责人 !</span>
             </div>
             <div class="enter">
-                <span class="spe-enlight"><a href="javascript:void(0)" id="sign-btn">Sign In</a></span>
-                <span> by your email or </span>
-                <span class="spe-enlight"><a href="/index/sign_up/">Sign Up</a></span>
+                <span class="spe-enlight"><a href="javascript:void(0)" id="sign-btn">登 录</a></span>
+                <span> / </span>
+                <span class="spe-enlight"><a href="/index/sign_up/">注 册</a></span>
             </div>
         </div>
         <div class="model-hide" style="display: none;" id="model">
@@ -48,16 +49,16 @@
                 </div>
                 <div class="model-body">
                     <div class="sign-in">
-                        <form id="sign-in" onsubmit="return false">
+                        <form id="sign-in">
                             <div class="body-line">
                                 <label for="mail">邮 箱 : </label>
-                                <input id="mail" class="input1" type="text" placeholder="Enter your email" onchange="checkMail(this)" />
-                                <i class="check fa fa-close" id="check-mail"></i>
+                                <input id="mail" class="input1" type="text" placeholder="请输入登录邮箱" onchange="checkMail(this)" />
+                                <!-- <i class="check fa fa-close" id="check-mail"></i> -->
                             </div>
                             <div class="body-line">
                                 <label for="psw">密 码 : </label>
-                                <input id="psw" class="input2" type="password" placeholder="密码（6-20位）" onchange="checkPsw(this)" />
-                                <i class="check fa fa-check" id="check-psw"></i>
+                                <input id="psw" class="input2" type="password" placeholder="请输入登录密码" onchange="checkPsw(this)" />
+                                <!-- <i class="check fa fa-check" id="check-psw"></i> -->
                             </div>
                             <input type="submit" name="submit" value="登 录" id="login">
                         </form>
@@ -68,41 +69,6 @@
                 </div>
             </div>
         </div>
-        <!-- 导航栏 -->
-        <nav role="navigation">
-            <div class="region region-navigation">
-                <ul class="navbar-menu">
-                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
-                    </li>
-                    <li class="dropdown">项目组 <span class="caret"></span>
-                        <ul class="dropdown-menu pull-right">
-
-                        {% for team in teams %}
-                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
-                        {% endfor %}
-                        {% if perms.RedAnt.add_projectteam %}
-                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
-                         {% endif %}
-
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
-                        <ul class="dropdown-menu pull-right">
-                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
-                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
-                            <li class="lastmenuli"><a href="#">添加课程</a></li>
-                        </ul>
-                    </li>
-                    <li class="leaf"><a href="#" >论 &nbsp;坛 </a>
-                    </li>
-                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
-                    </li>
-                   {% if perms.auth.change_user %}
-                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
-                   {% endif %}
-                </ul>
-            </div>
-        </nav>
         <!-- 轮播图片 -->
         <div id="wheel-container" class="wheel-container">
             <div id="wheel" class="wheel">
@@ -277,10 +243,26 @@
                 <div> 已发送！</div>
             </div>
         </div>
+        <div class="model-alertInfo" id="model-alertInfo">
+            <div class="model-container">
+                <div class="model-head">
+                    <span class="model-title">登 录</span>
+                    <i class="fa fa-close"></i>
+                </div>
+                <div class="model-body">
+                    <h3 class="message"><h3>
+                </div>
+                <div class="model-end">
+                    <div class="btn get">确 认</div>
+                    <!-- <div class="btn shut">关 闭</div> -->
+                </div>
+            </div>
+        </div>
     <script type="text/javascript" src="/static/js/signIn.js"></script>
     <script type="text/javascript" src="/static/js/contact.js"></script>
     <script type="text/javascript" src="/static/js/wheel.js"></script>
     <script type="text/javascript" src="/static/js/news.js"></script>
+    <script type="text/javascript" src="/static/js/alertModel.js"></script>
         <footer>@大连理工大学红蚂蚁实验室</footer>
     </body>
 </html>

@@ -8,8 +8,8 @@
 
 			ol{
 				counter-reset: li;
-				width:  86%;
-				margin-left: 7%;
+				width:  90%;
+				margin:auto;
 				list-style: none;
 				
 				list-style: decimal;

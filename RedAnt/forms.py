@@ -23,3 +23,5 @@ class myUEditorModelForm(UEditorModelForm):
         # 直接设置style或者某项属性改变样式，记得字典格式，赋值给attrs
         }
 
+class FileUploadForm(forms.Form):
+    file = forms.FileField()

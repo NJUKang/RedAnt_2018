@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^manage/$', RedAnt.views.manage),
     url(r'^manage/powerUser/$', RedAnt.views.vip_manage),
     url(r'^myaccount/$', RedAnt.views.account_manager),
+    url(r'^forum/',include('RedAnt.forum.urls')),
 ]
 
 if settings.DEBUG:

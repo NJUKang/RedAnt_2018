@@ -6,10 +6,12 @@ html{
 	font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
 }
 body{
-	background: url("../images/22.jpg");
+/* 	background: url("../images/22.jpg"); */
 	background-size: cover;
 	overflow-x: hidden;
+	background-color: #f1f1f1;
 	/*background-repeat: no-repeat;*/
+	margin: 0;
 }
 header.sign-up-header{
 	font-size: 5rem;
@@ -33,19 +35,30 @@ header.sign-up-header a:hover{
 #sign-up-container.sign-up-container{
 	position: absolute;
 	transform: translate(-50%,-50%);
-	top: 33%;
+	top: 40%;
 	left: 50%;
-	background-color: rgba(0,0,0,0.6);
-	width: 40%;
-	height: 35rem;
+	background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 8px rgba(0,0,0,.1);
+  vertical-align: middle;
+	width: 50rem;
+	height: 50rem;
 	border-radius: 1rem;
 	min-width:30rem;
+}
+footer{
+	position: relative;
+	text-align: center;
+	display: block;
+	width: 100%;
+	color: white;
+	background-color: rgba(39,68,114,1);
 }
 footer{
 	text-align: center;
 	width: 100%;
 	position: absolute;
-	bottom: 2px;
+	bottom: 0;
 }
 div#sign-up-title{
 	text-align: center;
@@ -53,14 +66,31 @@ div#sign-up-title{
 	font-size: 2rem;
 	position: relative;
 	top: 5%;
-	color: #4876FF;
+	color: #ea6f5a;
 	font-weight: 600;
-	font-style: 2.2rem;
+	font-size: 2.1rem;
 }
 .sign-up input{
 	outline:none;
 	background: rgba(256,256,256,0.4);
-	border: none;
+	margin-bottom: 0;
+  	padding: 2px 1rem 2px 1rem;
+  	border: 1px solid #c8c8c8;
+	border-radius: 4px 4px 0 0;
+	background-color: hsla(0,0%,71%,.1);
+  	vertical-align: middle;
+	/*border-bottom: solid black 1px;*/
+}
+.sign-up select{
+	outline:none;
+	background: rgba(256,256,256,0.4);
+	margin-bottom: 0;
+  	padding: 2px 1rem 2px 1rem;
+  	border: 1px solid #c8c8c8;
+	border-radius: 4px 4px 0 0;
+	background-color: hsla(0,0%,71%,.1);
+  	vertical-align: middle;
+  	margin-bottom: 2rem;
 	/*border-bottom: solid black 1px;*/
 }
 ::-moz-focus-inner{border:0px;}   /*去除按钮点击时出现的虚线边框*/
@@ -68,11 +98,20 @@ div#sign-up-title{
 	width: 100%;
 	height: auto;
 	position: absolute;
-	transform: translate(0,-50%);
-	top: 50%;
-	/*left: 50%;*/
+	transform: translate(-50%,-50%);
+	top: 55%;
+	left: 50%;
 }
-form.sign-up .sign-up-name,form.sign-up .sign-up-password,form.sign-up .sign-up-mail,form.sign-up .check-psw{
+#sign-up-container.sign-up-container form span.must{
+	width: auto;
+	color: red;
+}
+form.sign-up .sign-up-name,
+form.sign-up .sign-up-password,
+form.sign-up .sign-up-mail,
+form.sign-up .check-psw,
+form.sign-up .sign-up-inv,
+form.sign-up .project{
 	width: auto;
 	height: auto;
 	margin: 0;
@@ -80,51 +119,119 @@ form.sign-up .sign-up-name,form.sign-up .sign-up-password,form.sign-up .sign-up-
 	border: 0;
 	position: relative;
 	text-align: center;
+	left: -2%;
 }
-form.sign-up .sign-up-name >span,form.sign-up .sign-up-password >span,form.sign-up .sign-up-mail >span,form.sign-up .check-psw >span{
-	width: auto;
+form.sign-up .sign-up-name >span,
+form.sign-up .sign-up-password >span,
+form.sign-up .sign-up-mail >span,
+form.sign-up .check-psw >span,
+form.sign-up .sign-up-inv>span,
+form.sign-up .project>span{
+	width: 10rem;
 	font-size: 1.6rem;
 	font-weight: 600;
 	overflow: hidden;
-	color: white;
+	color: black;
 	display: inline-block;
-	height: 2rem;
-	/*text-align: right;*/
+	vertical-align: middle;
+/* 	height: 2rem; */
+	text-align: right;
 }
 form.sign-up input{
-	height: 3rem;
+	height: 3.5rem;
 	width: 24rem;
 	line-height: 3rem;
 	border-radius: /*0.5rem 0.5rem 0 0;*/0.5rem;
 }
+form.sign-up select{
+	height: 4rem;
+	width: 26.1rem;
+	line-height: 3rem;
+	border-radius: /*0.5rem 0.5rem 0 0;*/0.5rem;
+}
+form.sign-up .project i,form.sign-up .project span{
+	margin-bottom: 2rem;
+}
 form.sign-up input#sign-up-btn{
-	width: 16rem;
-	position: absolute;
-	left: 50%;
-	transform: translate(-50%,0);
-	border: none;
-	background-color: #00B2EE;
+	width: 10rem;
+	position: relative;
+	left: 27%;
+/* 	transform: translate(-50%,0); */
+	background-color: #42c02e;
 	opacity: 0.8;
 	border-radius: 1rem;
 	font-weight: bold;
 	font-size: 1.6rem;
 	height: 3.5rem;
 	margin-top: 0.5rem;
+	color: white;
+	border: 1px solid #42c02e;
 }
-form.sign-up span.check{
+form.sign-up i.check{
 	position: relative;
-	color: red;
-	font-size: 1.6rem;
-	width: 100%;
-	display: block;
+	font-size: 1.5rem;
+	width: 1rem;
+	display: inline-block;
 	text-align: center;
-	height: 2rem;
+	vertical-align: middle;
 }
-form.sign-up span.check i{
+form.sign-up span.hint{
 	opacity: 0;
-	margin: 0 0.5rem;
-}
-form.sign-up span.check span{
-	color: red;
+	width: 100%;
+	display: inline-block;
+	font-size: 1.4rem;
+	height: 2rem;
 	font-weight: normal;
+	color: #969696;
+	position: relative;
+	left: 58%;
+	transform: translate(-50%,0);
+	text-align: center;
+}
+form.sign-up span.hint i{
+	margin: 0 0.5rem;
+	opacity: 0;
+}
+.btn{
+	display: inline-block;
+	margin-bottom: 0;
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	background-image: none;
+	white-space: nowrap;
+	padding: 0.6rem 1.2rem;
+	font-size: 1.4rem;
+	line-height: 1.42857;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+form.sign-up .go-back{
+	width: 10rem;
+	display: inline-block;
+	position: relative;
+	left: 30%;
+	border: 1px solid #969696;
+	background-color: transparent;
+	opacity: 0.8;
+	border-radius: 1rem;
+	font-weight: bold;
+	font-size: 1.6rem;
+	margin-top: 0.5rem;
+	padding-left: 0;
+	padding-right: 0;
+}
+form.sign-up .go-back a{
+	width: 100%;
+	display: inline-block;
+}
+form.sign-up a{
+	text-decoration: none;
+	color: black;
 }

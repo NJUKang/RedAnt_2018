@@ -4,6 +4,7 @@
 	<title>个人中心</title>
 	<meta charset="utf-8">
 	<meta>
+    <link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
 	<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 	<script src="/static/js/jquery-1.8.3.min.js"></script>
@@ -31,7 +32,7 @@
                     <a href="/myaccount/">
                         <img src="/static/images/23.jpg" alt="用户头像">
                     </a>
-                    <div><span class="drop-menu" id="drop-menu">
+                    <span class="drop-menu" id="drop-menu">
                         <a href="/myaccount/">
                             个人中心
                         </a>
@@ -41,7 +42,6 @@
                             注销
                         </a>
                     </span>
-                    </div>
                     
                 </div>
             </div>
@@ -71,7 +71,7 @@
                             <li class="lastmenuli"><a href="#">添加课程</a></li>
                         </ul>
                     </li>
-                    <li class="leaf"><a href="#" >论 &nbsp;坛 </a>
+                    <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
                     </li>
                     <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
                     </li>
@@ -83,7 +83,7 @@
         </nav>
         <div class="main-container" id="main">
         	<div class="vacant left"></div>
-        	<div class="vacant right"></div>
+        	<!-- <div class="vacant right"></div> -->
         	<div class="sidebar">
 	            <div class="reverse-nav">
 	                <ul>
@@ -122,15 +122,23 @@
         					<!-- ??? -->
         					<span class="change-only"><a href="javascript:void(0)" id="showSetPsw">修改密码</a></span>
         					<div class="set-psw">
-        						<div class="show">
-									<span>新密码：&nbsp &nbsp </span>
-									<input id="psw" type="password" name="password" placeholder="6-20位密码" maxlength="20" minlength="6" onchange="checkPsw(this)"  onfocus="setPsw(this)" onblur="blurPsw(this)">
-									<span class="check check-psw" id="psw-tip"><i class="fa fa-exclamation-circle"></i><span id="check-psw"></span></span>
+                                <div class="show conf-old-psw">
+                                    <span>确认旧密码：</span>
+                                    <input id="prePsw" type="password" name="prePsw" placeholder="请输入旧密码" maxlength="20" minlength="6" onfocus="showHint(this)" onblur="hideHint(this)" onchange="checkPrepsw(this)">
+                                    <i class="fa check"></i>
+                                    <span class="hint"><i class="fa fa-exclamation-circle"></i><span  id="hint-prePsw"></span></span>
+                                </div>
+        						<div class="show setPsw">
+									<span>设置新密码：</span>
+									<input id="psw" type="password" name="psw" placeholder="请输入6-20位密码" maxlength="20" minlength="6" onchange="checkPsw(this)"  onfocus="showHint(this)" onblur="hideHint(this)">
+                                    <i class="fa check"></i>
+									<span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-psw"></span></span>
 								</div>
 								<div id="confirm-psw" class="show check-psw">
-									<span>确认密码：</span>
-									<input id="cf-psw" type="password" name="password" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
-									<span class="check check-cf-psw" id="conf-tip"><i class="fa fa-exclamation-circle"></i><span id="check-cf-psw"></span></span>
+									<span>确认新密码：</span>
+									<input id="cf-psw" type="password" name="cf-psw" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
+                                    <i class="fa check"></i>
+									<span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-cf-psw"></span></span>
 								</div>
 								<a href="javascript:void(0)" id="hideSetPsw">取消</a>
         					</div>
@@ -139,23 +147,14 @@
         				<span>邮箱</span></td>
         				<td><span class="setted" id="mail">{{ user.email }}</span>
         				<span class="setted-tip"><i class="fa fa-check"></i>已绑定</span>
-        				<a href="javascript:void(0)">更换邮箱</a>
+        				<!-- <a href="javascript:void(0)">更换邮箱</a> -->
         			</td></tr>
         			<tr><td class="setting-title">
-        				<span>参与项目</span></td>
+        				<span>项目组</span></td>
         				<td>
         					<ul class="pro-list" id="pro-list">
         						<li>
-        							<span>信息发布网站开发</span>
-        							<i class="fa fa-minus-square remove"> 移除 </i>
-        						</li>
-        						<li>
-        							<span>Android应用开发</span>
-        							<i class="fa fa-minus-square remove"> 移除 </i>
-        						</li>
-        						<li>
-        							<span>论文检测</span>
-        							<i class="fa fa-minus-square remove"> 移除 </i>
+        							<span>{{ user.first_name }}</span>
         						</li>
         					</ul>
         					<!-- <span class="change-only"><a href="#">管理项目</a></span> -->
@@ -164,7 +163,23 @@
         		<input type="submit" name="save" value="保存" class="save btn btn-full" id="save">
         	</div>
         </div>
+        <div class="model-alertInfo" id="model-alertInfo">
+            <div class="model-container">
+                <div class="model-head">
+                    <span class="model-title">注 册</span>
+                    <i class="fa fa-close"></i>
+                </div>
+                <div class="model-body">
+                    <h3 class="message"><h3>
+                </div>
+                <div class="model-end">
+                    <div class="btn get">确 认</div>
+                    <!-- <div class="btn shut">关 闭</div> -->
+                </div>
+            </div>
+        </div>
         <footer>@大连理工大学红蚂蚁实验室</footer>
         <script type="text/javascript" src="/static/js/personalCenter.js"></script>
+        <script type="text/javascript" src="/static/js/alertModel.js"></script>
 </body>
 </html>

@@ -3,10 +3,11 @@ from django.conf.urls import include, url
 import RedAnt.teams.views as views
 
 urlpatterns = [
-
+    url(r'major=(?P<name>.*)/delete/resource=(?P<file>.*)/', views.deleteResource),
     url(r'major=(?P<name>.*)/delete/article=(?P<article>.*)/', views.deleteBlog),
     url(r'major=(?P<name>.*)/article=(?P<article>.*)/', views.editBlog),
-    url(r'major=(?P<name>.*)/edit', views.edit),
+    url(r'major=(?P<name>.*)/edit/', views.edit),
+    url(r'major=(?P<name>.*)/delete/', views.delete),
     url(r'major=(?P<name>.*)/', views.teamMajor),
     url(r'operating=new/', views.teamAdd),
     # url(r'sign_up/', views.sign_up),

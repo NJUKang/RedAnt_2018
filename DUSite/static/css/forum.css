@@ -1,0 +1,60 @@
+body > div.wrapper > section > div > ul > li>div.cbp_tmlabel{
+	margin-left: 10%;
+}
+body > div.wrapper > section > div.backTop{
+	right: 9%;
+	position: absolute;
+	text-decoration: none;
+	background-color: #26abe2;
+	color: whitesmoke;
+	border-radius: 25px;
+}
+body > div.wrapper > section > div > ul.cbp_tmtimeline{
+	width: 90%;
+	margin:auto;
+}
+body > div.wrapper > section > div > ul > li> time.cbp_tmtime{
+	margin-left: 0px;
+	padding-right: 1%;
+}
+#timeline:before{
+	left:8%;
+}
+#issue{
+	right: 8%;
+	position: absolute;
+}
+#timeline > li> div> div> div.article{
+	margin-bottom:10px;
+}
+.fa-angle-double-up::before {
+    content: "\f102";
+}
+.wrapper > section{
+	padding-bottom: 80px;
+}
+.ul_pages{
+	display: block;
+	margin: auto;
+	width: 20%;
+	font-size: 30px;
+	text-align: center;
+	margin-top: 50px;
+}
+.ul_pages>li{
+	display: inline;
+
+}
+.ul_pages>li>a.active{
+	background-color: #26abe2;
+	color: whitesmoke;
+}
+.ul_pages>li>a{
+	text-decoration: none;
+	font-size: 30px;
+	color: #686e6f;
+	padding: 3px;
+}
+.ul_pages>li>a:hover:not(.active){
+	background-color:#ddd;
+}

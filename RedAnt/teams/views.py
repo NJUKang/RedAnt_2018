@@ -1,5 +1,5 @@
 #coding:utf-8
-from RedAnt.forms import teamForm,myUEditorModelForm
+from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from RedAnt.models import ProjectTeam,Blog,LearningResources
@@ -15,14 +15,18 @@ import re
 import datetime
 import random
 
-@permission_required('RedAnt.add_ProjectTeam')
+@permission_required('RedAnt.add_projectteam')
 @login_required
 def teamAdd(request):
     name = '未命名'
     introduction = '请添加项目简介'
     team = ProjectTeam.objects.create(TeamName=name,Introduction=introduction)
+    team.ShortName = team.id
     team.save()
-    form = myUEditorModelForm()
+    blog = Blog.objects.get(id=0)
+    blog.id = None
+    blog.Team = team
+    blog.save()
     url = '/teams/major='+ str(team.id) + '/edit/'
     return HttpResponseRedirect(url)
 
@@ -33,38 +37,41 @@ def teamMajor(request,name):
     except:
         return HttpResponse(u"项目组不存在")
     if request.method == 'POST':
-        form = myUEditorModelForm(request.POST)
-        if form.is_valid():
-            blog = form.save()
-            blog.Team = team
-            blog = transform(blog)
-            blog.save()
-            form = myUEditorModelForm()
-            blogs = Blog.objects.filter(Team=team).order_by("-modify_time")
-            teams = ProjectTeam.objects.all()
-            return render(request, 'projectTeam.html', {'team': team, 'teams': teams,'form': form, 'blogs': blogs})
-        else:
-            return HttpResponse(u"数据校验错误")
+        fileForm = FileUploadForm(request.POST, request.FILES)
+        if fileForm.is_valid():
+            file = LearningResources()
+            file.Team = ProjectTeam.objects.get(ShortName=name)
+            file.teamName = name
+            file.fileField = fileForm.cleaned_data['file']
+            file.name = file.fileField.name
+            file.save()
+        url = request.get_full_path()
+        return HttpResponseRedirect(url)
     else:
-        try:
-            blogs = Blog.objects.filter(Team=team).order_by('-modify_time')
-        except:
-            blogs = ''
-        form = myUEditorModelForm()
+        blogs = Blog.objects.filter(Team=team).order_by('-modify_time')
         teams = ProjectTeam.objects.all()
-        return render(request, 'projectTeam.html', {'team': team,'teams': teams, 'form': form, 'blogs': blogs})
+        fileForm = FileUploadForm()
+        resourseList = LearningResources.objects.filter(Team=team).order_by('-date')
+        return render(request, 'projectTeam.html', {'team': team,'teams': teams,
+                                                    'blogs': blogs,'fileForm': fileForm,'resourseList':resourseList})
 
+@permission_required('RedAnt.change_projectteam')
 @login_required
 def edit(request,name):
     if request.method == 'POST':
         form = teamForm(request.POST)
         if form.is_valid():
             try:
-                ProjectTeam.objects.get(ShortName=name).delete()
+                team = ProjectTeam.objects.get(ShortName=name)
             except:
-                ProjectTeam.objects.get(id=int(name)).delete()
-            team = form.save()
-            url = '/teams/major=' + team.ShortName + '/'
+                team  =ProjectTeam.objects.get(id=int(name))
+            blogs = Blog.objects.filter(Team=team)
+            newTeam = form.save()
+            for blog in blogs:
+                blog.Team = newTeam
+                blog.save()
+            team.delete()
+            url = '/teams/major=' + newTeam.ShortName + '/'
             return HttpResponseRedirect(url)
         else:
             return HttpResponse(u"数据校验错误")
@@ -77,32 +84,53 @@ def edit(request,name):
         teams = ProjectTeam.objects.all()
         return render(request, 'teamEdit.html', {'team': team,'teams': teams, 'editor': editor})
 
+@permission_required('RedAnt.delete_projectteam')
+@login_required
+def delete(request, name):
+    ProjectTeam.objects.get(ShortName=name).delete()
+    url = '/index/'
+    return HttpResponseRedirect(url)
+
 @permission_required('RedAnt.change_blog')
 @login_required
 def editBlog(request, name, article):
-
-    if request.method == 'POST':
-        form = myUEditorModelForm(request.POST)
-        Blog.objects.get(Name=article).delete()
-        if form.is_valid():
-            blog = form.save()
-            blog = transform(blog)
-            blog.save()
-            url = '/teams/major=' + name + '/ article = '+ article + '/'
-            return HttpResponseRedirect(url)
-        else:
-            return HttpResponse(u"数据校验错误")
+    if article == 'new':
+        blog = Blog()
+        blog.Team = ProjectTeam.objects.get(ShortName=name)
+        blog.save()
+        url = '/teams/major=' + name + '/article='+str(blog.id)+'/'
+        return HttpResponseRedirect(url)
     else:
-        article = Blog.objects.get(Name=article)
-        form = myUEditorModelForm(instance=article)
-        teams = ProjectTeam.objects.all()
-        return render(request, 'editBlog.html', {'form': form,'teams': teams})
+        if request.method == 'POST':
+            form = myUEditorModelForm(request.POST)
+            Blog.objects.get(id=article).delete()
+            if form.is_valid():
+                blog = form.save()
+                blog.Team = ProjectTeam.objects.get(ShortName=name)
+                blog = transform(blog)
+                blog.save()
+                url = '/teams/major=' + name +'/'
+                return HttpResponseRedirect(url)
+            else:
+                return HttpResponse(u"数据校验错误")
+        else:
+            article = Blog.objects.get(id=article)
+            form = myUEditorModelForm(instance=article)
+            teams = ProjectTeam.objects.all()
+            return render(request, 'editBlog.html', {'form': form,'teams': teams})
 
 @permission_required('RedAnt.delete_blog')
 @login_required
 def deleteBlog(request, name, article):
-    Blog.objects.get(Name=article).delete()
-    url = '/teams/major=' + name + '/ '
+    Blog.objects.get(id=article).delete()
+    url = '/teams/major=' + name + '/'
+    return HttpResponseRedirect(url)
+
+@permission_required('RedAnt.delete_learningresoures')
+@login_required
+def deleteResource(request, name, file):
+    LearningResources.objects.get(fileField=file).delete()
+    url = '/teams/major=' + name + '/'
     return HttpResponseRedirect(url)
 
 def transform(blog):

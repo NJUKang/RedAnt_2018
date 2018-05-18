@@ -28,29 +28,6 @@ def courseAdd(request):
 
 @login_required
 def courseMajor(request,name):
-    # try:
-    #     team = ProjectTeam.objects.get(ShortName=name)
-    # except:
-    #     return HttpResponse(u"项目组不存在")
-    # if request.method == 'POST':
-    #     form = myUEditorModelForm(request.POST)
-    #     if form.is_valid():
-    #         blog = form.save()
-    #         blog.Team = team
-    #         blog = transform(blog)
-    #         blog.save()
-    #         form = myUEditorModelForm()
-    #         blogs = Blog.objects.filter(Team=team).order_by("-modify_time")
-    #         return render(request, 'projectTeam.html', {'team': team, 'form': form, 'blogs': blogs})
-    #     else:
-    #         return HttpResponse(u"数据校验错误")
-    # else:
-    #     try:
-    #         blogs = Blog.objects.filter(Team=team).order_by('-modify_time')
-    #     except:
-    #         blogs = ''
-    #     form = myUEditorModelForm()
-    #     return render(request, 'projectTeam.html', {'team': team, 'form': form, 'blogs': blogs})
     if name == 'cptNw':
         teams = ProjectTeam.objects.all()
         return render(request, 'cptNw.html', {'teams': teams})
