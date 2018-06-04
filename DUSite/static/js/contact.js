@@ -1,31 +1,73 @@
 (function(){
 	'use strict';
-	var wrap=document.getElementById('u193');
-	var button=document.getElementById('u190');
-	var close=document.getElementById('u201');
-	var send=document.getElementById('u200');
-	var sendtip=document.getElementById('u205');
-	button.addEventListener("click", show, false);
-	close.addEventListener("click", clo, false);
-	send.addEventListener("click", tip, false);
-	function show(){
-		if(wrap.classList.contains("contact-hidden")){
-			wrap.classList.add("contact-visible");
-			wrap.classList.remove("contact-hidden");
-			wrap.style.visibility="visible";
-			wrap.style.display="block";
-		}
-	}
-	function clo(){
-		wrap.classList.add("contact-hidden");
-		wrap.classList.remove("contact-visible");
-		wrap.style.visibility="hidden";
-		wrap.style.display="none";
-	}
-	function tip(){
-		clo();
-		sendtip.style.visibility="visible";
-		sendtip.style.display="block";
-		setTimeout(function(){sendtip.style.display="none";sendtip.style.visibility="visible"},1200);
-	}
+	$("#contactUs").click(function(){
+		$("#model-email").css("display","block");
+		// $("#model .model-container").css("top","25%");
+		$("#model-email .model-container").css("opacity",1);
+	})
+	$("#model-email .model-container .fa-close").click(function(){
+		$("#model-email").css("display","none");
+		var input=$("#model-email .model-body input");
+		var i=input.length;
+        for(var n=0;n<i-1;n++){
+            input[n].value='';
+            $("#model-email .model-body i").css("opacity",0);
+        }
+	})
+
 })();
+var cfm='';
+function checkFromMail(node) {
+    var tip = document.getElementById("check-from-mail");
+    var mail = node.value;
+    if( ! isEmail(mail) ){
+    	tip.style.color="red";
+    	tip.opacity=1;
+    	tip.className="check fa fa-close";
+    	cfm=false;
+    	return false;
+    }
+    else{
+    	tip.className="check fa";
+    	tip.opacity=0;
+    	cfm=true;
+    }
+}
+
+$("#send").click(function(e){
+	e.preventDefault();
+	$("#model-alertInfo span.model-title").html("联系我们");
+	var content=$("from-content").val();
+	if(cfm!=true||content==''){
+		alertInformation("请完善表单");
+		return false;
+	}
+	var from=$("#from-mail").val();
+	var sender=$("#from-name").val();
+	var content=$("#from-content").val();
+	$.ajax({
+        type:"POST",
+        url:"/index/emailSend/",
+        // async:false,
+        cache:false,
+        data:{
+            "from": from,
+            "sender": sender,
+            "content":content
+        },
+        success:function(data){
+        	if(data.code == 1) {
+				alertInfoWithJump(data.info,"/index/");
+			}
+			else {
+                alertInformation(data.info);
+            }
+        },
+        fail: function() {
+            alertInformation("failed");
+        },
+        error: function(response) {
+            alertInformation("error");
+        }
+    });
+});

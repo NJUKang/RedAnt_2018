@@ -116,3 +116,32 @@ $(".manager #change-rank").on("click",function(){
 	var table=removeItem();
 	submitList(table,"changeRank");
 });
+
+$(".manager select.manage-team").change(function(){
+	var emailEl=$(this).parent("td").siblings("td")[2];
+	var email=emailEl.innerHTML;
+	var team=$(this).find('option:selected').val();
+	$.ajax({
+		type:"POST",
+        url:"/manage/changeGroup/",
+        cache:false,
+        data:{
+            "email":email,
+            "team": team
+        },
+        success:function(data){
+			if(data.code == 1) {
+					alertInformation(data.info);
+				}
+				else {
+                    alertInformation(data.info);
+                }
+        },
+        fail: function() {
+            alert("failed");
+        },
+        error: function(response) {
+            alert("error");
+        }
+	});
+});

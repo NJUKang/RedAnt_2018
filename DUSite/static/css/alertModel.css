@@ -87,10 +87,13 @@
 .model-alertInfo .model-container .model-end .btn{
 	margin: 0 2rem;
 	width: 5rem;
+/* 	background-color: #42c02e;
+	color: white;
+	border: none; */
 }
-.model-alertInfo .model-container .model-end .get{
+.model-alertInfo .model-container .model-end .btn.get,.model-alertInfo .model-container .model-end .btn .clo{
 	background-color: #42c02e;
-	opacity: 0.8;
+/* 	opacity: 0.8; */
 	color: white;
 	border:none;
 }

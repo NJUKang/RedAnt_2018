@@ -20,13 +20,13 @@ a{
 	height: 7rem;
 	background: rgba(39,68,114,1);
 	position: relative;
-	min-width: 70rem;
+	min-width: 62rem;
 }
 .top-icon{
 	display: block;
 	position: absolute;
 	top: 50%;
-	left: 13%;
+	left: 15%;
 	transform: translate(-50%,-50%);
 }
 .top-icon img{
@@ -43,7 +43,6 @@ a{
 	left: 50%;
 	transform: translate(-50%,-50%);
 	font-style: bold;
-	font-style: italic;
 	font-size: 1.7rem;
 	color: white;
 }
@@ -52,7 +51,6 @@ a{
 }
 .LabSlogan span{
 	margin-left: 5rem;
-	font-style: italic;
 }
 .LabSlogan span.secondslo{
 	margin-left: 14rem;
@@ -61,7 +59,7 @@ a{
 /* 	height: 7rem; */
 	position: absolute;
 	top: 50%;
-	right: 13.5%;
+	right: 16.3%;
 	transform: translate(50%,-50%);
 	padding: 0 1rem;
 	background-color: #274472;
@@ -117,7 +115,7 @@ a{
 	display: block;
 }*/
 .enter .person .drop-menu:hover >a{
-	color: gold;
+	color: #2A8FBD;
 }
 
 /*页脚
@@ -159,10 +157,13 @@ footer{
 .main-container .change{
 	width: 40%;
 	display: inline-block;
-	left: -5%;
+	/*! left: -5%; */
 	/*border-left: solid 0.1rem #CCC;*/
 	/*border-right: solid 0.1rem #CCC;*/
 	/*background-color: gold;*/
+	min-width: 44rem;
+	position: absolute;
+	transform: translate(-10%,0);
 }
 .main-container .sidebar{
 	width: 19%;
@@ -193,6 +194,28 @@ footer{
 	height: 9rem;
 	width: 9rem;
 	border-radius: 50%;
+}
+.main-container table form{
+	position: relative;
+}
+.main-container table form input#id_file{
+	position: absolute;
+	clip: rect(0 0 0 0);
+	left: 3rem;
+}
+.main-container table form label{
+	padding: 1rem;
+	background-color: #eee;
+	border-radius: 0.5rem 0 0 0.5rem;
+}
+.main-container table form input#btn_upload{
+	border-radius: 0 0.5rem 0.5rem 0;
+	position: relative;
+	left: -0.4rem;
+	padding: 0.7rem;
+	top: -0.1rem;
+	background-color: #eee;
+	border-left: solid 1px rgba(0,0,0,0.3);
 }
 .main-container table .hide{
 	position: absolute;
@@ -234,8 +257,16 @@ footer{
 	color: #969696;
 	vertical-align: middle;
 }
+.main-container table i.hint-checkname{
+	display: block;
+	margin: 0.5rem 0 0 0;
+	position: absolute;
+	opacity: 0;
+}
 .main-container table i#check-name{
 	opacity: 0;
+	position: relative;
+	margin-left: 5rem;
 }
 .main-container table .setted-tip{
 	color: #969696;
@@ -257,6 +288,8 @@ footer{
 .main-container table .mail a,.main-container table .name a{
 	display: none;
 	font-size: 1.4rem;
+	position: absolute;
+	line-height: 3rem;
 }
 .main-container table .mail:hover a,.main-container table .name:hover a{
 	display: inline-block;
@@ -355,9 +388,9 @@ footer{
 .main-container ul li:hover i{
 	display: inline-block;
 }
-.main-container ul li:hover{
+/* .main-container ul li:hover{
 	border-bottom: 1px solid #CCC;
-}
+} */
 .main-container ul li i:hover{
 	cursor: pointer;
 }
@@ -452,13 +485,13 @@ footer{
 	display: inline-block;
 }
 .main-container .sidebar .reverse-nav ul .thisleaf{
-	background-color: rgba(32,178,170,0.8);
+	background-color: #7bbfea;/*rgba(32,178,170,0.8)*/
 }
 .main-container .sidebar .reverse-nav ul .thisleaf a{
 	color: black;
 }
 .main-container .sidebar .reverse-nav ul li:hover{
-	background-color: rgba(205,205,180,0.8);
+	background-color: #7bbfea;
 }
 .main-container .sidebar .reverse-nav ul li:hover a{
 	color: black;

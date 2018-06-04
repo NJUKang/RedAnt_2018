@@ -264,7 +264,7 @@ input,
 select,
 textarea {
     /*font-family: inherit; /* 1 */
-    font-size: 100%; /* 2 */
+    font-size: 16px; /* 2 */
     margin: 0; /* 3 */
 }
 
@@ -366,10 +366,10 @@ textarea {
  */
 
 table {
-    width: 90%;
     border-collapse: collapse;
     border-spacing: 0;
     margin: auto;
+    /* border: 1px solid rgb(221, 221, 221); */
 }
 
 #id_content{

@@ -136,13 +136,15 @@
 	   	var tip = document.getElementById("sign-up-name").getElementsByClassName("check")[0];
 	    var account = $.trim(node.value);
 	    var name= node.value;
+	    var reg=/^[\u4e00-\u9fff\w]{2,10}$/;/*由字母、数字、_或汉字组成;*/
 	    if(name==""){
-	    	tip.style.opacity='0';
+	    	tip.style.opacity=0;
 	        ca=false;
 	        return false;
 	    }
-	    if (name.length < 2||name.length > 10) {
-	       	tip.style.opacity='1';
+	    console.log(reg.test(name));
+	    if (reg.test(name)!=true) {
+	       	tip.style.opacity=1;
 	    	tip.className="fa fa-close check";
 	    	tip.style.color="red";
 	        ca=false;
@@ -152,7 +154,7 @@
 	    	$.ajax({
 		        type:"POST",
 		        url:"/index/userCheck/",
-		        async:false,
+		        // async:false,
 		        cache:false,
 		        data:{
 	                "username": name
@@ -229,7 +231,7 @@
 			hintEl.innerHTML="";
 		}
 		else if(id=="name"){
-			hintEl.innerHTML="请输入2-10个字符（不包含空格）组成的用户名";
+			hintEl.innerHTML="请输入2-10位由字母、数字、_或汉字组成的用户名";
 			$(hintEl).siblings("i").css("opacity","1");
 		}
 		else if(id=="password"){

@@ -37,6 +37,7 @@ body{background:#f0f0f0;}
 	margin-top: 2%;
 	margin-left: 5%;
 	position: absolute;
+	z-index: 2;
 }
 
 .jquery-accordion-menu .jquery-accordion-menu-footer,.jquery-accordion-menu .jquery-accordion-menu-header {
@@ -46,7 +47,8 @@ body{background:#f0f0f0;}
 	float: left;
 	line-height: 50px;
 	font-weight: 600;
-	color: #f0f0f0;
+	font-size: 20px;
+	color: #26abe2;
 	background: #414956
 }
 

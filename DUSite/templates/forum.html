@@ -6,90 +6,76 @@
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>{{ team.TeamName }}</title>
+<title>论坛</title>
 
 <link rel="alternate" type="application/rss+xml" title="" href="/index/">
 <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
-<link rel="stylesheet" type="text/css" href="../static/css/forum.css">
+<link rel="stylesheet" type="text/css" href="/static/css/forum.css">
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 
-<link rel="stylesheet" href="../static/css/essaystyle.css">
+<link rel="stylesheet" href="/static/css/footer.css">
 
-<link rel="stylesheet" href="../static/css/projectTeamIndex.css">
+<link rel="stylesheet" href="/static/css/projectTeamIndex.css">
 
-<link rel="stylesheet" href="../static/css/animate.css">
-
-
+<link rel="stylesheet" href="/static/css/animate.css">
 
 
-<link rel="stylesheet" type="text/css" href="../static/css/nav.css">
-<link rel="stylesheet" href="../static/css/jquery.tiles.css">
-<link rel="stylesheet" href="../static/css/normalize.css">
-<script src="../static/js/jquery.tiles.js"></script>
-<script src="../static/js/jquery-1.8.3.min.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+<link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
+<link rel="stylesheet" href="/static/css/normalize.css">
+<script src="/static/js/jquery.tiles.min.js"></script>
+<script src="/static/js/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-<link rel="stylesheet" type="text/css" href="../static/css/personalCenter.css">
+<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
 </head>
 <body>
-    <!-- <script>
-            window.onload=function(){
-                var i=document.getElementsByTagName('input').length;
-                for(var n=0;n<i;n++){
-                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
-                        document.getElementsByTagName('input')[n].value='';
-                    }
-                }
-                var check=document.getElementsByClassName("check");
-                for(var x=0;x<check.length;x++){
-                    check[x].style.opacity="0";
-                }
-            }
-        </script> -->
         <div class="Top-bar">
             <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
             <div class="LabSlogan">
-                
                 <span> 遇到问题立即沟通 !<br></span>
                 <span class="secondslo"> 我是最后负责人 !</span>
             </div>
             <div class="enter">
-              <div class="person">
-                <a href="/myaccount/">
-                    <img src="/static/images/23.jpg" alt="用户头像">
-                  </a>
+                <div class="person">
+                    <a href="/myaccount/">
+                        <img src="/media/{{ user.last_name }}" alt="用户头像">
+                    </a>
                     <span class="drop-menu" id="drop-menu">
                         <a href="/myaccount/">
                             个人中心
                         </a>
                     </span>
                     <span class="drop-menu" id="drop-menu">
-                        <a hf="/index/logout/">
+                        <a href="/index/logout/">
                             注销
                         </a>
                     </span>
-              </div>
+                </div>
             </div>
         </div>
         <!-- 导航栏 -->
-       <nav role="navigation">
+        <nav role="navigation">
             <div class="region region-navigation">
                 <ul class="navbar-menu">
                     <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
                     </li>
-                    <li class="dropdown">项目组 <span class="caret"></span>
+                    <li class="dropdown"><a href="javascript:void(0);">项目组<span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
 
-  
+                        {% for team in teams %}
                             <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
-                   
+                        {% endfor %}
+                        {% if perms.RedAnt.add_projectteam %}
                              <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
-    
+                         {% endif %}
 
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                    <li class="dropdown"><a href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
                             <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
                             <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
@@ -98,7 +84,7 @@
                     </li>
                     <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
                     </li>
-                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    <li class="leaf"><a href="/index/#contact" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
                     </li>
                    {% if perms.auth.change_user %}
                 <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
@@ -109,120 +95,20 @@
     
 <div class="wrapper">
 <section>
-    <button class="edit" id="issue"><i class="fa fa-pencil-square-o"></i>发帖</button>
+  <button onclick="window.location.href='post/'" class="edit" id="post" ><i class="fa fa-pencil-square-o"></i>发帖</button>
   <div class="container">
-      <hr>
-
-      <ul class="cbp_tmtimeline" id="timeline">
-          
-           <li>
-            <time class="cbp_tmtime" ><span id="11.8"><td>日期</td></span> <span><td>昵称</td></span></time>
-            <div class="cbp_tmlabel" onclick="window.open('#')">
-            <div style="width:100%">
-              <div id="article" class="article">
-                 <h4>北京人：麻酱就是我的命</h4>
-                 <span class="blogpic"><img src="{{ blog.ImagePath }}"></span><p id="content">
-                  天还没亮，北京人的一日三餐就被麻酱包圆儿了。一碗热乎面茶上需要淋一勺芝麻酱，一圈一圈吸溜着喝。到了晌午，来碗麻酱凉面，过凉水的面裹上芝麻酱，香得呦，赛似活神仙。天黑后就是涮羊肉了，夹起一筷子在水里甩几下，一股脑儿沉入麻酱碗底，就像老舍说的“那是动植物结合的精髓！”是生命的大和谐！  
-                  
-                  对他们来说，芝麻酱不是调味剂而是必需品。就像酱油之于广州，辣酱之于韩国，咖喱之于印度，番茄酱之于意大利，没有麻酱，北京人会哭爹喊娘！
-                  一个月不吃烤鸭，一个月不吃卤煮，一个月不吃大米饭……都行！但绝不能一个星期吃不到芝麻酱！
-                  作者：福桃九分饱（来自豆瓣）
-                  来源：https://www.douban.com/note/665904674/
-
-                </p>
-              </div>
-
-              <!-- <button class="unfold foldbutton"><i class="fa fa-angle-double-down"></i> 展开</button> -->
-             <!--  <button class="fold foldbutton"><i class="fa fa-angle-double-up"></i> 收起</button> -->
-            </div>
-              <!-- {% if perms.RedAnt.delete_blog %} -->
-              <button onclick="" class="edit"><i class="fa fa-angle-double-down"></i>阅读全文</button>
-              <button onclick="" class="edit"><i class="fa fa-commenting-o"></i>评论</button>
-                              <button onclick="window.location.href='delete/article={{ blog.Name }}/'" class="edit"><i class="fa fa-trash"></i>删除</button>
-              <!-- {% endif %}
-              {% if perms.RedAnt.change_blog %} -->
-                               <button onclick="window.location.href='article={{ blog.Name }}/'" class="edit"><i class="fa fa-pencil"></i>编辑</button>
-          <!--     {% endif %} -->
-            </div>
-            </li>
-            <li>
-            <time class="cbp_tmtime" ><span id="11.8"><td>日期</td></span> <span><td>昵称</td></span></time>
-            <div class="cbp_tmlabel"  onclick="window.open('#')">
-            <div style="width:100%">
-              <div id="article" class="article">
-                 <h4>北京人：麻酱就是我的命</h4>
-                 <span class="blogpic"><img src="{{ blog.ImagePath }}"></span><p id="content">
-                  天还没亮，北京人的一日三餐就被麻酱包圆儿了。一碗热乎面茶上需要淋一勺芝麻酱，一圈一圈吸溜着喝。到了晌午，来碗麻酱凉面，过凉水的面裹上芝麻酱，香得呦，赛似活神仙。天黑后就是涮羊肉了，夹起一筷子在水里甩几下，一股脑儿沉入麻酱碗底，就像老舍说的“那是动植物结合的精髓！”是生命的大和谐！  
-                  对他们来说，芝麻酱不是调味剂而是必需品。就像酱油之于广州，辣酱之于韩国，咖喱之于印度，番茄酱之于意大利，没有麻酱，北京人会哭爹喊娘！
-                  一个月不吃烤鸭，一个月不吃卤煮，一个月不吃大米饭……都行！但绝不能一个星期吃不到芝麻酱！
-                  作者：福桃九分饱（来自豆瓣）
-                  来源：https://www.douban.com/note/665904674/
-
-                </p>
-              </div>
-              
-              <!-- <button class="unfold foldbutton"><i class="fa fa-angle-double-down"></i> 展开</button> -->
-             <!--  <button class="fold foldbutton"><i class="fa fa-angle-double-up"></i> 收起</button> -->
-            </div>
-              <!-- {% if perms.RedAnt.delete_blog %} -->
-
-              <button onclick="" class="edit"><i class="fa fa-angle-double-down"></i>阅读全文</button>
-              <button onclick="" class="edit"><i class="fa fa-commenting-o"></i>评论</button>
-                              <button onclick="window.location.href='delete/article={{ blog.Name }}/'" class="edit"><i class="fa fa-trash"></i>删除</button>
-              <!-- {% endif %}
-              {% if perms.RedAnt.change_blog %} -->
-                               <button onclick="window.location.href='article={{ blog.Name }}/'" class="edit"><i class="fa fa-pencil"></i>编辑</button>
-          <!--     {% endif %} -->
-            </div>
-            </li>
-            <li>
-            <time class="cbp_tmtime" ><span id="11.8"><td>日期</td></span> <span><td>昵称</td></span></time>
-            <div class="cbp_tmlabel"  onclick="window.open('#')">
-            <div style="width:100%">
-              <div id="article" class="article">
-                 <h4>北京人：麻酱就是我的命</h4>
-                 <span class="blogpic"><img src="{{ blog.ImagePath }}"></span><p id="content">
-                  天还没亮，北京人的一日三餐就被麻酱包圆儿了。一碗热乎面茶上需要淋一勺芝麻酱，一圈一圈吸溜着喝。到了晌午，来碗麻酱凉面，过凉水的面裹上芝麻酱，香得呦，赛似活神仙。天黑后就是涮羊肉了，夹起一筷子在水里甩几下，一股脑儿沉入麻酱碗底，就像老舍说的“那是动植物结合的精髓！”是生命的大和谐！  
-                  对他们来说，芝麻酱不是调味剂而是必需品。就像酱油之于广州，辣酱之于韩国，咖喱之于印度，番茄酱之于意大利，没有麻酱，北京人会哭爹喊娘！
-                  一个月不吃烤鸭，一个月不吃卤煮，一个月不吃大米饭……都行！但绝不能一个星期吃不到芝麻酱！
-                  作者：福桃九分饱（来自豆瓣）
-                  来源：https://www.douban.com/note/665904674/
-
-                </p>
-              </div>
-              
-              <!-- <button class="unfold foldbutton"><i class="fa fa-angle-double-down"></i> 展开</button> -->
-              <!-- <button class="fold foldbutton"><i class="fa fa-angle-double-up"></i> 收起</button> -->
-            </div>
-              <!-- {% if perms.RedAnt.delete_blog %} -->
-              <button onclick="" class="edit"><i class="fa fa-angle-double-down"></i>阅读全文</button>
-              <button onclick="" class="edit"><i class="fa fa-commenting-o"></i>评论</button>
-                              <button onclick="window.location.href='delete/article={{ blog.Name }}/'" class="edit"><i class="fa fa-trash"></i>删除</button>
-              <!-- {% endif %}
-              {% if perms.RedAnt.change_blog %} -->
-                               <button onclick="window.location.href='article={{ blog.Name }}/'" class="edit"><i class="fa fa-pencil"></i>编辑</button>
-          <!--     {% endif %} -->
-            </div>
-            </li>
-
-{#         <!--  {% endfor %} -->#}
-
-      </ul>
+          {% for post in posts %}
+                <div class="row">
+                <a href='forum={{ post.id }}/page=1/' class="forumList"><span style="font-size: 18px;">{{ post.name }}</span></a>
+                <span style="float: right; font-size: 14px; margin-right: 15px;">{{ post.modify_time|date:"m-d" }}发表
+                回帖数：{{ post.postNum }}
+                作者：{{ post.postedBy.username }}</span>
+                </div>
+          {% endfor %}
     </div>
-    
-    <ul class="ul_pages">
-    <li><a href="#"><<</a></li>
-    <li><a href="#">1</a></li>
-    <li><a class="active" href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#">>></a></li>
-    </ul>
     <div class="backTop" onclick="document.body.scrollTop = document.documentElement.scrollTop = 0;" id="backTop">
       <i class="fa fa-angle-double-up" style="font-size: 50px;"></i>
     </div>
-  </div>
   
 </section>
 </div>
@@ -238,6 +124,6 @@
 <script type="text/javascript" src="/static/js/index.js"></script>
 <script type="text/javascript" src="/static/js/layout.js"></script>
 <script type="text/javascript" src="/static/js/jquery.js"></script>
-<script type="text/javascript" src="../static/js/forum.js"></script>
+<script type="text/javascript" src="/static/js/forum.js"></script>
 </body>
 </html>

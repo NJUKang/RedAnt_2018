@@ -9,7 +9,7 @@ body{
 /* 	background: url("../images/22.jpg"); */
 	background-size: cover;
 	overflow-x: hidden;
-	background-color: #f1f1f1;
+	background-color: #f0f0f0;
 	/*background-repeat: no-repeat;*/
 	margin: 0;
 }
@@ -33,18 +33,19 @@ header.sign-up-header a:hover{
 	text-decoration: underline;
 }
 #sign-up-container.sign-up-container{
-	position: absolute;
-	transform: translate(-50%,-50%);
+	position: relative;
+	transform: translate(-50%,0);
 	top: 40%;
 	left: 50%;
 	background-color: #fff;
   border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0,0,0,.1);
+  box-shadow: 0 0 8px rgba(0,0,0,.3);
   vertical-align: middle;
 	width: 50rem;
 	height: 50rem;
 	border-radius: 1rem;
 	min-width:30rem;
+	margin-top: 5%;
 }
 footer{
 	position: relative;
@@ -138,13 +139,13 @@ form.sign-up .project>span{
 	text-align: right;
 }
 form.sign-up input{
-	height: 3.5rem;
+	height: 3rem;
 	width: 24rem;
 	line-height: 3rem;
 	border-radius: /*0.5rem 0.5rem 0 0;*/0.5rem;
 }
 form.sign-up select{
-	height: 4rem;
+	height: 3.5rem;
 	width: 26.1rem;
 	line-height: 3rem;
 	border-radius: /*0.5rem 0.5rem 0 0;*/0.5rem;
@@ -152,10 +153,13 @@ form.sign-up select{
 form.sign-up .project i,form.sign-up .project span{
 	margin-bottom: 2rem;
 }
+form.sign-up .buttons{
+	text-align: center;
+}
 form.sign-up input#sign-up-btn{
 	width: 10rem;
 	position: relative;
-	left: 27%;
+	/*! left: 27%; */
 /* 	transform: translate(-50%,0); */
 	background-color: #42c02e;
 	opacity: 0.8;
@@ -164,6 +168,7 @@ form.sign-up input#sign-up-btn{
 	font-size: 1.6rem;
 	height: 3.5rem;
 	margin-top: 0.5rem;
+	margin-left: 3.5rem;
 	color: white;
 	border: 1px solid #42c02e;
 }
@@ -216,7 +221,7 @@ form.sign-up .go-back{
 	width: 10rem;
 	display: inline-block;
 	position: relative;
-	left: 30%;
+	/*! left: 30%; */
 	border: 1px solid #969696;
 	background-color: transparent;
 	opacity: 0.8;
@@ -225,6 +230,7 @@ form.sign-up .go-back{
 	font-size: 1.6rem;
 	margin-top: 0.5rem;
 	padding-left: 0;
+	margin-left: 2rem;
 	padding-right: 0;
 }
 form.sign-up .go-back a{

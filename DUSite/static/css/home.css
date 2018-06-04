@@ -5,6 +5,8 @@ html{
 body{
 	margin: 0;
 	position: absolute;
+	min-width: 62rem;
+	background-color: #eee;/*#426ab3*/
 }
 a{
 	text-decoration:none;
@@ -21,7 +23,7 @@ a{
 	display: block;
 	position: absolute;
 	top: 50%;
-	left: 13%;
+	left: 15%;
 	transform: translate(-50%,-50%);
 }
 .top-icon img{
@@ -38,7 +40,6 @@ a{
 	left: 50%;
 	transform: translate(-50%,-50%);
 	font-style: bold;
-	font-style: italic;
 	font-size: 1.7rem;
 	color: white;
 }
@@ -47,7 +48,6 @@ a{
 }
 .LabSlogan span{
 	margin-left: 5rem;
-	font-style: italic;
 }
 .LabSlogan span.secondslo{
 	margin-left: 14rem;
@@ -56,10 +56,9 @@ a{
 	height: auto;
 	position: absolute;
 	top: 50%;
-	right: 12%;
+	right: 16.3%;
 	transform: translate(50%,-50%);
 	padding: 1.5rem 2rem;
-	background-color: rgba(201, 201, 201, 0.1);
 	color: white;
 	font-family: 'Arial Black', 'Arial';
 	font-size: 1.4rem;
@@ -81,11 +80,11 @@ span.spe-enlight{
 .limit{
 	position: relative;
 	margin: 0;
-	padding: 5% 10%;
+	padding: 0 10.5%;
 	width: 100%;
 	box-sizing: border-box;
-	background-color: #CCCCCC;
-}
+/* 	background-color: #eee; */
+}/*
 .course{
 	position: relative;
 	display: block;
@@ -161,15 +160,15 @@ span.spe-enlight{
 	box-sizing: content-box;
 	overflow: hidden;
 }
+.news ul li span:first-child{
+	width: 2rem;
+}
 .news ul li span a{
 	text-decoration: none;
 	width: auto;
 	color: black;
 	outline: none;
 }
-/*.news ul li span.news-title:hover{
-	color: gold;
-}*/
 .news ul li span a:visited{
 	color: black;
 }
@@ -179,11 +178,21 @@ span.spe-enlight{
 	border-radius: 1rem;
 	padding: 0 0.5rem;
 	margin-right: 1rem;
+}*/
+.wheel-container .bac-lim button{
+	background-color: #3366ff;
+	position: absolute;
+	bottom: 2rem;
+	right: 0;
 }
 .intr{
-	width: 80%;
+	width: 100%;
 	position: relative;
 	float: left;
+	padding-bottom: 4rem;
+	background-color: white;
+	min-width: 40rem;
+	margin-bottom: 2rem;
 }
 .clear{
 	clear: both;
@@ -192,8 +201,7 @@ span.spe-enlight{
 .project{
 	position: relative;
 	width: 100%;
-	margin-bottom: 2rem;
-	background-color: #CCCCCC;
+	background-color: transparent;
 }
 .project .side-fixed{
 	position: relative;
@@ -202,7 +210,8 @@ span.spe-enlight{
 	float: left;
 	background-color: rgba(51, 102, 255, 1);
 	margin-bottom: 1rem;
-	top: 2rem;
+	top: 5rem;
+	margin-left: 5rem;
 }
 .project img{
 	display: block;
@@ -219,25 +228,70 @@ span.spe-enlight{
 	top: -25rem;
 }
 .img-group{
-	display: block;
+	display:flex;
 	width: auto;
+	padding-left: 5rem;
 	height: auto;
 	position: relative;
-	/*justify-content: space-around;*/
+/* 	justify-content: space-evenly; */
+	flex-wrap: wrap;
+	align-content: flex-start;
 }
 .img-group .proimg{
-	float: left;
-	margin: 2rem 0 0 2rem;
+	margin: 5rem auto auto 2rem;
+	flex: 0 0 25%;
 	display: block;
 	width: 36rem;
+	min-width: 36rem;
 	height: 25rem;
 	overflow: hidden;
+	flex-shrink: 0;
 }
+/* .img-group .proimg:last-child{
+	flex: 1;
+	margin-left: auto;
+} */
 .intr-project{
 	padding: 2rem 0.5rem;
 	font-family: 'Arial Normal';
 	max-width: 16rem;
 }
+@media all and (max-width:850px){
+	.project .side-fixed{
+		margin-left: 0;
+	}
+	.img-group .proimg{
+		margin-left: auto;
+	}
+}
+@media all and (max-width:750px){
+	.intr-project{
+		max-width: 100%;
+	}
+	.img-group{
+		padding-left: 0;
+  }
+	.img-group .proimg{
+		margin-left: auto;
+	}
+	.project .side-fixed{
+		float: none;
+		margin-left: 0;
+	}
+}
+/* @media all and (max-width:460px){
+	.img-group .proimg{
+		margin: 1rem auto;
+	}
+	.project .side-fixed{
+		top: 0;
+		max-width: 36rem;
+		margin-left: 0;
+	}
+	.limit{
+		padding: 0.5rem;
+	}
+} */
 .project .intr-project span{
 	font-size: 1.7rem;
 	font-weight: bolder;
@@ -251,16 +305,21 @@ span.spe-enlight{
 	margin-left: 4%;
 	word-break: break-all;
 }
+.project .intr-project p button{
+	margin-top: 0.5rem;
+	margin-left: 0.5rem;
+}
 .contact{
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 30rem;
+	height: 40rem;
 	background-color: rgba(39, 68, 114, 1);
 	text-align: center;
 	color: white;
 	font-family: 'Arial Normal';
 	font-size: 1.6rem;
+	padding-top: 10rem;
 }
 footer{
 	position: relative;
@@ -298,9 +357,25 @@ footer{
 	display: block;
 	width: 35rem;
 	margin: 0 auto;
-	font-size: 1.3rem;
+	font-size: 1.6rem;
 	word-wrap: break-word;
 	line-height: 1.9rem;
+}
+.intr-contact p textarea{
+	width: 100%;
+	height: auto;
+	background: transparent;
+	border: none;
+	color: white;
+	font-size: 1.6rem;
+	font-weight: 600;
+	resize: none;
+	overflow-y:visible;
+	text-align: center;
+	border-radius: 0.5rem;
+}
+.intr-contact button{
+	margin-top: 1rem;
 }
 .primary_button{
 	width: 100%;
@@ -316,81 +391,6 @@ footer{
 	border-radius: 1rem;
 	line-height: 4rem;
 	cursor: pointer;
-}
-.contact-visible{
-	display: block;
-	width: 100%;
-	height: 229rem;
-	background-color: rgba(0,0,0,0.8);
-	position: absolute;
-	bottom: 0;
-	visibility: visible;
-}
-.contact-visible .input-container{
-	display: block;
-	width: 100%;
-	height: auto;
-	position: absolute;
-	top: 170rem;
-}
-.contact-visible .input-container .text_field{
-	display: block;
-	width: auto;
-	height: auto;
-}
-.contact-visible .input-container .text_field input{
-	height: 4rem;
-	display: block;
-	width: 60rem;
-	margin: 2rem auto;
-}
-.contact-visible .input-container .text_field textarea{
-	height: 25rem;
-	width: 60rem;
-	resize: none;
-}
-.send2{
-	margin-top: 5rem;
-}
-.close{
-	display: block;
-	position: absolute;
-	top: 160rem;
-	width: 100%;
-}
-.close .primary_button{
-	display: block;
-	background: rgba(22, 155, 213, 1);
-	width: 4rem;
-	height: 4rem;
-	border-radius: 1rem;
-	position: absolute;
-	margin: 0 auto;
-	left: 48%;
-}
-.close .contact-icon img{
-	margin: 1rem;
-	display: block;
-}
-.hidden-tip{
-	display: block;
-	position: absolute;
-	top: 2rem;
-	width: 100%;
-	height: auto;
-}
-.hidden-tip div{
-	display: block;
-	width: 15rem;
-	height: 3rem;
-	text-align: center;
-	vertical-align: middle;
-	background-color: rgba(200,200,200,0.6);
-	font-size: 1.8rem;
-	font-weight: 600;
-	font-family: 'Arial Normal';
-	border-radius: 0.5rem;
-	margin: 0 auto;
 }
 /*hover effect*/
 .proimg .hover-eff {
@@ -408,22 +408,24 @@ footer{
 .proimg h2 , .proimg a{
 	float: left;
 	color: black;
+	margin-left: 2rem;
 }
 .proimg a{
 	font-size: 1.4rem;
-	margin: -2.2rem 3rem 2rem;
+	margin: -2.5rem 3rem 2rem;
 }
 .proimg .hover-eff > span {
 	float: right;
 }
 .proimg p {
 	position: absolute;
-	bottom: 12rem;
+	bottom: 8rem;
 	padding: 2rem;
 	color: #fff;
 	text-transform: none;
-	font-size: 1.6rem;
+	font-size: 1.5rem;
 	opacity: 0;
+	line-height: 2rem;
 	-webkit-transition: opacity 0.35s;
 	transition: opacity 0.35s;
 }
@@ -448,6 +450,9 @@ footer{
 }
 .proimg h2, .proimg a{
 	display: inline-block;
+}
+.proimg a:hover{
+	text-decoration: underline;
 }
 .proimg:hover p{
 	opacity: 1;
@@ -479,6 +484,7 @@ footer{
 	width: 100%;
 	left: 0;
 	top: 0;
+	text-align: left;
 }
 .model-hide .model-container{
 	position: absolute;
@@ -526,6 +532,7 @@ footer{
 	padding: 0.5rem;
 	font-size: 1.6rem;
 	text-align: center;
+	color: black;
 }
 .model-hide .model-container .model-body i{
 	position: relative;
@@ -580,4 +587,79 @@ footer{
 .model-hide .model-container .model-end{
 	border-top: 1px #AAA solid;
 	padding: 1rem;
+}
+.model-hide .model-body form#send-email .body-line{
+	text-align: left;
+	margin-right: 3rem;
+	margin-left: 1rem;
+}
+.model-hide .model-body form#send-email label{
+	display: inline-block;
+	width: 120px;
+	text-align: right;
+}
+.model-hide .model-body form#send-email .body-line input{
+	width: 35rem;
+}
+.model-hide .model-body form#send-email textarea{
+	resize: none;
+	height: 20rem;
+	width: 35rem;
+	background-color: #f7f7f7;
+	border: #AAA 1px solid;
+	padding: 0.8rem 0.5rem;
+	font-size: 1.6rem;
+	border-radius: 0.5rem;
+}
+#model-email .model-container{
+	width: auto;
+}
+#model-email .model-container .model-head i{
+	right: -45rem;
+}
+/*
+poster
+--------------------------------------------------------------------------- */
+.project form{
+  text-align: center;
+	margin-top: 2rem;
+}
+.project form label{
+	font-size: 1.6rem;
+/* 	margin-right: 1rem; */
+	background-color: #169bd5;
+	padding: 1rem;
+	border-radius: 0.5rem 0 0 0.5rem;
+}
+.project form input{
+	position:absolute;
+	clip:rect(0 0 0 0);
+/* 	padding: 0.5rem;
+	border-radius: 0rem;
+	background-color: #169bd5;
+	border: none; */
+}
+.project form button.upload{
+	padding: 0.5rem;
+/* 	border: none; */
+	border: solid #169bd5 2px;
+	border-radius: 0 0.5rem 0.5rem 0;
+	background-color: #169bd5;
+	position: relative;
+	left: -0.3rem;
+	border-left: 1px solid #eee;
+}
+.project form i{
+	margin: 0.5rem;
+}
+.img-group.poster{
+	padding: 0;
+	justify-content: space-around;
+	align-content: space-around;
+}
+.img-group.poster .proimg{
+  margin: 5rem auto 1rem 1rem;
+}
+.img-group.poster .proimg .hover-eff a{
+  float: right;
 }

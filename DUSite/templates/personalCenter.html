@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>个人中心</title>
-	<meta charset="utf-8">
-	<meta>
+    <title>个人中心</title>
+    <meta charset="utf-8">
+    <meta>
     <link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
-	<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
-	<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-	<script src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
 </head>
 <body>
-	<!-- 修改密码，管理参与的项目 -->
-	<script type="text/javascript">
-		window.onload=function(){
+    <!-- 修改密码，管理参与的项目 -->
+    <script type="text/javascript">
+        window.onload=function(){
                 var username=document.getElementById('username');
                 username.value='{{ user }}';
                 var uImag=document.getElementById('main').getElementsByClassName('change')[0].getElementsByTagName('img')[0];
-                uImag.src="/static/images/23.jpg";
+                uImag.src='/media/{{ user.last_name }}';
             }
-	</script>
-	<div class="Top-bar">
+    </script>
+    <div class="Top-bar">
             <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
             <div class="LabSlogan">
-                
                 <span> 遇到问题立即沟通 !<br></span>
                 <span class="secondslo"> 我是最后负责人 !</span>
             </div>
             <div class="enter">
                 <div class="person">
                     <a href="/myaccount/">
-                        <img src="/static/images/23.jpg" alt="用户头像">
+                        <img src="/media/{{ user.last_name }}" alt="用户头像">
                     </a>
                     <span class="drop-menu" id="drop-menu">
                         <a href="/myaccount/">
@@ -42,7 +41,6 @@
                             注销
                         </a>
                     </span>
-                    
                 </div>
             </div>
         </div>
@@ -52,7 +50,7 @@
                 <ul class="navbar-menu">
                     <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
                     </li>
-                    <li class="dropdown">项目组 <span class="caret"></span>
+                    <li class="dropdown"><a href="javascript:void(0);">项目组<span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
 
                         {% for team in teams %}
@@ -64,7 +62,7 @@
 
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="/course/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                    <li class="dropdown"><a href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
                             <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
                             <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
@@ -73,7 +71,7 @@
                     </li>
                     <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
                     </li>
-                    <li class="leaf"><a href="" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    <li class="leaf"><a href="/index/#contact" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
                     </li>
                    {% if perms.auth.change_user %}
                 <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
@@ -82,86 +80,97 @@
             </div>
         </nav>
         <div class="main-container" id="main">
-        	<div class="vacant left"></div>
-        	<!-- <div class="vacant right"></div> -->
-        	<div class="sidebar">
-	            <div class="reverse-nav">
-	                <ul>
-	                    <!-- <li class="leaf"><a href="#">资 &nbsp;源</a>
-	                    </li>
-	                    <li class="leaf"><a href="#">论 &nbsp;坛 </a>
-	                    </li> -->
-	                    <li class="leaf thisleaf"><a href="#">个人设置 </a>
-	                    </li>
-	                	<li class="leaf"><a href="#">消 &nbsp;息 </a>
-	                	</li>
-	                </ul>
-	            </div>
-        	</div><!--该注释行用于解决inline-block的间距问题
-        	 --><div class="change">
-        		<table>
-        			<tr><td>
-        				<img  alt="用户头像"></td>
-        				<td><a class="btn btn-half"><input type="file" unselectable='on' class="hide change-userImag"  accept="image/*">更改头像</a>
-        			</td></tr>
-        			<tr class="name"><td class="setting-title">
-        				<span>用户名</span></td>
-        				<td>
-        					<input type="text" name="username" id="username" onchange="checkAccount(this)" disabled="disabled">
-        					<a href="javascript:void(0)" class="disable">修改用户名</a>
+            <div class="vacant left"></div>
+            <!-- <div class="vacant right"></div> -->
+            <div class="sidebar">
+                <div class="reverse-nav">
+                    <ul>
+                        <!-- <li class="leaf"><a href="#">资 &nbsp;源</a>
+                        </li>
+                        <li class="leaf"><a href="#">论 &nbsp;坛 </a>
+                        </li> -->
+                        <li class="leaf thisleaf"><a href="#">个人设置 </a>
+                        </li>
+                        <li class="leaf"><a href="#">消 &nbsp;息 </a>
+                        </li>
+                    </ul>
+                </div>
+            </div><!--该注释行用于解决inline-block的间距问题
+             --><div class="change">
+                <table>
+                    <tr><td>
+                        <img alt="用户头像"></td>
+                        <td>
+                            <div class="upload">
+                                <div class="content">
+                                <form action="changeImg/" method="post" enctype="multipart/form-data">
+                                <label for="id_file">上传图片:</label>
+                                <input id="id_file" name="file" type="file" required="">
+                                {% csrf_token %}
+                                <input type="submit" value="上传" id="btn_upload" class="btn">
+                                </form>
+                                </div>
+                            </div>
+                        </td></tr>
+                    <tr class="name"><td class="setting-title">
+                        <span>用户名</span></td>
+                        <td>
+                            <input type="text" name="username" id="username" onchange="checkAccount(this)" disabled="disabled"  onfocus="show(this)" onblur="hide(this)"><!--  -->
+                            <a href="javascript:void(0)" class="disable">修改用户名</a>
                             <i class="check fa fa-close" id="check-name"><span></span></i>
-        			</td></tr>
-{#        			<tr><td class="setting-title">#}
-{#        				<span>用户id</span></td>#}
-{#        				<td><span class="setted">{{ user.first_name }}</span>#}
-{#        				<span class="setted-tip"><i class="fa fa-check"></i>自动绑定</span>#}
-{#        			</td></tr>#}
-        			<tr><td class="setting-title">
-        				<span>账号密码</span></td>
-        				<td>
-        					<!-- ??? -->
-        					<span class="change-only"><a href="javascript:void(0)" id="showSetPsw">修改密码</a></span>
-        					<div class="set-psw">
+                            <i class="hint-checkname fa fa-exclamation-circle"></i>
+                    </td></tr>
+{#                  <tr><td class="setting-title">#}
+{#                      <span>用户id</span></td>#}
+{#                      <td><span class="setted">{{ user.first_name }}</span>#}
+{#                      <span class="setted-tip"><i class="fa fa-check"></i>自动绑定</span>#}
+{#                  </td></tr>#}
+                    <tr><td class="setting-title">
+                        <span>账号密码</span></td>
+                        <td>
+                            <!-- ??? -->
+                            <span class="change-only"><a href="javascript:void(0)" id="showSetPsw">修改密码</a></span>
+                            <div class="set-psw">
                                 <div class="show conf-old-psw">
                                     <span>确认旧密码：</span>
                                     <input id="prePsw" type="password" name="prePsw" placeholder="请输入旧密码" maxlength="20" minlength="6" onfocus="showHint(this)" onblur="hideHint(this)" onchange="checkPrepsw(this)">
                                     <i class="fa check"></i>
                                     <span class="hint"><i class="fa fa-exclamation-circle"></i><span  id="hint-prePsw"></span></span>
                                 </div>
-        						<div class="show setPsw">
-									<span>设置新密码：</span>
-									<input id="psw" type="password" name="psw" placeholder="请输入6-20位密码" maxlength="20" minlength="6" onchange="checkPsw(this)"  onfocus="showHint(this)" onblur="hideHint(this)">
+                                <div class="show setPsw">
+                                    <span>设置新密码：</span>
+                                    <input id="psw" type="password" name="psw" placeholder="请输入6-20位密码" maxlength="20" minlength="6" onchange="checkPsw(this)"  onfocus="showHint(this)" onblur="hideHint(this)">
                                     <i class="fa check"></i>
-									<span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-psw"></span></span>
-								</div>
-								<div id="confirm-psw" class="show check-psw">
-									<span>确认新密码：</span>
-									<input id="cf-psw" type="password" name="cf-psw" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
+                                    <span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-psw"></span></span>
+                                </div>
+                                <div id="confirm-psw" class="show check-psw">
+                                    <span>确认新密码：</span>
+                                    <input id="cf-psw" type="password" name="cf-psw" placeholder="请再次输入密码" maxlength="20" minlength="6" onchange="confirmPsw(this)" >
                                     <i class="fa check"></i>
-									<span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-cf-psw"></span></span>
-								</div>
-								<a href="javascript:void(0)" id="hideSetPsw">取消</a>
-        					</div>
-        			</td></tr>
-        			<tr class="mail"><td class="setting-title">
-        				<span>邮箱</span></td>
-        				<td><span class="setted" id="mail">{{ user.email }}</span>
-        				<span class="setted-tip"><i class="fa fa-check"></i>已绑定</span>
-        				<!-- <a href="javascript:void(0)">更换邮箱</a> -->
-        			</td></tr>
-        			<tr><td class="setting-title">
-        				<span>项目组</span></td>
-        				<td>
-        					<ul class="pro-list" id="pro-list">
-        						<li>
-        							<span>{{ user.first_name }}</span>
-        						</li>
-        					</ul>
-        					<!-- <span class="change-only"><a href="#">管理项目</a></span> -->
-        			</td></tr>
-        		</table>
-        		<input type="submit" name="save" value="保存" class="save btn btn-full" id="save">
-        	</div>
+                                    <span class="hint"><i class="fa fa-exclamation-circle"></i><span id="hint-cf-psw"></span></span>
+                                </div>
+                                <a href="javascript:void(0)" id="hideSetPsw">取消</a>
+                            </div>
+                    </td></tr>
+                    <tr class="mail"><td class="setting-title">
+                        <span>邮箱</span></td>
+                        <td><span class="setted" id="mail">{{ user.email }}</span>
+                        <span class="setted-tip"><i class="fa fa-check"></i>已绑定</span>
+                        <!-- <a href="javascript:void(0)">更换邮箱</a> -->
+                    </td></tr>
+                    <tr><td class="setting-title">
+                        <span>项目组</span></td>
+                        <td>
+                            <ul class="pro-list" id="pro-list">
+                                <li>
+                                    <span>{{ user.first_name }}</span>
+                                </li>
+                            </ul>
+                            <!-- <span class="change-only"><a href="#">管理项目</a></span> -->
+                    </td></tr>
+                </table>
+                <input type="submit" name="save" value="保存" class="save btn btn-full" id="save">
+            </div>
         </div>
         <div class="model-alertInfo" id="model-alertInfo">
             <div class="model-container">

@@ -46,3 +46,16 @@ p{
 	line-height: 150%;
 	height: 80px;
 }
+
+body > div.wrapper > section > div > div.essay >div>.time{
+	float: right;
+    color: #aba8a8;
+}
+body > div.wrapper > section > div > div.essay >div> .name{
+    color: #aba8a8;
+}
+body > div.wrapper > section > div> div > div> img{
+	height: 6rem;
+	width: 6rem;
+	border-radius: 50%;
+}

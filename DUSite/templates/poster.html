@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>首页</title>
+    <meta charset="utf-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" /> -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <!-- [if lt IE 9]><script src="js/html5.js"></script><![endif] -->
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <script src="/static/js/jquery.tiles.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/wheel.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+  </head>
+    <body>
+        <script>
+            window.onload=function(){
+                var i=document.getElementsByTagName('input').length;
+                for(var n=0;n<i-1;n++){
+                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
+                        document.getElementsByTagName('input')[n].value='';
+                    }
+                }
+                var check=document.getElementsByClassName("check");
+                for(var x=0;x<check.length;x++){
+                    check[x].style.opacity="0";
+                }
+            }
+        </script>
+        <div class="Top-bar">
+            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
+            <div class="LabSlogan">
+                <span> 遇到问题立即沟通 !<br></span>
+                <span class="secondslo"> 我是最后负责人 !</span>
+            </div>
+            <div class="enter">
+                <div class="person">
+                    <a href="/myaccount/">
+                        <img src="/media/{{ user.last_name }}" alt="用户头像">
+                    </a>
+                    <span class="drop-menu" id="drop-menu">
+                        <a href="/myaccount/">
+                            个人中心
+                        </a>
+                    </span>
+                    <span class="drop-menu" id="drop-menu">
+                        <a href="/index/logout/">
+                            注销
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- 导航栏 -->
+        <nav role="navigation">
+            <div class="region region-navigation">
+                <ul class="navbar-menu">
+                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
+                    </li>
+                    <li class="dropdown"><a href="javascript:void(0);">项目组<span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+
+                        {% for team in teams %}
+                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
+                        {% endfor %}
+                        {% if perms.RedAnt.add_projectteam %}
+                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
+                         {% endif %}
+
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
+                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
+                            <li class="lastmenuli"><a href="#">添加课程</a></li>
+                        </ul>
+                    </li>
+                    <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
+                    </li>
+                    <li class="leaf"><a href="/index/#contact" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
+                    </li>
+                   {% if perms.auth.change_user %}
+                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
+                   {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div class="limit">
+        <!-- Project -->
+        <div class="project">
+            <div class="intr">
+                <div class="img-group poster">
+                    {% for poster in posters %}
+                        <div class="proimg" id="proimg">
+                            <div>
+                                <img src=/media/{{ poster.fileField }}>
+                                <div class="back-img-hover" id="back-img-hove">
+                                    <div  class="hover-eff">
+                                        <a href="delete={{ poster.fileField }}/">删除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+                <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ fileForm }}
+                <button class="upload"><i class="fa fa-upload" aria-hidden="true"></i>上传</button>
+                 </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+        </div>
+        <div class="contact" id="contact">
+            <div class="title-contact">{{ contact.Name }}</div>
+            <div class="line-con"><div class="line"></div></div>
+            <div class="intr-contact">
+                <p>
+                {% autoescape off %}
+                        <span class="edit-target">{{ contact.Content }}</span>
+                {% endautoescape %}
+                {% if user.is_superuser %}
+                <button class="btn edit" onclick="window.location.href= 'contactUs/'">编辑</button>
+                {% endif %}
+                </p>
+            </div>
+            <div id="u189" class="ax_default primary_button" data-label="send">
+                <div id="u190" class="text" style="visibility: visible;">
+                <p id="contactUs"><span>给我们发邮件</span></p>
+                </div>
+            </div>
+            <div class="model-hide model-email" id="model-email">
+                <div class="model-container">
+                    <div class="model-head">
+                        <span class="model-title">发邮件</span>
+                        <i class="fa fa-close"></i>
+                    </div>
+                    <div class="model-body">
+                        <div class="send-email">
+                            <form id="send-email">
+                                <div class="body-line">
+                                    <label for="from-mail">* 留下你的邮箱: </label>
+                                    <input id="from-mail" type="text" placeholder="实验室的回信将会发到这个邮箱" onchange="checkFromMail(this)" />
+                                    <i class="check fa" id="check-from-mail"></i>
+                                </div>
+                                <div class="body-line">
+                                    <label for="from-name">发件人姓名: </label>
+                                    <input id="from-name" type="text" placeholder="填写你的真实姓名"/>
+                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
+                                </div>
+                                <div class="body-line">
+                                    <label for="from-content">* 你想说的话: </label>
+                                    <textarea id="from-content" type="text" placeholder="写下你的疑问或心声！"/></textarea>
+                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
+                                </div>
+                                <input type="submit" name="send" value="发 送" id="send">
+                            </form>
+                        </div>
+                    </div>
+                <!-- <div class="model-end">
+                    <a href="#">忘记密码？</a>
+                </div> -->
+            </div>
+            </div>
+        </div>
+        <div class="model-alertInfo" id="model-alertInfo">
+            <div class="model-container">
+                <div class="model-head">
+                    <span class="model-title">联系我们</span>
+                    <i class="fa fa-close"></i>
+                </div>
+                <div class="model-body">
+                    <h3 class="message"></h3>
+                </div>
+                <div class="model-end">
+                    <div class="btn get">确 认</div>
+                    <!-- <div class="btn shut">关 闭</div> -->
+                </div>
+            </div>
+        </div>
+    <script type="text/javascript" src="/static/js/alertModel.js"></script>
+    <script type="text/javascript" src="/static/js/signIn.js"></script>
+    <script type="text/javascript" src="/static/js/contact.js"></script>
+    <script type="text/javascript" src="/static/js/wheel.js"></script>
+    <script type="text/javascript" src="/static/js/news.js"></script>
+        <footer>@大连理工大学红蚂蚁实验室</footer>
+    </body>
+</html>

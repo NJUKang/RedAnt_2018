@@ -1,0 +1,39 @@
+<style>
+    #submit{width: 60px;border-radius: 5px; background-color: deepskyblue;border: none; color: white; height: 30px;}
+</style>
+<div class="main-container" >
+    <div style="margin-left: 450px;">
+        <form action="/courses/zhangjie_add" enctype="multipart/form-data" method="post">
+            <table>
+                <colsgroup>
+                    <col style="width: 120px;">
+                    <col>
+                </colsgroup>
+                <tr >
+                    <td>
+                        <span>Major</span>
+                    </td>
+                    <td>
+                        {{ kecheng }}
+                        <input type="hidden" name="kecheng" value="{{ kecheng }}">
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <span>章节名</span>
+                    </td>
+                    <td>
+                        <input type="text" name="name" id="name" placeholder="请输入章节名">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <button id="submit" type="submit">提交</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

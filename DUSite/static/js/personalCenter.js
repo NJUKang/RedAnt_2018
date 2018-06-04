@@ -1,16 +1,3 @@
-// $(document).ready(function(){
-// 	var change=document.getElementById('drop-menu').getElementsByTagName('i')[0];
-// 	var ul=document.getElementById('personal-set');
-// 	$("#drop-menu").mouseover(function(){
-// 		$(ul).css("display","block");
-// 		change.className="fa fa-angle-up";
-// 	});
-// 	$("#drop-menu").mouseout(function(){
-// 		$(ul).css("display","none");
-// 		change.className="fa fa-angle-down";
-// 	});
-// });
-
 var cp='',cf='',ca='',cpre='';
 //验证密码
 	function isPsw(strPsw) {
@@ -89,7 +76,6 @@ var cp='',cf='',ca='',cpre='';
 	    }
 	}
 function checkPrepsw(node){
-	var initPsw="123456";//后端传未更改之前的密码
 	var input=node.value;
 	var tip = $("#prePsw").siblings(".check")[0];
 	if(input==''){
@@ -97,19 +83,49 @@ function checkPrepsw(node){
 		cpre=false;
 		return false;
 	}
-	if(initPsw!=input){
-		tip.style.opacity='1';
-    	tip.className="fa fa-close check";
-    	tip.style.color="red";
-		cpre=false;
-		return false;
-	}
-	else{
-		tip.style.opacity='1';
-    	tip.className="fa fa-check check";
-    	tip.style.color="green";
-		cpre=true;
-	}
+	$.ajax({
+		type:"POST",
+        url:"/myaccount/checkPrepsw/",
+        async:false,
+        cache:false,
+        data:{
+        	"oldPsw":input
+        },
+        success:function(data){
+        	if(data.code == 1) {
+				tip.style.opacity='1';
+		    	tip.className="fa fa-check check";
+		    	tip.style.color="green";
+				cpre=true;
+			}
+			else {
+                tip.style.opacity='1';
+		    	tip.className="fa fa-close check";
+		    	tip.style.color="red";
+				cpre=false;
+				return false;
+            }
+        },
+        fail: function() {
+            alertInformation("failed");
+        },
+        error: function(response) {
+            alertInformation("error");
+        }
+	});
+	// if(initPsw!=input){
+	// 	tip.style.opacity='1';
+ //    	tip.className="fa fa-close check";
+ //    	tip.style.color="red";
+	// 	cpre=false;
+	// 	return false;
+	// }
+	// else{
+	// 	tip.style.opacity='1';
+ //    	tip.className="fa fa-check check";
+ //    	tip.style.color="green";
+	// 	cpre=true;
+	// }
 }
 var showHint=function(e){
 	var id=e.name;
@@ -129,26 +145,6 @@ var hideHint=function(e){
 	$(e).siblings("span.hint").css("opacity","0");
 	$(hintEl).siblings("i").css("opacity","0");
 }
-
-
-// function setPsw(node){
-// 	var Msg = document.getElementById("hint-psw");
-// 	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
-// 	var pwd = node.value;
-// 	    if(isPsw(pwd)){
-// 	    	Msg.innerHTML ="可输入数字、字母、横线、下划线";
-// 	    	tip[0].style.opacity='1';
-// 	    }
-// }
-// function blurPsw(node){
-// 	var Msg = document.getElementById("check-psw");
-// 	var tip = document.getElementById("psw-tip").getElementsByTagName('i');
-// 	var pwd = node.value;
-// 	if(isPsw(pwd)){
-// 	    	Msg.innerHTML ="";
-// 	    	tip[0].style.opacity='0';
-// 	    }
-// }
 
 var showBtn=document.getElementById('showSetPsw');
 var hideBtn=document.getElementById('hideSetPsw');
@@ -175,22 +171,19 @@ var form=document.getElementsByClassName('change')[0].getElementsByClassName('se
 	function checkAccount(node) {
 	    var tip = document.getElementById("check-name");
 	    var account = $.trim(node.value);
-	    if (account.length < 2 && account.length>0) {
-	        tip.getElementsByTagName("span")[0].innerHTML = " 用户名最少两位";
+	    var reg=/^[\u4e00-\u9fff\w]{2,10}$/;/*由字母、数字、_或汉字组成*/
+	    var name= node.value;
+	    if(reg.test(name)==true){
+	    	tip.getElementsByTagName("span")[0].innerHTML = "";
+	    	tip.className="check fa fa-check";
 	        tip.style.opacity='1';
-	        ca=false;
-	        return false;
-	    }
-	    else if (account.length > 10) {
-	        tip.getElementsByTagName("span")[0].innerHTML = " 用户名不能超过10位";
-	        tip.style.opacity='1';
-	        ca=false;
-	        return false;
-	    }
-	    else {
-	        tip.getElementsByTagName("span")[0].innerHTML = "";
-	        tip.style.opacity='0';
 	        ca=true;
+	    }
+	    else{
+	    	tip.style.opacity='1';
+	    	tip.className="check fa fa-close";
+	    	tip.getElementsByTagName("span")[0].innerHTML = "非法用户名";
+	        ca=false;
 	    }
 	}
 
@@ -229,6 +222,7 @@ function setUserName(){
 				this.className="disable";
 				$(input).val(init);
 				checkAccount(input);
+				document.getElementById("check-name").style.opacity=0;
 		}
 	});
 }
@@ -277,16 +271,18 @@ setUserName();
 
 	$("#save").click(function(e){
 		e.preventDefault();
-		if($('#psw').value!=undefined)
-			checkPsw($('#psw'));
-		if($('#cf-psw').val()!=undefined)
-			confirmPsw($('#cf-psw'));
-		if ($("#prePsw").val()!=undefined)
-			checkPrepsw($("#prePsw"));
-		checkAccount($('#username'));
+		// if($('#psw').value!=undefined)
+		// 	checkPsw($('#psw'));
+		// if($('#cf-psw').val()!=undefined)
+		// 	confirmPsw($('#cf-psw'));
+		// if ($("#prePsw").val()!=undefined)
+		// 	checkPrepsw($("#prePsw"));
+		// if($("table tr.name input").attr("disabled")==true)
+		// 	checkAccount($('#username'));
 		// if(cp!=true||cf!=true || ca!=true||cpre!=true){
 		// 	return false;
 		// }
+		var img = $("#img").val();
 		var name = $("#username").val();
 		var mail = $("#mail").val();
         var prePsw = $("#prePsw").val();
@@ -295,9 +291,10 @@ setUserName();
 		$.ajax({
 	        type:"POST",
 	        url:"/myaccount/",
-	        // async:false,
+	        async:false,
 	        cache:false,
 	        data:{
+	        	"img": img,
                 "username": name,
                 "prePassword": prePsw,
                 "password": psw,
@@ -307,8 +304,7 @@ setUserName();
 	        },
 	        success:function(data){
 	        	if(data.code) {
-	        		alertInfoWithJump(data.info,"/myaccount/");//修改成功改为保存成功，因为有时候没有修改
-	        		// location.href=;
+	        		alertInfoWithJump(data.info,"/myaccount/");
 				}
 				else {
                     alertInformation(data.info);
@@ -337,4 +333,11 @@ var jsonfy=function (el){
 	proList+="}";
 	console.log(proList);
 	return proList;
+}
+
+var show=function(node){
+	$(node).siblings('.hint-checkname').css("opacity",1).html('请输入2-10位由字母、数字、_或汉字组成的新用户名');
+}
+var hide=function(node){
+	$(node).siblings('.hint-checkname').css("opacity",0);
 }

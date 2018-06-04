@@ -1,0 +1,76 @@
+     <!--course-->
+        <div class="course">
+            <div class="intr">
+                <div class="couvideo" id="couvideo">
+                <div>
+                	<div class="coutitle">
+                		<h3>{{ zjsmall.name }}</h3>
+                        
+                	</div>
+                    <div style="display: flow-root;width: 85%">
+                    <button class="edit" onclick="javascript:window.open('/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ zj.kecheng }}&zj={{ zj.name }}&zjs_id={{ zjsmall.id }}&type=video&zjsmall={{ zjsmall.name }}')"><i class="fa fa-pencil"></i>删除
+                            </button>
+
+                    </div>
+                        <p>{{ zjsmall.video_desc }}
+                        </p>
+                            <p>
+                            <button class="edit" onclick="javascript:window.open('/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ zj.kecheng }}&zj={{ zj.name }}&zjs_id={{ zjsmall.id }}&type=video&zjsmall={{ zjsmall.name }}')"><i class="fa fa-pencil"></i>编辑
+                            </button>
+                            </p>
+                        <hr>
+                </div>
+                    
+                        <video controls preload="meta" width="640" height="350" poster="/static/images/poster.jpg" data-setup="{}">
+
+                            <source src="/static/upload/zjsp/1.mp4" type="video/mp4">
+{#							<source src="/static/upload/zjsp/1.webm" type="video/webm">#}
+{#							<source src="/static/upload/zjsp/1.ogg" type="video/ogg">#}
+
+                        
+                        </video>
+
+
+                        
+                        <hr>
+                        <!--课件播放-->
+                        <div style="margin-top: 35px"><div class="coutitle"><h3>课件播放</h3></div>
+                        <p>{{ zjsmall.content }}
+                        </p>
+                            <p>
+
+                            <button class="edit" onclick="javascript:window.open('/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ zj.kecheng }}&zj={{ zj }}&zjs_id={{ zjsmall.id }}&type=content&zjsmall={{ zjsmall.name }}')"><i class="fa fa-trash"></i>编辑
+                            </button>
+                            </p>
+                        <hr>
+                    </div>
+                        <div id="wheel-container" class="wheel-container">
+                        <div id="wheel" class="wheel">
+                            <div id="photo" class="photo">
+                                <div id="pre" class="pre">
+                                    <i class="fa fa-angle-left"></i>
+                                </div>
+                                {% for img in zjsmall.pics.all %}
+                                    <img src="{{ img.path }}" alt="轮播图片">
+                                {% endfor %}
+                                <div id="after" class="after">
+                                    <i class="fa fa-angle-right"></i>
+                                </div>
+                            </div>
+                            <div id="wheel-spot" class="wheel-spot">
+                                <div class="spot active-spot"></div>
+                                <div class="spot"></div>
+                                <div class="spot"></div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+
+            </div>
+            
+            <div class="clear"></div>
+    
+         <br><br><br>
+         </div>
+        
+       

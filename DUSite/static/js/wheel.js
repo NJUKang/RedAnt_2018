@@ -17,6 +17,7 @@ var init=function(){
 	}
 	images[0].className='curr';
 	images[num-1].className='last';
+	spot[0].className='active-spot spot';
 }
 var show=function(k){
 	var i=k-1,j=count+1;

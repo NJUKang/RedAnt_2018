@@ -59,6 +59,7 @@
 
 	$("#login").click(function(e){
 		e.preventDefault();
+		$("#model-alertInfo span.model-title").html("登 录");
 		if(cm!=true||cp!=true){
 			alertInformation("请完善表单");
 			return false;

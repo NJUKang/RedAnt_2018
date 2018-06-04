@@ -1,10 +1,11 @@
 #coding:utf-8
-from . import settings
+from django import views
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
-from django import views
-import RedAnt.views
+
+import RedAnt.personalAccount.views
+from . import settings
 
 admin.autodiscover()
 
@@ -18,9 +19,8 @@ urlpatterns = [
     url(r'^index/', include('RedAnt.index.urls')),
     url(r'^teams/', include('RedAnt.teams.urls')),
     url(r'^courses/', include('RedAnt.courses.urls')),
-    url(r'^manage/$', RedAnt.views.manage),
-    url(r'^manage/powerUser/$', RedAnt.views.vip_manage),
-    url(r'^myaccount/$', RedAnt.views.account_manager),
+    url(r'^manage/', include('RedAnt.userManage.urls')),
+    url(r'^myaccount/', include('RedAnt.personalAccount.urls')),
     url(r'^forum/',include('RedAnt.forum.urls')),
 ]
 

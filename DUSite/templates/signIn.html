@@ -52,12 +52,12 @@
                         <form id="sign-in">
                             <div class="body-line">
                                 <label for="mail">邮 箱 : </label>
-                                <input id="mail" class="input1" type="text" placeholder="请输入登录邮箱" onchange="checkMail(this)" />
+                                <input id="mail" class="input1" type="text" placeholder="请输入登录邮箱" onchange="checkMail(this)"  autocomplete="close"/>
                                 <!-- <i class="check fa fa-close" id="check-mail"></i> -->
                             </div>
                             <div class="body-line">
                                 <label for="psw">密 码 : </label>
-                                <input id="psw" class="input2" type="password" placeholder="请输入登录密码" onchange="checkPsw(this)" />
+                                <input id="psw" class="input2" type="password" placeholder="请输入登录密码" onchange="checkPsw(this)" autocomplete="close" />
                                 <!-- <i class="check fa fa-check" id="check-psw"></i> -->
                             </div>
                             <input type="submit" name="submit" value="登 录" id="login">
@@ -71,186 +71,124 @@
         </div>
         <!-- 轮播图片 -->
         <div id="wheel-container" class="wheel-container">
+            <div class="bac-lim">
             <div id="wheel" class="wheel">
                 <div id="photo" class="photo">
                     <div id="pre" class="pre">
                         <i class="fa fa-angle-left"></i>
                     </div>
-                    <img src="/static/images/8.jpg" alt="轮播图片">
-                    <img src="/static/images/9.jpg" alt="轮播图片">
-                    <img src="/static/images/10.jpg" alt="轮播图片">
+                    {% for poster in posters %}
+                        <img src=/media/{{ poster.fileField }} alt="轮播图片">
+                    {% endfor %}
                     <div id="after" class="after">
                         <i class="fa fa-angle-right"></i>
                     </div>
                 </div>
                 <div id="wheel-spot" class="wheel-spot">
-                    <div class="spot active-spot"></div>
-                    <div class="spot"></div>
-                    <div class="spot"></div>
+                    {% for poster in posters %}
+                        <div class="spot"></div>
+                    {% endfor %}
                 </div>
+            </div>
             </div>
         </div>
         <div class="limit">
-        <!-- Course -->
-        <div class="course">
-            <!-- <h2>Course</h2> -->
-            <div class="intr">
-                <a href="#"><img src="/static/images/4.jpg"></a>
-                <span class="title">Course</span><br>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.</p>
-            </div>
-            <div class="news">
-                <ul class="news-list">
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="clear"></div>
-        </div>
         <!-- Project -->
         <div class="project">
             <div class="intr">
                 <div class="side-fixed">
                     <div class="intr-project">
-                        <span>introduct</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.</p>
+                        <span>{{ introduction.Name }}</span>
+                        <p>
+                            {% autoescape off %}
+                                {{ introduction.Content }}
+                            {% endautoescape %}
+                        </p>
                     </div>
                 </div>
                 <div class="img-group">
-                    <div class="proimg" id="proimg">
-                        <div>
-                            <img src="/static/images/11.jpg">
-                            <div class="back-img-hover" id="back-img-hove">
-                                <div  class="hover-eff">
-                                    <h2>Creative <span>Zoe</span></h2>
-                                    <span class="icon-heart fa fa-heart"></span>
-                                    <p>Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
-                                    <a href="#">View more</a>
+                    {% for team in teams %}
+                        <div class="proimg" id="proimg">
+                            <div>
+                                <img src=/media/{{ team.GroupPhoto }}>
+                                <div class="back-img-hover" id="back-img-hove">
+                                    <div  class="hover-eff">
+                                        <h2>{{ team.TeamName }}</h2>
+                                        <p>
+                                            {% autoescape off %}
+                                                {{ team.Introduction }}
+                                            {% endautoescape %}
+                                         </p>
+                                        <a href="/teams/major={{ team.ShortName }}/">了解更多</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
-                    <div class="proimg" id="proimg">
-                        <div>
-                            <img src="/static/images/p1(2).jpg">
-                            <div class="back-img-hover" id="back-img-hove">
-                                <div  class="hover-eff">
-                                    <h2>Creative <span>Zoe</span></h2>
-                                    <span class="icon-heart fa fa-heart"></span>
-                                    <p>Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
-                                    <a href="#">View more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="proimg" id="proimg">
-                        <div>
-                            <img src="/static/images/p1(12).jpg">
-                            <div class="back-img-hover back-img-hover-3" id="back-img-hove">
-                                <div  class="hover-eff">
-                                    <h2>Creative <span>Zoe</span></h2>
-                                    <span class="icon-heart fa fa-heart"></span>
-                                    <p>Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
-                                    <a href="#">View more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="proimg" id="proimg">
-                        <div>
-                            <img src="/static/images/3.jpg">
-                            <div class="back-img-hover back-img-hover-4" id="back-img-hove">
-                                <div  class="hover-eff">
-                                    <h2>Creative <span>Zoe</span></h2>
-                                    <span class="icon-heart fa fa-heart"></span>
-                                    <p>Zoe never had the patience of her sisters. She deliberately punched the bear in his face.</p>
-                                    <a href="#">View more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                 </div>
-            </div>
-            <div class="news">
-                <ul class="news-list">
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                    <li>
-                        <span class="news-title">news</span>
-                        <span class="num">0</span>
-                    </li>
-                </ul>
             </div>
             <div class="clear"></div>
         </div>
         </div>
         </div>
         <div class="contact">
-            <div class="title-contact">Contact Us</div>
+            <div class="title-contact">联系我们</div>
             <div class="line-con"><div class="line"></div></div>
             <div class="intr-contact">
                 <p>
-                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</span>
+                {% autoescape off %}
+                        <span class="edit-target">{{ contact.Content }}</span>
+                {% endautoescape %}
                 </p>
             </div>
-            <div id="u189" class="ax_default primary_button" data-label="send">
+            <div id="u189" class="ax_default primary_button">
                 <div id="u190" class="text" style="visibility: visible;">
-                  <p><span>SEND US A MESSAGE</span></p>
+                  <p id="contactUs"><span>给我们发邮件</span></p>
                 </div>
             </div>
-            <div id="u193" class="ax_default ax_default_hidden contact-hidden" data-label="contact " style="display: none; visibility: hidden;">
-                <div class="input-container">
-                    <div id="u196" class="ax_default text_field">
-                        <input id="u196_input" type="text" placeholder="&nbsp;Your name."/>
+            <div class="model-hide model-email" id="model-email">
+                <div class="model-container">
+                    <div class="model-head">
+                        <span class="model-title">发邮件</span>
+                        <i class="fa fa-close"></i>
                     </div>
-                    <div id="u197" class="ax_default text_field">
-                        <input id="u197_input" type="text" placeholder="&nbsp;Youemail..."/>
-                    </div>
-                    <div id="u198" class="ax_default text_field">
-                        <textarea id="u198_input" class="text-3" type="text" placeholder="The massage send to us"></textarea>
-                    </div>
-                    <div id="u199" class="ax_default primary_button send2" data-label="send2">
-                        <div id="u199_div" class=""></div>
-                        <div id="u200" class="text">
-                            <p><span>Send</span></p>
+                    <div class="model-body">
+                        <div class="send-email">
+                            <form id="send-email">
+                                <div class="body-line">
+                                    <label for="from-mail">* 留下你的邮箱: </label>
+                                    <input id="from-mail" type="text" placeholder="实验室的回信将会发到这个邮箱" onchange="checkFromMail(this)" />
+                                    <i class="check fa" id="check-from-mail"></i>
+                                </div>
+                                <div class="body-line">
+                                    <label for="from-name">发件人姓名: </label>
+                                    <input id="from-name" type="text" placeholder="填写你的真实姓名"/>
+                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
+                                </div>
+                                <div class="body-line">
+                                    <label for="from-content">* 你想说的话: </label>
+                                    <textarea id="from-content" type="text" placeholder="写下你的疑问或心声！"/></textarea>
+                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
+                                </div>
+                                <input type="submit" name="send" value="发 送" id="send">
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div id="u201" class="ax_default ax_default_hidden close" data-label="close">
-                    <div id="u204" class="ax_default contact-icon primary_button">
-                        <img id="u204_img" class="img" src="/static/images/u204.png"/>
-                    </div>
-                </div>
+                <!-- <div class="model-end">
+                    <a href="#">忘记密码？</a>
+                </div> -->
             </div>
-            <div class="hidden-tip" style="visibility: hidden;display: none;">
-                <div> 已发送！</div>
-            </div>
+        </div>
         </div>
         <div class="model-alertInfo" id="model-alertInfo">
             <div class="model-container">
                 <div class="model-head">
-                    <span class="model-title">登 录</span>
+                    <span class="model-title">联系我们</span>
                     <i class="fa fa-close"></i>
                 </div>
                 <div class="model-body">
-                    <h3 class="message"><h3>
+                    <h3 class="message"></h3>
                 </div>
                 <div class="model-end">
                     <div class="btn get">确 认</div>

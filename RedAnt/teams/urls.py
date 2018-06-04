@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'major=(?P<name>.*)/article=(?P<article>.*)/', views.editBlog),
     url(r'major=(?P<name>.*)/edit/', views.edit),
     url(r'major=(?P<name>.*)/delete/', views.delete),
+    url(r'major=(?P<name>.*)/changeImg/', views.changeImg),
     url(r'major=(?P<name>.*)/', views.teamMajor),
     url(r'operating=new/', views.teamAdd),
     # url(r'sign_up/', views.sign_up),

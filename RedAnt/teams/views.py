@@ -2,7 +2,7 @@
 from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import ProjectTeam,Blog,LearningResources
+from RedAnt.models import ProjectTeam,Blog,LearningResources,Photo
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -18,17 +18,25 @@ import random
 @permission_required('RedAnt.add_projectteam')
 @login_required
 def teamAdd(request):
-    name = '未命名'
-    introduction = '请添加项目简介'
-    team = ProjectTeam.objects.create(TeamName=name,Introduction=introduction)
-    team.ShortName = team.id
-    team.save()
-    blog = Blog.objects.get(id=0)
-    blog.id = None
-    blog.Team = team
-    blog.save()
-    url = '/teams/major='+ str(team.id) + '/edit/'
-    return HttpResponseRedirect(url)
+    if request.method == 'POST':
+        form = teamForm(request.POST)
+        if form.is_valid():
+            team = ProjectTeam()
+            newTeam = form.save()
+            team.ShortName = newTeam.ShortName
+            team.TeamName = newTeam.TeamName
+            team.Introduction = newTeam.Introduction
+            team.GroupPhoto = 'photos/LOGO.png'
+            newTeam.delete()
+            team.save()
+            url = '/teams/major=' + team.ShortName + '/'
+            return HttpResponseRedirect(url)
+        else:
+            return HttpResponse(u"数据校验错误")
+    else:
+        editor = teamForm()
+        teams = ProjectTeam.objects.all()
+        return render(request, 'teamEdit.html', {'teams': teams, 'editor': editor})
 
 @login_required
 def teamMajor(request,name):
@@ -41,7 +49,7 @@ def teamMajor(request,name):
         if fileForm.is_valid():
             file = LearningResources()
             file.Team = ProjectTeam.objects.get(ShortName=name)
-            file.teamName = name
+            file.teamId = ProjectTeam.objects.get(ShortName=name).id
             file.fileField = fileForm.cleaned_data['file']
             file.name = file.fileField.name
             file.save()
@@ -51,27 +59,34 @@ def teamMajor(request,name):
         blogs = Blog.objects.filter(Team=team).order_by('-modify_time')
         teams = ProjectTeam.objects.all()
         fileForm = FileUploadForm()
-        resourseList = LearningResources.objects.filter(Team=team).order_by('-date')
+        resourceList = LearningResources.objects.filter(Team=team).order_by('-date')
         return render(request, 'projectTeam.html', {'team': team,'teams': teams,
-                                                    'blogs': blogs,'fileForm': fileForm,'resourseList':resourseList})
+                                                    'blogs': blogs,'fileForm': fileForm,'resourceList':resourceList})
 
 @permission_required('RedAnt.change_projectteam')
 @login_required
 def edit(request,name):
     if request.method == 'POST':
         form = teamForm(request.POST)
+
+        print(request.POST)
         if form.is_valid():
             try:
                 team = ProjectTeam.objects.get(ShortName=name)
             except:
                 team  =ProjectTeam.objects.get(id=int(name))
-            blogs = Blog.objects.filter(Team=team)
             newTeam = form.save()
-            for blog in blogs:
-                blog.Team = newTeam
-                blog.save()
-            team.delete()
-            url = '/teams/major=' + newTeam.ShortName + '/'
+            team.ShortName = newTeam.ShortName
+            if team.TeamName != newTeam.TeamName:
+                users = User.objects.filter(first_name=team.TeamName)
+                for user in users:
+                    user.first_name = newTeam.TeamName
+                    user.save()
+            team.TeamName = newTeam.TeamName
+            team.Introduction = newTeam.Introduction
+            newTeam.delete()
+            team.save()
+            url = '/teams/major=' + team.ShortName + '/'
             return HttpResponseRedirect(url)
         else:
             return HttpResponse(u"数据校验错误")
@@ -87,7 +102,12 @@ def edit(request,name):
 @permission_required('RedAnt.delete_projectteam')
 @login_required
 def delete(request, name):
-    ProjectTeam.objects.get(ShortName=name).delete()
+    team = ProjectTeam.objects.get(ShortName=name)
+    users = User.objects.filter(first_name=team.TeamName)
+    for user in users:
+        user.first_name = ''
+        user.save()
+    team.delete()
     url = '/index/'
     return HttpResponseRedirect(url)
 
@@ -95,11 +115,21 @@ def delete(request, name):
 @login_required
 def editBlog(request, name, article):
     if article == 'new':
-        blog = Blog()
-        blog.Team = ProjectTeam.objects.get(ShortName=name)
-        blog.save()
-        url = '/teams/major=' + name + '/article='+str(blog.id)+'/'
-        return HttpResponseRedirect(url)
+        if request.method == 'POST':
+            form = myUEditorModelForm(request.POST)
+            if form.is_valid():
+                blog = form.save()
+                blog.Team = ProjectTeam.objects.get(ShortName=name)
+                blog = transform(blog)
+                blog.save()
+                url = '/teams/major=' + name +'/'
+                return HttpResponseRedirect(url)
+            else:
+                return HttpResponse(u"数据校验错误")
+        else:
+            form = myUEditorModelForm()
+            teams = ProjectTeam.objects.all()
+            return render(request, 'editBlog.html', {'form': form, 'teams': teams})
     else:
         if request.method == 'POST':
             form = myUEditorModelForm(request.POST)
@@ -126,7 +156,7 @@ def deleteBlog(request, name, article):
     url = '/teams/major=' + name + '/'
     return HttpResponseRedirect(url)
 
-@permission_required('RedAnt.delete_learningresoures')
+@permission_required('RedAnt.delete_learningresources')
 @login_required
 def deleteResource(request, name, file):
     LearningResources.objects.get(fileField=file).delete()
@@ -141,3 +171,28 @@ def transform(blog):
     except:
         blog.ImagePath = '/static/images/LOGO1.png'
     return blog
+
+@login_required
+def changeImg(request,name):
+    if request.method == 'POST':
+        fileForm = FileUploadForm(request.POST, request.FILES)
+        if fileForm.is_valid():
+            team = ProjectTeam.objects.get(ShortName = name)
+            photo = Photo()
+            photo.fileField = fileForm.cleaned_data['file']
+            photo.save()
+            try:
+                Photo.objects.get(fileField = team.GroupPhoto).delete()
+                team.GroupPhoto = photo.fileField
+                team.save()
+                url = '/index/'
+                return HttpResponseRedirect(url)
+            except:
+                team.GroupPhoto = photo.fileField
+                team.save()
+                url = '/index/'
+                return HttpResponseRedirect(url)
+    else:
+        editor = FileUploadForm()
+        teams = ProjectTeam.objects.all()
+        return render(request, 'teamEdit.html', {'editor':editor,'teams': teams})

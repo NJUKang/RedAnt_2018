@@ -44,7 +44,10 @@ var jsonfy=function (table){
 				userList=userList+"'email':'"+table.rows[i].cells[j].innerHTML+"',";
 			}
 			if (j==3) {
-				userList=userList+"'userId':'"+table.rows[i].cells[j].innerHTML+"'";
+				userList=userList+"'userId':'"+table.rows[i].cells[j].innerHTML+",";
+			}
+			if (j==4) {
+				userList=userList+"'team':'"+table.rows[i].cells[j].innerHTML+"'";
 			}
 		}
 		userList+="]";
@@ -83,7 +86,6 @@ var submitList=function(table,status){
         },
         error: function(response) {
             alert("error");
-            console.log(userList);
         }
 	});
 }
@@ -115,4 +117,34 @@ $(".manager #delete").on("click",function(){
 $(".manager #change-rank").on("click",function(){
 	var table=removeItem();
 	submitList(table,"changeRank");
+});
+
+
+$(".manager select.manage-team").change(function(){
+	var emailEl=$(this).parent("td").siblings("td")[2];
+	var email=emailEl.innerHTML;
+	var team=$(this).find('option:selected').val();
+	$.ajax({
+		type:"POST",
+        url:"/manage/changeGroup/",
+        cache:false,
+        data:{
+            "email":email,
+            "team": team
+        },
+        success:function(data){
+			if(data.code == 1) {
+					alertInformation(data.info);
+				}
+				else {
+                    alertInformation(data.info);
+                }
+        },
+        fail: function() {
+            alert("failed");
+        },
+        error: function(response) {
+            alert("error");
+        }
+	});
 });
