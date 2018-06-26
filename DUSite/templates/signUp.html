@@ -55,7 +55,9 @@
 				<select name="proGroup" id='proGroup' onchange="checkPro(this)">
 					<option value="----" selected="selected">----</option>
                     {% for team in teams %}
-                        <option value="{{ team.TeamName }}">{{ team.TeamName }}</option>
+                        {% if team.OutofTime is False%}
+                            <option value="{{ team.TeamName }}">{{ team.TeamName }}</option>
+                        {% endif %}
                     {% endfor %}
 
 				</select>
@@ -83,11 +85,11 @@
 	<div class="model-alertInfo" id="model-alertInfo">
         <div class="model-container">
             <div class="model-head">
-                <span class="model-title">个人中心</span>
+                <span class="model-title">注册</span>
                 <i class="fa fa-close"></i>
             </div>
             <div class="model-body">
-                <h3 class="message"><h3>
+                <h3 class="message"></h3>
             </div>
             <div class="model-end">
             	<div class="btn get">确 认</div>
@@ -95,7 +97,13 @@
             </div>
         </div>
     </div>
-	<footer>@大连理工大学红蚂蚁实验室</footer>
+	<footer>
+        <div>
+            <hr>
+              <p> Copyright 红蚂蚁实验室</p>
+            <hr>
+        </div>
+    </footer>
 	<script type="text/javascript" src="/static/js/signUp.js"></script>
 	<script type="text/javascript" src="/static/js/alertModel.js"></script>
 </body>

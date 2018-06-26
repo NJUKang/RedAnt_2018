@@ -2,8 +2,8 @@
     #submit{width: 60px;border-radius: 5px; background-color: deepskyblue;border: none; color: white; height: 30px;}
 </style>
 <div class="main-container" >
-    <div style="margin-left: 450px;">
-        <form action="/courses/zhangjie_small_add" enctype="multipart/form-data" method="post">
+    <div style="margin-left: 25%;">
+        <form action="/courses/zhangjie_small_add" enctype="multipart/form-data" method="post" style="border: 1px solid #ddd;margin:5%; padding: 10px; margin-top: 50px;">
             <table>
                 <colsgroup>
                     <col style="width: 120px;">
@@ -11,9 +11,7 @@
                 </colsgroup>
                 <tr >
                     <td>
-                        {% if type_ %}
-                            <a href="/courses/major=cptNw/?zjs_id={{ zjsmall.id }}&del=1">DELETE </a>
-                        {% endif %}
+                        
                     </td>
                     <td>
                         {% if zjsmall %}
@@ -32,12 +30,12 @@
                         <span>章节名</span>
                     </td>
                     <td>
-                        <input type="text" name="name" id="name" placeholder="请输入章节名" style="width: 200px">
+                        <input type="text" name="name" id="name" placeholder="请输入章节名" value="默认章节名" style="width: 100%;">
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td><span style="color: red">Tips</span></td>
+                    <td><span style="color: red">注意</span></td>
                     <td><span style="color: red">文件不上传则不会进行删除修改</span></td>
                 </tr>
             {% endif %}
@@ -47,7 +45,7 @@
                         <span>章节视频</span>
                     </td>
                     <td>
-                        <input type="file" name="video">
+                        <input type="file" name="video" style="font-size: 14px;">
                     </td>
                 </tr>
                 <tr >
@@ -55,7 +53,7 @@
                         <span>视频描述</span>
                     </td>
                     <td>
-                        <textarea name="video_desc" id="" cols="70" rows="10">{{ zjsmall.video_desc }}</textarea>
+                        <textarea name="video_desc" id="" style="width: 100%" rows="10">{{ zjsmall.video_desc }}</textarea>
                     </td>
                 </tr>
             {% endif %}
@@ -65,7 +63,7 @@
                         <span>章节内容</span>
                     </td>
                     <td>
-                        <textarea name="content" id="" cols="70" rows="10">{{ zjsmall.content }}</textarea>
+                        <textarea name="content" id="" style="width: 100%" rows="10">{{ zjsmall.content }}</textarea>
                     </td>
                 </tr>
                 <tr >
@@ -78,35 +76,11 @@
                 </tr>
             {% endif %}
                 <tr>
-                    <td>
-                    </td>
-                    <td>
-                        <button id="submit" type="submit">提交</button>
-                        <button id="submit" type="submit" onclick="showAlert()">取消</button>
-                    </td>
+                    
                 </tr>
             </table>
+            <br>
+            <button id="submit" type="submit" style="position: relative;left: 50%;" onclick="alertInfoWithJump0('正在进行提交，请勿关闭页面，否则将提交失败')">提交</button>
         </form>
     </div>
 </div>
-<div class="model-alertInfo" id="model-alertInfo" style="display: none;">
-            <div class="model-container" style="opacity: 0.2; top: 29%;">
-                <div class="model-head">
-                    <span class="model-title">登 录</span>
-                    <i class="fa fa-close"></i>
-                </div>
-                <div class="model-body">
-                    <h3 class="message">邮箱或密码错误</h3><h3>
-                </h3></div>
-                <div class="model-end">
-                    <div class="btn get">确 认</div>
-                    <!-- <div class="btn shut">关 闭</div> -->
-                </div>
-            </div>
-        </div>
-<script type="text/javascript">
-function cancle(){
-    alert("你确定要取消添加吗？");
-}
-</script>
-<script type="text/javascript" src="/static/js/alertModel.js"></script>

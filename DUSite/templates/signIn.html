@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.css">
     <!-- [if lt IE 9]><script src="js/html5.js"></script><![endif] -->
     <script src="/static/js/jquery-1.8.3.min.js"></script>
     <script src="/static/js/jquery.tiles.js"></script>
@@ -16,59 +16,10 @@
     <link rel="stylesheet" type="text/css" href="/static/css/home.css">
     <link rel="stylesheet" type="text/css" href="/static/css/wheel.css">
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/cornerTop.css">
   </head>
     <body>
-        <script>
-            window.onload=function(){
-                var i=document.getElementsByTagName('input').length;
-                var input=$("#model .model-body input");
-                var i=input.length;
-                for(var n=0;n<i-1;n++){
-                    input[n].value='';
-                    $("#model .model-body i").css("opacity","0");
-                }
-            }
-        </script>
-        <div class="Top-bar">
-            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
-            <div class="LabSlogan">
-                <span> 遇到问题立即沟通 !<br></span>
-                <span class="secondslo"> 我是最后负责人 !</span>
-            </div>
-            <div class="enter">
-                <span class="spe-enlight"><a href="javascript:void(0)" id="sign-btn">登 录</a></span>
-                <span> / </span>
-                <span class="spe-enlight"><a href="/index/sign_up/">注 册</a></span>
-            </div>
-        </div>
-        <div class="model-hide" style="display: none;" id="model">
-            <div class="model-container">
-                <div class="model-head">
-                    <span class="model-title">登 录</span>
-                    <i class="fa fa-close"></i>
-                </div>
-                <div class="model-body">
-                    <div class="sign-in">
-                        <form id="sign-in">
-                            <div class="body-line">
-                                <label for="mail">邮 箱 : </label>
-                                <input id="mail" class="input1" type="text" placeholder="请输入登录邮箱" onchange="checkMail(this)"  autocomplete="close"/>
-                                <!-- <i class="check fa fa-close" id="check-mail"></i> -->
-                            </div>
-                            <div class="body-line">
-                                <label for="psw">密 码 : </label>
-                                <input id="psw" class="input2" type="password" placeholder="请输入登录密码" onchange="checkPsw(this)" autocomplete="close" />
-                                <!-- <i class="check fa fa-check" id="check-psw"></i> -->
-                            </div>
-                            <input type="submit" name="submit" value="登 录" id="login">
-                        </form>
-                    </div>
-                </div>
-                <div class="model-end">
-                    <a href="#">忘记密码？</a>
-                </div>
-            </div>
-        </div>
+        {% include 'topBar.html' %}
         <!-- 轮播图片 -->
         <div id="wheel-container" class="wheel-container">
             <div class="bac-lim">
@@ -108,22 +59,24 @@
                 </div>
                 <div class="img-group">
                     {% for team in teams %}
-                        <div class="proimg" id="proimg">
-                            <div>
-                                <img src=/media/{{ team.GroupPhoto }}>
-                                <div class="back-img-hover" id="back-img-hove">
-                                    <div  class="hover-eff">
-                                        <h2>{{ team.TeamName }}</h2>
-                                        <p>
-                                            {% autoescape off %}
-                                                {{ team.Introduction }}
-                                            {% endautoescape %}
-                                         </p>
-                                        <a href="/teams/major={{ team.ShortName }}/">了解更多</a>
+                        {% if team.OutofTime is False%}
+                            <div class="proimg" id="proimg">
+                                <div>
+                                    <img src=/media/{{ team.GroupPhoto }}>
+                                    <div class="back-img-hover" id="back-img-hove">
+                                        <div  class="hover-eff">
+                                            <h2>{{ team.TeamName }}</h2>
+                                            <p>
+                                                {% autoescape off %}
+                                                    {{ team.Introduction }}
+                                                {% endautoescape %}
+                                             </p>
+                                            <a href="/teams/major={{ team.id }}/">了解更多</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                    </div>
+                        {% endif %}
                     {% endfor %}
 
                 </div>
@@ -131,8 +84,7 @@
             <div class="clear"></div>
         </div>
         </div>
-        </div>
-        <div class="contact">
+        <div id="contact" class="contact">
             <div class="title-contact">联系我们</div>
             <div class="line-con"><div class="line"></div></div>
             <div class="intr-contact">
@@ -142,44 +94,28 @@
                 {% endautoescape %}
                 </p>
             </div>
-            <div id="u189" class="ax_default primary_button">
+            <!-- <div id="u189" class="ax_default primary_button">
                 <div id="u190" class="text" style="visibility: visible;">
                   <p id="contactUs"><span>给我们发邮件</span></p>
                 </div>
-            </div>
-            <div class="model-hide model-email" id="model-email">
-                <div class="model-container">
-                    <div class="model-head">
-                        <span class="model-title">发邮件</span>
-                        <i class="fa fa-close"></i>
+            </div> -->
+            <div class="send-email">
+                <form id="send-email">
+                    <div class="body-line">
+                        <input id="from-mail" type="text" placeholder="请填写你的邮箱" onchange="checkFromMail(this)" />
+                        <i class="check fa fa-check" id="check-from-mail"></i>
                     </div>
-                    <div class="model-body">
-                        <div class="send-email">
-                            <form id="send-email">
-                                <div class="body-line">
-                                    <label for="from-mail">* 留下你的邮箱: </label>
-                                    <input id="from-mail" type="text" placeholder="实验室的回信将会发到这个邮箱" onchange="checkFromMail(this)" />
-                                    <i class="check fa" id="check-from-mail"></i>
-                                </div>
-                                <div class="body-line">
-                                    <label for="from-name">发件人姓名: </label>
-                                    <input id="from-name" type="text" placeholder="填写你的真实姓名"/>
-                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
-                                </div>
-                                <div class="body-line">
-                                    <label for="from-content">* 你想说的话: </label>
-                                    <textarea id="from-content" type="text" placeholder="写下你的疑问或心声！"/></textarea>
-                                    <!-- <i class="check fa fa-check" id="check-psw"></i> -->
-                                </div>
-                                <input type="submit" name="send" value="发 送" id="send">
-                            </form>
-                        </div>
+                    <div class="body-line">
+                        <input id="from-name" type="text" placeholder="填写你的真实姓名"/>
+                        <!-- <i class="check fa fa-check" id="check-psw"></i> -->
                     </div>
-                <!-- <div class="model-end">
-                    <a href="#">忘记密码？</a>
-                </div> -->
+                    <div class="body-line">
+                        <textarea id="from-content" type="text" placeholder="写下你的疑问或心声！"></textarea>
+                        <!-- <i class="check fa fa-check" id="check-psw"></i> -->
+                    </div>
+                    <input type="submit" name="send" value="发 送" id="send">
+                </form>
             </div>
-        </div>
         </div>
         <div class="model-alertInfo" id="model-alertInfo">
             <div class="model-container">
@@ -196,11 +132,26 @@
                 </div>
             </div>
         </div>
+        <div class="corner-top">
+            <button class="CornerButton" onclick="backTotop()" aria-lable="回到顶部" type="button" data-tooltip="回到顶部" data-tooltip-position="left" id="CornerButton">
+              <svg title="回到顶部" class="Backtotop" FILL="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                <path d="M 16.036 19.59 a 1 1 0 0 1 -0.997 0.995 H 9.032 a 0.996 0.996 0 0 1 -0.997 -0.996 v -7.005 H 5.03 c -1.1 0 -1.36 -0.633 -0.578 -1.416 L 11.33 4.29 a 1.003 1.003 0 0 1 1.412 0 l 6.878 6.88 c 0.782 0.78 0.523 1.415 -0.58 1.415 h -3.004 v 7.005 Z">
+                </path>
+              </svg>
+            </button>
+         </div>
     <script type="text/javascript" src="/static/js/signIn.js"></script>
     <script type="text/javascript" src="/static/js/contact.js"></script>
     <script type="text/javascript" src="/static/js/wheel.js"></script>
     <script type="text/javascript" src="/static/js/news.js"></script>
     <script type="text/javascript" src="/static/js/alertModel.js"></script>
-        <footer>@大连理工大学红蚂蚁实验室</footer>
+    <script type="text/javascript" src="/static/js/backTop.js"></script>
+        <footer>
+            <div>
+                <hr>
+                  <p> Copyright 红蚂蚁实验室</p>
+                <hr>
+            </div>
+        </footer>
     </body>
 </html>

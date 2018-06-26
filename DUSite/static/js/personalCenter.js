@@ -150,12 +150,12 @@ var showBtn=document.getElementById('showSetPsw');
 var hideBtn=document.getElementById('hideSetPsw');
 var form=document.getElementsByClassName('change')[0].getElementsByClassName('set-psw')[0];
 	showBtn.onclick=function(){
-		$(form).css("display","block");
+		$(form).css("display","inline-block");
 		$(showBtn).css("display","none");
 	}
 	hideBtn.onclick=function(){
 		$(form).css("display","none");
-		$(showBtn).css("display","block");
+		$(showBtn).css("display","inline-block");
 		var num=form.getElementsByTagName('input').length;
 		var errorMsg=new Array(num),tip=new Array(num),el=new Array(num);
 		for(var i=0;i<num;i++){

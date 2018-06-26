@@ -2,7 +2,7 @@
 from RedAnt.forms import myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import Blog,ProjectTeam,Photo
+from RedAnt.models import Blog,ProjectTeam,Photo,Course
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -14,6 +14,7 @@ import json
 import re
 import datetime
 import random
+
 
 @login_required
 def account_manager(request):
@@ -56,7 +57,8 @@ def account_manager(request):
     else:
         teams = ProjectTeam.objects.all()
         fileForm = FileUploadForm()
-        return render(request, 'personalCenter.html', {'teams': teams,'fileForm': fileForm})
+        courses = Course.objects.all()
+        return render(request, 'personalCenter.html', {'teams': teams,'fileForm': fileForm,'courses': courses})
 
 @login_required
 def checkPrepsw(request):

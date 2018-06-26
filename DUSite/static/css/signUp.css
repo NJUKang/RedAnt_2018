@@ -4,6 +4,7 @@ header{
 html{
 	font-size: 62.5%;
 	font-family: "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
+	padding: 0;
 }
 body{
 /* 	background: url("../images/22.jpg"); */
@@ -12,6 +13,7 @@ body{
 	background-color: #f0f0f0;
 	/*background-repeat: no-repeat;*/
 	margin: 0;
+padding: 0;
 }
 header.sign-up-header{
 	font-size: 5rem;
@@ -46,20 +48,7 @@ header.sign-up-header a:hover{
 	border-radius: 1rem;
 	min-width:30rem;
 	margin-top: 5%;
-}
-footer{
-	position: relative;
-	text-align: center;
-	display: block;
-	width: 100%;
-	color: white;
-	background-color: rgba(39,68,114,1);
-}
-footer{
-	text-align: center;
-	width: 100%;
-	position: absolute;
-	bottom: 0;
+	z-index: 100;
 }
 div#sign-up-title{
 	text-align: center;
@@ -240,4 +229,10 @@ form.sign-up .go-back a{
 form.sign-up a{
 	text-decoration: none;
 	color: black;
+}
+
+
+footer{
+	position: absolute;
+	bottom: 0;
 }

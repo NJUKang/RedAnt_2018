@@ -22,11 +22,9 @@ urlpatterns = [
     url(r'^manage/', include('RedAnt.userManage.urls')),
     url(r'^myaccount/', include('RedAnt.personalAccount.urls')),
     url(r'^forum/',include('RedAnt.forum.urls')),
+    url(r'^media/(?P<path>.*)', views.static.serve, {'document_root': settings.MEDIA_ROOT }),
+    url(r'^static/(?P<path>.*)', views.static.serve, {'document_root': settings.STATIC_ROOT}),
+    url(r'^(?P<path>.*)', views.static.serve, {'document_root': settings.STATIC_ROOT}),
 ]
 
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'^media/(?P<path>.*)$', views.static.serve, {'document_root': settings.MEDIA_ROOT }),
-        url(r'^static/(?P<path>.*)$',views.static.serve,{'document_root':settings.STATIC_ROOT}),
-        url(r'^(?P<path>.*)$',views.static.serve,{'document_root':settings.STATIC_ROOT}),
-    ]
+

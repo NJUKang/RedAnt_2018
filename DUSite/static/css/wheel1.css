@@ -107,7 +107,7 @@ body{
 	opacity: 1;
 }
 .wheel-container #photo.photo .curr{/*1*/
-	left: 0;
+	/*left: 0;*/
 }
 .wheel-container #photo.photo .last{
 	left: -64rem;

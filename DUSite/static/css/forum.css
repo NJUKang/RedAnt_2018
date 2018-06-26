@@ -15,8 +15,8 @@ section {
     background: #fff;
 }
 body > div.wrapper > section > div.container{
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 body > div.wrapper > section > div > ul > li>div.cbp_tmlabel{
 	margin-left: 10%;

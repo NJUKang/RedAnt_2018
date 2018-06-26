@@ -1,39 +1,26 @@
-
-            <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
-                <div class="jquery-accordion-menu-header" id="form">
-                    此处为课程名
-                </div>
-                <ul id="demo-list">
-                 
-                   
-                   <!--  <li><a href="#"><i class="fa fa-envelope"></i>Messages </a><span class="jquery-accordion-menu-label">
-                       12 </span></li> -->
-                    {% for zj in zjs %}
-                    <li><a href="#"><i class="fa fa-calendar"></i>{{ zj.name }} </a>
-                        <ul class="submenu">
-                            {% for zjs in zj.details.all %}
-                                <li>
-                                    <a href="/courses/major=cptNw/?zjs_id={{ zjs.id }}">{{ zjs.name }} </a>
-                                </li>
-                            {% endfor %}
-{#                            <li><a href="#">Video </a>#}
-{#                                <ul class="submenu">#}
-{#                                    <li><a href="#">Doc </a></li>#}
-{#                                    <li><a href="#">Slides </a></li>#}
-{#                                </ul>#}
-{#                            </li>#}
-                            <li>
-                                <a href="/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ zj.kecheng }}&zj={{ zj.name }}" class="addPart"><button class="addSlides">添加子章节</button></a>
-                            </li>
-                        </ul>
-                    </li>
-                    {% endfor %}
+<div class="jquery-accordion-menu-con">
+<div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+    <div class="jquery-accordion-menu-header" id="form">
+        <span>{{course.Name}}</span>
+    </div>
+    <ul id="demo-list">
+        {% for zj in zjs %}
+            <li><a href="#"><i class="fa fa-calendar"></i>{{ zj.name }} </a>
+            <ul class="submenu">
+                {% for zjs in zj.details.all %}
                     <li>
-                        <a href="/courses/zhangjie_add?kecheng={{ kecheng }}"><i class="fa fa-calendar"></i>新增章节 </a>
+                        <a href="/courses/major={{ course.id }}?zjs_id={{ zjs.id }}">{{ zjs.name }} </a>
                     </li>
-                </ul>
-        </div>
-
-        
-
-
+                {% endfor %}
+                <li>
+                    <a href="/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ course.id }}&zj={{ zj.name }}" class="addPart"><button class="addSlides">添加子章节</button></a>
+                </li>
+            </ul>
+        </li>
+        {% endfor %}
+    <li>
+        <a href="/courses/zhangjie_add?kecheng={{ course.id }}"><i class="fa fa-calendar"></i>新增章节 </a>
+    </li>
+</ul>
+</div>
+</div>

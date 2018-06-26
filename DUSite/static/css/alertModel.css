@@ -1,10 +1,10 @@
 
 /*alert模态框
 ——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————*/
-#model-alertInfo{
+#model-alertInfo,#model-alertInfo_0{
 	display: none;
 	position: fixed;
-	z-index: 2000;
+	z-index: 6000;
 	background-color: rgba(0,0,0,0.7);
 	height: 100%;
 	width: 100%;
@@ -20,13 +20,9 @@
 	background-color: white;
 	height: auto;
 	width: 45rem;
-	/*transition: top 2s ease,opacity 2s ease;
-	-moz-transition: top 2s ease,opacity 2s ease;
-	-webkit-transition: top 2s ease,opacity 2s ease;
-	-o-transition: top 2s ease,opacity 2s ease;*/
 }
 .model-alertInfo .model-container .model-head{
-	background-color: orange;
+	background-color: #1E90FF;
 	height: auto;
 	padding: 1.5rem 2rem;
 	position: relative;
@@ -55,7 +51,11 @@
 	text-align: center;
 	color: black;
 	font-size: 1.6rem;
+	margin-top: 10px;
 	font-weight: bold;
+    line-height: 40px;
+    font-weight: 600;
+    font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 .model-alertInfo .model-container .model-end{
 	border-top: 1px #AAA solid;
@@ -96,4 +96,31 @@
 /* 	opacity: 0.8; */
 	color: white;
 	border:none;
+}
+
+
+/*页脚
+--------------------------------------------------------------------*/
+footer {
+    position: relative;
+    text-align: center;
+    display: block;
+    width: 100%;
+    color: white;
+    font-size: 16px;
+    background-color: rgba(39,68,114,1);
+}
+footer {
+    padding: 1.5em 0;
+}
+footer p {
+    margin: 0;
+    color: #999;
+}
+hr {
+    background: #EEE;
+    border: 0;
+    height: 1px;
+    margin: 20px 0 20px;
+    display: inline-block;
 }

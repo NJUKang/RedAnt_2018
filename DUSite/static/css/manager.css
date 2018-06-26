@@ -4,9 +4,10 @@
 	outline: none;
 	position: relative;
 	margin: 0;
-	width: 40%;
+	/*! width: 40%; */
 	display: inline-block;
-	left: -5%;
+	left: -8%;
+	max-width: 58%;
 }
 .main-container .manager table{
 	text-align: center;

@@ -28,8 +28,8 @@ a{
 }
 .top-icon img{
 	display: block;
-	height: 6rem;
-	width: 13rem;
+	height: 4rem;
+	width: auto;
 }
 .LabSlogan{
 	display: block;
@@ -39,7 +39,7 @@ a{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-	font-style: bold;
+	font-style: blod
 	font-size: 1.7rem;
 	color: white;
 }
@@ -180,7 +180,7 @@ span.spe-enlight{
 	margin-right: 1rem;
 }*/
 .wheel-container .bac-lim button{
-	background-color: #3366ff;
+	background-color: rgba(30,144,255,0.8);
 	position: absolute;
 	bottom: 2rem;
 	right: 0;
@@ -207,11 +207,12 @@ span.spe-enlight{
 	position: relative;
 	min-width: 0;
 	height: auto;
-	float: left;
-	background-color: rgba(51, 102, 255, 1);
+	/*! float: left; */
+	background-color: rgba(30,144,255,0.8);
 	margin-bottom: 1rem;
-	top: 5rem;
-	margin-left: 5rem;
+	top: 3rem;
+	margin: 0 2.5%;
+	box-shadow: 0 1px 4px rgba(0,0,0,.5);
 }
 .project img{
 	display: block;
@@ -230,22 +231,25 @@ span.spe-enlight{
 .img-group{
 	display:flex;
 	width: auto;
-	padding-left: 5rem;
+	padding: 0 5%;
 	height: auto;
 	position: relative;
-/* 	justify-content: space-evenly; */
+	justify-content: space-between;
 	flex-wrap: wrap;
 	align-content: flex-start;
 }
 .img-group .proimg{
-	margin: 5rem auto auto 2rem;
-	flex: 0 0 25%;
+/* 	margin: 5rem 5% auto 5%; */
+	margin-top: 5rem;
 	display: block;
 	width: 36rem;
 	min-width: 36rem;
 	height: 25rem;
 	overflow: hidden;
 	flex-shrink: 0;
+}
+.img-group .proimg:last-child:nth-child(2n+1){
+	
 }
 /* .img-group .proimg:last-child{
 	flex: 1;
@@ -254,44 +258,8 @@ span.spe-enlight{
 .intr-project{
 	padding: 2rem 0.5rem;
 	font-family: 'Arial Normal';
-	max-width: 16rem;
+	/*! max-width: 16rem; */
 }
-@media all and (max-width:850px){
-	.project .side-fixed{
-		margin-left: 0;
-	}
-	.img-group .proimg{
-		margin-left: auto;
-	}
-}
-@media all and (max-width:750px){
-	.intr-project{
-		max-width: 100%;
-	}
-	.img-group{
-		padding-left: 0;
-  }
-	.img-group .proimg{
-		margin-left: auto;
-	}
-	.project .side-fixed{
-		float: none;
-		margin-left: 0;
-	}
-}
-/* @media all and (max-width:460px){
-	.img-group .proimg{
-		margin: 1rem auto;
-	}
-	.project .side-fixed{
-		top: 0;
-		max-width: 36rem;
-		margin-left: 0;
-	}
-	.limit{
-		padding: 0.5rem;
-	}
-} */
 .project .intr-project span{
 	font-size: 1.7rem;
 	font-weight: bolder;
@@ -299,7 +267,7 @@ span.spe-enlight{
 }
 .project .intr-project p{
 	display: block;
-	width: 90%;
+	width: 95%;
 	font-size: 1.4rem;
 	line-height: 1.8rem;
 	margin-left: 4%;
@@ -313,21 +281,19 @@ span.spe-enlight{
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 40rem;
-	background-color: rgba(39, 68, 114, 1);
+	min-height: 100vh;
+	background: url(/static/images/18.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+/* 	background-color: rgba(39, 68, 114, 1); */
 	text-align: center;
 	color: white;
 	font-family: 'Arial Normal';
 	font-size: 1.6rem;
 	padding-top: 10rem;
-}
-footer{
-	position: relative;
-	text-align: center;
-	display: block;
-	width: 100%;
-	color: white;
-	background-color: rgba(39,68,114,1);
+	padding-bottom: 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
 }
 .title-contact{
 	padding: 3rem 0 0 0;
@@ -376,6 +342,7 @@ footer{
 }
 .intr-contact button{
 	margin-top: 1rem;
+	background-color: white;
 }
 .primary_button{
 	width: 100%;
@@ -511,7 +478,7 @@ footer{
 	color: #d9534f;
 }
 .model-hide .model-container .model-head{
-	background-color: orange;
+	background-color: #1E90FF;
 	height: auto;
 	padding: 1.5rem 2rem;
 	position: relative;
@@ -626,40 +593,211 @@ poster
 }
 .project form label{
 	font-size: 1.6rem;
-/* 	margin-right: 1rem; */
-	background-color: #169bd5;
-	padding: 1rem;
-	border-radius: 0.5rem 0 0 0.5rem;
+	margin-right: 1rem;
+/* 	background-color: #169bd5; */
+/* 	padding: 1rem; */
+/* 	border-radius: 0.5rem 0 0 0.5rem; */
 }
 .project form input{
-	position:absolute;
-	clip:rect(0 0 0 0);
-/* 	padding: 0.5rem;
-	border-radius: 0rem;
-	background-color: #169bd5;
-	border: none; */
+/* 	position:absolute;
+	clip:rect(0 0 0 0); */
+	border: solid #ddd 1px;
 }
 .project form button.upload{
-	padding: 0.5rem;
-/* 	border: none; */
-	border: solid #169bd5 2px;
-	border-radius: 0 0.5rem 0.5rem 0;
-	background-color: #169bd5;
+	padding: 0 0.5rem 0 0;
+	border: solid #ddd 2px;
+/* 	border-radius: 0 0.5rem 0.5rem 0; */
+	background-color: #ddd;
 	position: relative;
+	top: -0.1rem;
 	left: -0.3rem;
-	border-left: 1px solid #eee;
+/* 	border-left: 1px solid #eee; */
 }
 .project form i{
 	margin: 0.5rem;
 }
 .img-group.poster{
 	padding: 0;
-	justify-content: space-around;
-	align-content: space-around;
+	justify-content: space-between;
+	align-content: flex-start;
 }
 .img-group.poster .proimg{
   margin: 5rem auto 1rem 1rem;
 }
 .img-group.poster .proimg .hover-eff a{
   float: right;
+}
+.intr-project button.edit{
+	position: absolute;
+	right: 2.5%;
+	transform: translate(0,-50%);
+	background-color: white;
+	box-shadow: 1px 1px #aaa;
+}
+.intr-project button.edit:before,.intr-project button.edit:after{
+	clear: both;
+}
+.img-group.poster .proimg:last-child:nth-child(3n+2){
+	flex: 1;
+}
+
+
+
+
+
+
+form#send-email input{
+	border: #AAA 1px solid;
+	padding: 0.8rem 0.5rem;
+	font-size: 1.5rem;
+	border-radius: 0.5rem;
+	background: #f7f7f7;
+}
+form#send-email input[type="submit"]{
+	margin: 2rem auto 1rem auto;
+	padding: 0.5rem;
+	width: 10rem;
+	border: none;
+	display: inline-block;
+	background-color: rgba(255,255,255,0.5);
+	font-weight: 400;
+	text-align: center;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	white-space: nowrap;
+	border-radius: 4px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	color: black;
+	position:relative;
+	transform: translate(-45%,0);
+}
+ form#send-email .body-line{
+	text-align: left;
+	margin-right: 3rem;
+	margin-left: 1rem;
+	width: 45%;
+	display: inline-block;
+	margin-top: 2rem;
+}
+ form#send-email .body-line input{
+	width: 80%;
+	padding: 1rem;
+	background-color: rgba(255,255,255,0.5);
+	min-width: 20rem;
+}
+ form#send-email textarea{
+	resize: none;
+	min-width: 20rem;
+	height: 20rem;
+	width: 100%;
+	background-color: rgba(255,255,255,0.5);
+	border: #AAA 1px solid;
+	padding: 0.8rem 1rem;
+	font-size: 1.5rem;
+	border-radius: 0.5rem;
+	box-sizing: border-box;
+	font-family: 'Arial Normal';
+}
+#send-email {
+    width: 60%;
+    position: relative;
+    left: 50%;
+    transform: translate(-45%,0);
+}
+#send-email .body-line i{
+	opacity: 0;
+}
+form#send-email .body-line:nth-child(3n){
+	width: 88.5%;
+	position: relative;
+	left: -3.2%;
+}
+.contact .send-email{
+	margin: 2rem 0 0 0;
+}
+/*适配
+-----------------------------------------------------------------*/
+/* @media all and (max-width:1300px){
+	.img-group{
+		padding: 0 8%;
+	}
+} */
+@media all and (max-width:1428px){
+	.img-group.poster{
+		padding: 0 8%;
+	}
+	.contact{
+		padding-top: 7rem;
+	}
+	form#send-email .body-line input{
+	  box-sizing: border-box;
+	}
+	form#send-email .body-line:nth-child(3n){
+	 width: 60%;
+		left: 0;
+  }
+	form#send-email .body-line textarea{
+	 width: 100%;
+  }
+	form#send-email input[type='submit']{
+		display: block;
+		margin: 2rem auto 0 auto;
+    transform: translate(0,0);
+	}
+	form#send-email .body-line{
+		width: 60%;
+  }
+}
+@media all and (max-width:1200px){
+	.img-group{
+		padding: 0 2.5%;
+	}
+	.project .side-fixed{
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+@media all and (max-width:1000px){
+	.img-group.poster .proimg{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.img-group.poster{
+		padding: 0 8%;
+	}
+	.img-group.poster .proimg:last-child:nth-child(3n+2){
+		flex: 0;
+	}
+}
+
+@media all and (max-width:980px){
+	.intr-project{
+		max-width: 100%;
+	}
+	.project .side-fixed{
+		float: none;
+		margin-left: 0;
+	}
+	.img-group .proimg{
+		margin-left: auto;
+		margin-right: auto;
+	}
+	form#send-email .body-line textarea{
+	 width: 80%;
+  }
+	form#send-email input[type='submit']{
+		position: relative;
+		left: -8%;
+		
+	}
+}
+@media all and (max-width:460px){
+	html{
+		font-size:37.5% !important;;
+	}
 }

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" /> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.css">
     <!-- [if lt IE 9]><script src="js/html5.js"></script><![endif] -->
     <script src="/static/js/jquery-1.8.3.min.js"></script>
     <script src="/static/js/jquery.tiles.js"></script>
@@ -18,79 +18,7 @@
     <link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
   </head>
     <body>
-        <script>
-            window.onload=function(){
-                var i=document.getElementsByTagName('input').length;
-                for(var n=0;n<i-1;n++){
-                    if(document.getElementsByTagName('input')[n].className!="sign-up-btn"){
-                        document.getElementsByTagName('input')[n].value='';
-                    }
-                }
-                var check=document.getElementsByClassName("check");
-                for(var x=0;x<check.length;x++){
-                    check[x].style.opacity="0";
-                }
-            }
-        </script>
-        <div class="Top-bar">
-            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
-            <div class="LabSlogan">
-                <span> 遇到问题立即沟通 !<br></span>
-                <span class="secondslo"> 我是最后负责人 !</span>
-            </div>
-            <div class="enter">
-                <div class="person">
-                    <a href="/myaccount/">
-                        <img src="/media/{{ user.last_name }}" alt="用户头像">
-                    </a>
-                    <span class="drop-menu" id="drop-menu">
-                        <a href="/myaccount/">
-                            个人中心
-                        </a>
-                    </span>
-                    <span class="drop-menu" id="drop-menu">
-                        <a href="/index/logout/">
-                            注销
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <!-- 导航栏 -->
-        <nav role="navigation">
-            <div class="region region-navigation">
-                <ul class="navbar-menu">
-                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
-                    </li>
-                    <li class="dropdown"><a href="javascript:void(0);">项目组<span class="caret"></span></a>
-                        <ul class="dropdown-menu pull-right">
-
-                        {% for team in teams %}
-                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
-                        {% endfor %}
-                        {% if perms.RedAnt.add_projectteam %}
-                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
-                         {% endif %}
-
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
-                        <ul class="dropdown-menu pull-right">
-                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
-                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
-                            <li class="lastmenuli"><a href="#">添加课程</a></li>
-                        </ul>
-                    </li>
-                    <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
-                    </li>
-                    <li class="leaf"><a href="/index/#contact" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
-                    </li>
-                   {% if perms.auth.change_user %}
-                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
-                   {% endif %}
-                </ul>
-            </div>
-        </nav>
+        {% include 'topBar.html' %}
         <div class="limit">
         <!-- Project -->
         <div class="project">

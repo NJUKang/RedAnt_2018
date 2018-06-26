@@ -1,9 +1,19 @@
 <style>
     #submit{width: 60px;border-radius: 5px; background-color: deepskyblue;border: none; color: white; height: 30px;}
 </style>
+ <div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+                <div class="jquery-accordion-menu-header" id="form">
+                    <a href="/courses/major={{ course.id }}/">{{ course.Name }}</a>
+                </div>
+                <ul id="demo-list">
+                    <li>
+                        <a href=""><i class="fa fa-calendar"></i>新增章节 </a>
+                    </li>
+                </ul>
+        </div>
 <div class="main-container" >
     <div style="margin-left: 450px;">
-        <form action="/courses/zhangjie_add" enctype="multipart/form-data" method="post">
+        <form action="" enctype="multipart/form-data" method="post">
             <table>
                 <colsgroup>
                     <col style="width: 120px;">
@@ -30,7 +40,7 @@
                     <td>
                     </td>
                     <td>
-                        <button id="submit" type="submit">提交</button>
+                        <button id="submit" type="submit" >提交</button>
                     </td>
                 </tr>
             </table>

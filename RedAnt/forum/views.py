@@ -2,13 +2,15 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 import urllib.request
 from RedAnt.forms import postForm,myUEditorModelForm
-from RedAnt.models import Post,lPost,ProjectTeam
+from RedAnt.models import Post,lPost,ProjectTeam,Course
 from django.contrib.auth.models import User
+
 
 def index(request):
     posts = Post.objects.all().order_by('-modify_time')
     teams = ProjectTeam.objects.all()
-    return render(request, 'forum.html',{'teams': teams,'posts':posts})
+    courses = Course.objects.all()
+    return render(request, 'forum.html',{'teams': teams,'posts':posts,'courses': courses})
 
 def post(request):
     if request.method == 'POST':
@@ -31,7 +33,8 @@ def post(request):
     else:
         form = myUEditorModelForm()
         teams = ProjectTeam.objects.all()
-        return render(request,'forums.html',{'teams': teams,'form': form})
+        courses = Course.objects.all()
+        return render(request,'forums.html',{'teams': teams,'form': form,'courses': courses})
 
 def forum(request,name,page):
     if request.method == 'POST':
@@ -54,7 +57,8 @@ def forum(request,name,page):
         post = postForm()
         name = Post.objects.get(id=name).name
         teams = ProjectTeam.objects.all()
-        return render(request, 'forumContent.html',{'teams': teams,'lposts':lposts,'lpost':lpost,'post':post,'name':name})
+        courses = Course.objects.all()
+        return render(request, 'forumContent.html',{'teams': teams,'lposts':lposts,'lpost':lpost,'post':post,'name':name,'courses': courses})
 
 def forumJump(request,name):
     url = request.get_full_path()+'page=1/'

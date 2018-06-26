@@ -11,6 +11,16 @@ var closeAlert=function(){
 	$("#model-alertInfo .model-container").css("top","29%");
 }
 
+var showAlert0=function(){
+	$("#model-alertInfo_0").css("display","block");
+	$("#model-alertInfo_0 .model-container").animate({opacity:"1",top:"30%"},300);
+}
+
+function alertInfoWithJump0(msg){
+	showAlert0();
+	$("#model-alertInfo_0 .model-body .message")[0].innerHTML=msg;
+}
+
 
 function alertInfoWithJump(msg,url){
 	// $("#model").css("display","none");

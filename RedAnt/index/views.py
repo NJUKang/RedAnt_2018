@@ -2,7 +2,7 @@
 from RedAnt.forms import myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import Blog,ProjectTeam,inviteCode,Introduction,ContactUs,Poster
+from RedAnt.models import Blog,ProjectTeam,inviteCode,Introduction,ContactUs,Poster,Course
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -15,6 +15,7 @@ import re
 import datetime
 import random
 from django.core.mail import send_mail
+from DUSite import settings
 
 def sign_in(request):
     if request.method == 'POST':
@@ -48,7 +49,8 @@ def sign_in(request):
         introduction = Introduction.objects.get()
         contact = ContactUs.objects.get()
         posters = Poster.objects.all()
-        return render(request, 'signIn.html',{'teams': teams, 'introduction': introduction, 'contact': contact,'posters':posters})
+        courses = Course.objects.all()
+        return render(request, 'signIn.html',{'teams': teams, 'introduction': introduction, 'contact': contact,'posters':posters,'courses': courses})
 
 def logout_system(request):
     """
@@ -91,7 +93,8 @@ def sign_up(request):
                     data = {'code': '1', 'info': u'注册成功'}
                     return JsonResponse(data)
     else:
-        return render(request,'signUp.html',{'teams':ProjectTeam.objects.all()})
+        courses = Course.objects.all()
+        return render(request,'signUp.html',{'teams':ProjectTeam.objects.all(),'courses': courses})
 
 def emailSend(request):
     if request.method == 'POST':
@@ -111,6 +114,7 @@ def emailSend(request):
         except:
             data = {'code': '0', 'info': u'邮件发送失败'}
             return JsonResponse(data)
+
 def emailCheck(request):
     if request.method == 'POST':
         email = request.POST.get("email", False)
@@ -143,7 +147,8 @@ def index(request):
     introduction = Introduction.objects.get()
     contact = ContactUs.objects.get()
     posters = Poster.objects.all()
-    return render(request, 'home.html',{'teams':teams,'introduction':introduction,'contact':contact,'posters':posters})
+    courses = Course.objects.all()
+    return render(request, 'home.html',{'teams':teams,'courses': courses,'introduction':introduction,'contact':contact,'posters':posters})
 
 @login_required
 def contactUs(request):
@@ -168,7 +173,8 @@ def contactUs(request):
         except:
             form = myUEditorModelForm()
         teams = ProjectTeam.objects.all()
-        return render(request, 'editBlog.html', {'form': form,'teams': teams})
+        courses = Course.objects.all()
+        return render(request, 'editBlog.html', {'form': form,'teams': teams,'courses': courses})
 
 @login_required
 def introduce(request):
@@ -193,7 +199,8 @@ def introduce(request):
         except:
             form = myUEditorModelForm()
         teams = ProjectTeam.objects.all()
-        return render(request, 'editBlog.html', {'form': form,'teams': teams})
+        courses = Course.objects.all()
+        return render(request, 'editBlog.html', {'form': form,'teams': teams,'courses': courses})
 
 @login_required
 def changePoster(request):
@@ -211,7 +218,8 @@ def changePoster(request):
         contact = ContactUs.objects.get()
         fileForm = FileUploadForm()
         posters = Poster.objects.all()
-        return render(request, 'poster.html', {'teams': teams, 'introduction': introduction, 'contact': contact,'fileForm': fileForm,'posters':posters})
+        courses = Course.objects.all()
+        return render(request, 'poster.html', {'teams': teams, 'introduction': introduction, 'contact': contact,'fileForm': fileForm,'posters':posters,'courses': courses})
 
 @login_required
 def deletePoster(request,name):

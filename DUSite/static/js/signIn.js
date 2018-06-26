@@ -116,4 +116,35 @@
 	})
 
 
-
+$("#forget").click(function(e){
+		e.preventDefault();
+		$("#model-alertInfo span.model-title").html("忘记密码");
+		if(cm!=true){
+			alertInformation("请填写绑定邮箱");
+			return false;
+		}
+		var mail = $("#mail").val();
+		$.ajax({
+	        type:"POST",
+	        url:"/index/sign_in/",
+	        // async:false,
+	        cache:false,
+	        data:{
+                "email": mail
+	        },
+	        success:function(data){
+	        	if(data.code == 1) {
+						alertInformation(data.info);/*"密码已发送至您的邮箱。"或"邮箱未注册"*/
+				}
+				else {
+                    alertInformation(data.info);
+                }
+	        },
+            fail: function() {
+                alertInformation("failed");
+            },
+            error: function(response) {
+                alertInformation("error");
+            }
+	    });
+	});

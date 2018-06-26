@@ -2,7 +2,7 @@
 from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode
+from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode,Course
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -41,7 +41,8 @@ def manage(request):
     else:
         users = User.objects.filter(groups__name='user')
         teams = ProjectTeam.objects.all()
-        return render(request, 'manager.html',{'users':users, 'teams': teams})
+        courses = Course.objects.all()
+        return render(request, 'manager.html',{'users':users, 'teams': teams,'courses': courses})
 
 @login_required
 def vip_manage(request):
@@ -69,7 +70,8 @@ def vip_manage(request):
     else:
         users = User.objects.filter(groups__name='admin')
         teams = ProjectTeam.objects.all()
-        return render(request, 'powerUserManage.html',{'users':users, 'teams': teams})
+        courses = Course.objects.all()
+        return render(request, 'powerUserManage.html',{'users':users, 'teams': teams,'courses': courses})
 
 @login_required
 def invitation(request):
@@ -88,7 +90,8 @@ def invitation(request):
     else:
         teams = ProjectTeam.objects.all()
         invitation = inviteCode.objects.get()
-        return render(request,'invitation.html',{'teams': teams,'inviteCode':invitation})
+        courses = Course.objects.all()
+        return render(request,'invitation.html',{'teams': teams,'inviteCode':invitation,'courses': courses})
 
 @login_required
 def changeGroup(request):

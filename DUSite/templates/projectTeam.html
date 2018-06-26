@@ -1,115 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="description" content="">
-<meta name="HandheldFriendly" content="True">
-<meta name="MobileOptimized" content="320">
-<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>{{ team.TeamName }}</title>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ team.TeamName }}</title>
 
-<link rel="alternate" type="application/rss+xml" title="" href="/index/">
-<link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
-<link rel="stylesheet" type="text/css" href="/static/css/projectTeamIndex.css">
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <link rel="alternate" type="application/rss+xml" title="" href="/index/">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:700,300" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/projectTeamIndex.css">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 
-<link rel="stylesheet" href="/static/css/essaystyle.css">
-<!--<link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/base.css">-->
-<link rel="stylesheet" href="/static/css/projectTeamIndex.css">
-<!-- <link rel="stylesheet" href="/static/WebTeam/css/xiangmuzu/bootstrap.min.css"> 
- -->
-<link rel="stylesheet" href="/static/css/animate.css">
-<link rel="stylesheet" href="/static/css/jindutiao.css">
-<link rel="stylesheet" href="/static/css/liebiao.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/wheel.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/cornerTop.css">
 
-<!--<link rel="stylesheet" type="text/css" href="/static/css/home1com.css">-->
-<link rel="stylesheet" type="text/css" href="/static/css/nav.css">
-<link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
-<link rel="stylesheet" href="/static/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
-<script src="/static/js/jquery.tiles.js"></script>
-<script src="/static/js/jquery-1.8.3.min.js"></script>
-<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-<link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
+    <link rel="stylesheet" href="/static/css/essaystyle.css">
+    <link rel="stylesheet" href="/static/css/projectTeamIndex.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/jindutiao.css">
+    <link rel="stylesheet" href="/static/css/liebiao.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
+    <link rel="stylesheet" href="/static/css/jquery.tiles.min.css">
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/alertModel.css">
+    <script src="/static/js/jquery.tiles.js"></script>
+    <script src="/static/js/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/personalCenter.css">
 </head>
 <body>
-        <div class="Top-bar">
-            <div class="top-icon"><img src="/static/images/LOGO2.png" alt="实验室图标"></div>
-            <div class="LabSlogan">
-                <span> 遇到问题立即沟通 !<br></span>
-                <span class="secondslo"> 我是最后负责人 !</span>
-            </div>
-            <div class="enter">
-                <div class="person">
-                    <a href="/myaccount/">
-                        <img src="/media/{{ user.last_name }}" alt="用户头像">
-                    </a>
-                    <span class="drop-menu" id="drop-menu">
-                        <a href="/myaccount/">
-                            个人中心
-                        </a>
-                    </span>
-                    <span class="drop-menu" id="drop-menu">
-                        <a href="/index/logout/">
-                            注销
-                        </a>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <!-- 导航栏 -->
-        <nav role="navigation">
-            <div class="region region-navigation">
-                <ul class="navbar-menu">
-                    <li class="first-leaf thisleaf"><a href="/index/" data-target="#" class="dropdown-toggle" data-toggle="dropdown">首 &nbsp;页</a>
-                    </li>
-                    <li class="dropdown"><a href="javascript:void(0);">项目组<span class="caret"></span></a>
-                        <ul class="dropdown-menu pull-right">
+{% include 'topBar.html' %}
 
-                        {% for team in teams %}
-                            <li class="dropdownmenu"><a href="/teams/major={{ team.ShortName }}/">{{ team.TeamName }} </a></li>
-                        {% endfor %}
-                        {% if perms.RedAnt.add_projectteam %}
-                             <li class="lastmenuli"><a href="/teams/operating=new/">添加项目组</a></li>
-                         {% endif %}
-
-                        </ul>
-                    </li>
-                    <li class="dropdown"><a href="javascript:void(0);" data-target="#" class="dropdown-toggle" data-toggle="dropdown">课程展示 <span class="caret"></span></a>
-                        <ul class="dropdown-menu pull-right">
-                            <li class="dropdownmenu"><a href="/courses/major=cptCp/">计算机组成原理</a></li>
-                            <li class="dropdownmenu"><a href="/courses/major=cptNw/">计算机网络</a></li>
-                            <li class="lastmenuli"><a href="#">添加课程</a></li>
-                        </ul>
-                    </li>
-                    <li class="leaf"><a href="/forum/" >论 &nbsp;坛 </a>
-                    </li>
-                    <li class="leaf"><a href="/index/#contact" data-target="#" class="dropdown-toggle" data-toggle="dropdown">联系我们 </a>
-                    </li>
-                   {% if perms.auth.change_user %}
-                <li class="last leaf"><a href="/manage/"  target="_blank">用户管理 </a></li>
-                   {% endif %}
-                </ul>
-            </div>
-        </nav>
-    
 <div class="wrapper">
 <section>
-    
+
   <div class="container">
   <!--侧边页面内导航栏-->
     <ul class="docs-nav">
       <li><a href="#1" class="cc-active">项目组简介</a></li>
-        
       <li><a href="#3" class="cc-active">项目组日志</a></li>
-        {% if perms.RedAnt.add_blog %}
-            {% if user.first_name == team.TeamName or user.is_superuser %}
-                 <li><a href="#4" class="cc-active">新建日志</a></li>
-            {% endif %}
-        {% endif %}
-      <li><a href="#5" class="cc-active">学习资源</a></li>
+      <li><a href="#4" class="cc-active">学习资源</a></li>
       <li class="separator"></li>
     </ul>
     <div class="docs-content">
@@ -126,22 +60,22 @@
           {% autoescape off %}
               {{ team.Introduction }}
           {% endautoescape %}
-              
+
       </p>
-    
+
 
     </div>
 
       <hr>
      <div>
-     
+
       <h3 id="3">日志 {% if perms.RedAnt.add_blog  %}
-        {% if user.first_name == team.TeamName or user.is_superuser %}     
+        {% if user.first_name == team.TeamName or user.is_superuser %}
       <button onclick="window.location.href='article=new/'" class="edit rightBottom"><i class="fa fa-plus"></i>新建日志</button>
         {% endif %}
         {% endif %}
     </h3>
-      
+
     <hr style="margin-top: 0px">
       <ul class="cbp_tmtimeline">
            {% for blog in blogs %}
@@ -151,11 +85,11 @@
             <div style="width:100%">
               <div id="article" class="article">
                  <h4>{{ blog.Name }}</h4>
-                 <span class="blogpic"><img src="{{ blog.ImagePath }}"></span><p id="content">
+                  <p id="content">
                     {% autoescape off %}
                         {{ blog.Content }}
                     {% endautoescape %}
-                </p>
+                  </p>
               </div>
               <button class="unfold foldbutton"><i class="fa fa-angle-double-down"></i> 展开</button>
               <button class="fold foldbutton"><i class="fa fa-angle-double-up"></i> 收起</button>
@@ -175,10 +109,10 @@
       </ul>
       </div>
       <hr>
-    
+
       <hr>
 
-      <h3 id="5">学习资源</h3>
+      <h3 id="4">学习资源</h3>
       <ol class="rectangle-list">
          {% for resource in resourceList %}
             <li><a href="/media/{{ resource.fileField }}">{{ resource.name }}
@@ -206,7 +140,7 @@
     <div class="model-alertInfo" id="model-alertInfo">
             <div class="model-container">
                 <div class="model-head">
-                    <span class="model-title">网站组</span>
+                    <span class="model-title">项目组</span>
                     <i class="fa fa-close"></i>
                 </div>
                 <div class="model-body">
@@ -228,6 +162,7 @@
   </div>
 </footer>
 <script src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/signIn.js"></script>
 <script type="text/javascript" src="/static/js/prettify.js"></script>
 <script type="text/javascript" src="/static/js/index.js"></script>
 <script type="text/javascript" src="/static/js/layout.js"></script>
@@ -241,13 +176,13 @@
   var show_height =160;
   i=0;
 
-  for ( i=0; i<objs.length; i++) 
+  for ( i=0; i<objs.length; i++)
   {
     unfolds[i].index=i;
     folds[i].index=i;
     if(objs[i].scrollHeight>show_height){
-      unfolds[i].style.display = 'block';   
-    }       
+      unfolds[i].style.display = 'block';
+    }
     else{
       unfolds[i].style.display='none';
     }

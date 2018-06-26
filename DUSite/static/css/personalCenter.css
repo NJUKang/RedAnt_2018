@@ -31,8 +31,8 @@ a{
 }
 .top-icon img{
 	display: block;
-	height: 6rem;
-	width: 13rem;
+	height: 4rem;
+	width: auto;
 }
 .LabSlogan{
 	display: block;
@@ -118,16 +118,7 @@ a{
 	color: #2A8FBD;
 }
 
-/*页脚
------------------------------------------------------------------------------*/
-footer{
-	position: relative;
-	text-align: center;
-	display: block;
-	width: 100%;
-	color: white;
-	background-color: rgba(39,68,114,1);
-}
+
 /*布局
 --------------------------------------------------------------------------- */
 .main-container{
@@ -138,24 +129,13 @@ footer{
 	font-size: 1.4rem;
 }
 .main-container .vacant{
-	width: 20%;
+	width: 25%;
 	float: left;
 	/*background: red;*/
 	height: 100%;
 }
-.main-container .vacant.right{
-	float: right;
-	/*background-color: blue;*/
-}
-.main-container .change, .main-container .sidebar{
-	height: 100%;
-	overflow: hidden;
-	outline: none;
-	position: relative;
-	margin: 0;
-}
 .main-container .change{
-	width: 40%;
+	width: 70%;
 	display: inline-block;
 	/*! left: -5%; */
 	/*border-left: solid 0.1rem #CCC;*/
@@ -163,7 +143,13 @@ footer{
 	/*background-color: gold;*/
 	min-width: 44rem;
 	position: absolute;
-	transform: translate(-10%,0);
+}
+.main-container .change, .main-container .sidebar{
+	height: 100%;
+	overflow: hidden;
+	outline: none;
+	position: relative;
+	margin: 0;
 }
 .main-container .sidebar{
 	width: 19%;
@@ -195,7 +181,7 @@ footer{
 	width: 9rem;
 	border-radius: 50%;
 }
-.main-container table form{
+/* .main-container table form{
 	position: relative;
 }
 .main-container table form input#id_file{
@@ -216,7 +202,7 @@ footer{
 	top: -0.1rem;
 	background-color: #eee;
 	border-left: solid 1px rgba(0,0,0,0.3);
-}
+} */
 .main-container table .hide{
 	position: absolute;
 	display: block !important;
@@ -237,8 +223,8 @@ footer{
 	padding: 2rem 1rem;
 }
 .main-container table tr td:last-child{
-	/*min-width: 75%;*/
-	width: 40rem;
+	min-width: 75%;
+/* 	width: 40rem; */
 }
 .main-container table input[type="text"]{
 	/*border: 1px solid #c8c8c8;
@@ -284,6 +270,7 @@ footer{
 .main-container table .change-only a{
 	color: #ea6f5a;
 	margin: 0;
+	display: inline-block;
 }
 .main-container table .mail a,.main-container table .name a{
 	display: none;
@@ -340,6 +327,38 @@ footer{
 	border: 1px solid rgba(59,194,29,0.7);
 	color: #42c02e;
 }
+
+.main-container form{
+  text-align: left;
+	margin-top: 2rem;
+}
+.main-container form label{
+	font-size: 1.6rem;
+	margin-right: 1rem;
+/* 	background-color: #169bd5; */
+/* 	padding: 1rem; */
+/* 	border-radius: 0.5rem 0 0 0.5rem; */
+}
+.main-container form input{
+/* 	position:absolute;
+	clip:rect(0 0 0 0); */
+	border: solid #ddd 1px;
+}
+.main-container form button.upload{
+	padding: 0 0.5rem 0 0;
+	border: solid #ddd 2px;
+/* 	border-radius: 0 0.5rem 0.5rem 0; */
+	background-color: #ddd;
+	position: relative;
+	top: -0.2rem;
+	left: -0.4rem;
+/* 	border-left: 1px solid #eee; */
+}
+.main-container form i{
+	margin: 0.5rem;
+	color: black;
+}
+
 .main-container ul{
 	list-style: none;
 	padding: 0;

@@ -1,19 +1,18 @@
-(function(){
-	'use strict';
-	$("#contactUs").click(function(){
-		$("#model-email").css("display","block");
-		// $("#model .model-container").css("top","25%");
-		$("#model-email .model-container").css("opacity",1);
-	})
-	$("#model-email .model-container .fa-close").click(function(){
-		$("#model-email").css("display","none");
-		var input=$("#model-email .model-body input");
-		var i=input.length;
-        for(var n=0;n<i-1;n++){
-            input[n].value='';
-            $("#model-email .model-body i").css("opacity",0);
-        }
-	})
+﻿(function(){
+	// $("#contactUs").click(function(){
+	// 	// $("#model-email").css("display","block");
+	// 	// // $("#model .model-container").css("top","25%");
+	// 	// $("#model-email .model-container").css("opacity",1);
+	// })
+	// $("#model-email .model-container .fa-close").click(function(){
+	// 	$("#model-email").css("display","none");
+	// 	var input=$("#model-email .model-body input");
+	// 	var i=input.length;
+ //        for(var n=0;n<i-1;n++){
+ //            input[n].value='';
+ //            $("#model-email .model-body i").css("opacity",0);
+ //        }
+	// })
 
 })();
 var cfm='';
@@ -22,14 +21,14 @@ function checkFromMail(node) {
     var mail = node.value;
     if( ! isEmail(mail) ){
     	tip.style.color="red";
-    	tip.opacity=1;
+    	tip.style.opacity=1;
     	tip.className="check fa fa-close";
     	cfm=false;
     	return false;
     }
     else{
-    	tip.className="check fa";
-    	tip.opacity=0;
+    	// tip.className="check fa";
+    	tip.style.opacity=0;
     	cfm=true;
     }
 }
