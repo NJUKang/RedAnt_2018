@@ -12,15 +12,19 @@
                         <a href="/courses/major={{ course.id }}?zjs_id={{ zjs.id }}">{{ zjs.name }} </a>
                     </li>
                 {% endfor %}
+            {% if perms.auth.change_couser %}
                 <li>
                     <a href="/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ course.id }}&zj={{ zj.name }}" class="addPart"><button class="addSlides">添加子章节</button></a>
                 </li>
+            {% endif %}
             </ul>
         </li>
         {% endfor %}
+    {% if perms.auth.change_couser %}
     <li>
         <a href="/courses/zhangjie_add?kecheng={{ course.id }}"><i class="fa fa-calendar"></i>新增章节 </a>
     </li>
+    {% endif %}
 </ul>
 </div>
 </div>

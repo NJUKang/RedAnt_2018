@@ -6,6 +6,7 @@
                     	<div class="coutitle">
                     		<h3>{{ zjsmall.name }}</h3>
                     	</div>
+                        {% if perms.auth.change_couser %}
                         <button class="rightBottom" onclick="alertInfoWithJump('确认删除此章节？','?zjs_id={{ zjsmall.id }}&operating=delzjs')"><i class="fa fa-trash"></i>删除
                         </button>
                         <button class="rightBottom" onclick="window.location.href='/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ course.id }}&zj={{ zj.name }}&zjs_id={{ zjsmall.id }}&type=video&zjsmall={{ zjsmall.name }}' " id="videoEdit"><i class="fa fa-pencil"></i>编辑
@@ -13,6 +14,7 @@
                         <button class="rightBottom" onclick=" window.location.href='/courses/zhangjie_small_add?zj_id={{ zj.id }}&kecheng={{ course.id }}&zj={{ zj }}&zjs_id={{ zjsmall.id }}&type=content&zjsmall={{ zjsmall.name }}' " id="slidsEdit" >
                             <i class="fa fa-pencil"></i>编辑
                         </button>
+                        {% endif %}
                         <div style="margin-top: 10px;margin-left: 5%;">  
                             <button onclick="video()" class="contButton">视频</button>
                             <button onclick="slids()" class="contButton">课件</button>
