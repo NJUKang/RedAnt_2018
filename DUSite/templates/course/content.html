@@ -38,9 +38,9 @@
                     <div class="video" id="video">
                         <p>{{ zjsmall.video_desc }}</p>
                             <video controls preload="meta" width="640" height="350" poster="/static/images/poster.png" data-setup="{}">
-                                <source src="/static/upload/zjsp/{{ zjsmall.video}}" type="video/mp4">
-        						<source src="/static/upload/zjsp/{{ zjsmall.video}}" type="video/webm">
-        						<source src="/static/upload/zjsp/{{ zjsmall.video}}" type="video/ogg">
+                                <source src="/media/course/{{ zjsmall.video}}" type="video/mp4">
+        						<source src="/media/course/{{ zjsmall.video}}" type="video/webm">
+        						<source src="/media/course/{{ zjsmall.video}}" type="video/ogg">
                             </video>
                             <hr>
                     </div>
@@ -59,7 +59,7 @@
                                         <i class="fa fa-angle-left"></i>
                                     </div>
                                     {% for img in pics %}
-                                        <img src="/static/upload/zjsp/{{ img.file}}" alt="轮播图片">
+                                        <img src="/media/course/{{ img.file}}" alt="轮播图片">
                                     {% endfor %}
                                     <div id="after" class="after">
                                         <i class="fa fa-angle-right"></i>
