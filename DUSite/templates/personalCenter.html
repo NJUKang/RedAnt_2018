@@ -11,15 +11,6 @@
     <link rel="stylesheet" type="text/css" href="/static/css/nav.css">
 </head>
 <body>
-    <!-- 修改密码，管理参与的项目 -->
-    <script type="text/javascript">
-        window.onload=function(){
-                var username=document.getElementById('username');
-                username.value='{{ user }}';
-                var uImag=document.getElementById('main').getElementsByClassName('change')[0].getElementsByTagName('img')[0];
-                uImag.src='/media/{{ user.last_name }}';
-            }
-    </script>
     {% include 'topBar.html' %}
         <div class="main-container" id="main">
             <div class="vacant left"></div>
@@ -28,7 +19,7 @@
         --><div class="change">
                 <table>
                     <tr><td>
-                        <img alt="用户头像"></td>
+                        <img src="/media/{{ user.last_name }}" alt="用户头像"></td>
                         <td>
                             <div class="upload">
                                 <div class="content">
@@ -44,7 +35,7 @@
                     <tr class="name"><td class="setting-title">
                         <span>用户名</span></td>
                         <td>
-                            <input type="text" name="username" id="username" onchange="checkAccount(this)" disabled="disabled"  onfocus="show(this)" onblur="hide(this)"><!--  -->
+                            <input type="text" name="username" id="username" value='{{ user }}' onchange="checkAccount(this)" disabled="disabled"  onfocus="show(this)" onblur="hide(this)"><!--  -->
                             <a href="javascript:void(0)" class="disable">修改用户名</a>
                             <i class="check fa fa-close" id="check-name"><span></span></i>
                             <i class="hint-checkname fa fa-exclamation-circle"></i>
