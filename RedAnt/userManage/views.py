@@ -2,7 +2,7 @@
 from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode,Course
+from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode,Course,log
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -107,3 +107,10 @@ def changeGroup(request):
         except:
             data = {'code': '0', 'info': u'用户不存在'}
             return JsonResponse(data)
+
+@login_required
+def userLog(request):
+    teams = ProjectTeam.objects.all()
+    courses = Course.objects.all()
+    logs = log.objects.all()
+    return render(request, 'userLogs.html', {'teams': teams, 'courses': courses,'logs':logs})

@@ -2,7 +2,7 @@
 from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import ProjectTeam,Blog,LearningResources,Photo,Course
+from RedAnt.models import ProjectTeam,Blog,LearningResources,Photo,Course,log
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
@@ -50,6 +50,8 @@ def teamMajor(request,name):
             file.fileField = fileForm.cleaned_data['file']
             file.name = file.fileField.name
             file.save()
+            newLog = log(User=request.user.username, Content="上传了学习资源 "+file.name+" 。")
+            newLog.save()
         url = request.get_full_path()
         return HttpResponseRedirect(url)
     else:
@@ -79,6 +81,8 @@ def edit(request,name):
             team.Introduction = newTeam.Introduction
             newTeam.delete()
             team.save()
+            newLog = log(User=request.user.username, Content="编辑 " + team.TeamName + " 信息。")
+            newLog.save()
             url = '/teams/major=' + str(team.id) + '/'
             return HttpResponseRedirect(url)
         else:
@@ -99,6 +103,8 @@ def delete(request, name):
         user.first_name = ''
         user.save()
     team.delete()
+    newLog = log(User=request.user.username, Content="删除 " + team.TeamName + " 。")
+    newLog.save()
     url = '/index/'
     return HttpResponseRedirect(url)
 
@@ -112,6 +118,8 @@ def editBlog(request, name, article):
                 blog = form.save()
                 blog.Team = ProjectTeam.objects.get(id=int(name))
                 blog.save()
+                newLog = log(User=request.user.username, Content="新建日志 " + blog.Name + " 。")
+                newLog.save()
                 url = '/teams/major=' + name +'/'
                 return HttpResponseRedirect(url)
             else:
@@ -130,6 +138,8 @@ def editBlog(request, name, article):
                 blog.Team = ProjectTeam.objects.get(id=name)
                 blog = transform(blog)
                 blog.save()
+                newLog = log(User=request.user.username, Content="编辑日志 " + blog.Name + " 。")
+                newLog.save()
                 url = '/teams/major=' + name +'/'
                 return HttpResponseRedirect(url)
             else:
@@ -144,6 +154,8 @@ def editBlog(request, name, article):
 @permission_required('RedAnt.delete_blog')
 @login_required
 def deleteBlog(request, name, article):
+    newLog = log(User=request.user.username, Content="删除日志 " +  Blog.objects.get(id=article).Name + " 。")
+    newLog.save()
     Blog.objects.get(id=article).delete()
     url = '/teams/major=' + name + '/'
     return HttpResponseRedirect(url)
@@ -151,6 +163,8 @@ def deleteBlog(request, name, article):
 @permission_required('RedAnt.delete_learningresources')
 @login_required
 def deleteResource(request, name, file):
+    newLog = log(User=request.user.username, Content="删除学习资源 " + LearningResources.objects.get(fileField=file).name + " 。")
+    newLog.save()
     LearningResources.objects.get(fileField=file).delete()
     url = '/teams/major=' + name + '/'
     return HttpResponseRedirect(url)
@@ -164,6 +178,9 @@ def changeImg(request,name):
             photo = Photo()
             photo.fileField = fileForm.cleaned_data['file']
             photo.save()
+            newLog = log(User=request.user.username,
+                         Content="修改 " + team.TeamName + " 照片。")
+            newLog.save()
             try:
                 Photo.objects.get(fileField = team.GroupPhoto).delete()
                 team.GroupPhoto = photo.fileField

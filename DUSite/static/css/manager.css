@@ -105,3 +105,27 @@
 .main-container .manager form.inv .save{
 	margin-left: 7px;
 }
+/*logs
+----------------------------------------------------------------------------------------------------- */
+.main-container .manager .prim-list .logs{
+	box-sizing: border-box;
+	width: 90%;
+	color: black;
+	background-color: #eee;
+	padding: 0.5rem 2rem;
+	font-size: 1.4rem;
+	margin: 0.5rem 0;
+	border-radius: 4px;
+	word-wrap: break-word;
+}
+.main-container .manager .prim-list .logs p{
+	word-wrap: break-word;
+}
+.main-container .manager .prim-list{
+	display: inline-block;
+	margin-top: 2rem;
+}
+.main-container .manager{
+	left: 0;
+	margin-left: -10%;
+}
