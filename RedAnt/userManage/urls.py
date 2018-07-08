@@ -6,5 +6,7 @@ urlpatterns = [
     url(r'log/', views.userLog),
     url(r'invitation/', views.invitation),
     url(r'powerUser/', views.vip_manage),
+    url(r'changeMail/', views.emailManage),
+    url(r'changeEmail/', views.changEmail),
     url(r'', views.manage),
     ]
