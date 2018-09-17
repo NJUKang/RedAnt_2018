@@ -10,6 +10,11 @@ from DUSite import settings
 import os
 from hashlib import md5
 
+class log(models.Model):
+    User = models.CharField(max_length=100)
+    Content = models.CharField(max_length=100)
+    Time = models.DateTimeField(auto_now=True)
+
 class Introduction(models.Model):
     Name = models.CharField(u'名称', max_length=100)
     Content = UEditorField(u'内容', height=200, width=788,imagePath="introduction/",toolbars="besttome")

@@ -2,13 +2,14 @@
 from RedAnt.forms import teamForm,myUEditorModelForm,FileUploadForm
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
-from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode,Course
+from RedAnt.models import ProjectTeam,Blog,LearningResources,inviteCode,Course,log
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required, permission_required
 import DUSite
 from bs4 import BeautifulSoup
+from DUSite import settings
 import urllib.request
 import json
 import re
@@ -107,3 +108,38 @@ def changeGroup(request):
         except:
             data = {'code': '0', 'info': u'用户不存在'}
             return JsonResponse(data)
+
+@login_required
+def userLog(request):
+    teams = ProjectTeam.objects.all()
+    courses = Course.objects.all()
+    logs = log.objects.all()
+    return render(request, 'userLogs.html', {'teams': teams, 'courses': courses,'logs':logs})
+
+@login_required
+def emailManage(request):
+    teams = ProjectTeam.objects.all()
+    courses = Course.objects.all()
+    f = open(settings.STATIC_ROOT + "email", "r")  # 打开文件
+    host = f.readline().rstrip('\n')  # 读一行
+    email = f.readline().rstrip('\n')  # 读一行
+    f.close()
+    return render(request, 'changeMail.html', {'teams': teams, 'courses': courses,'email':email})
+
+@login_required
+def changEmail(request):
+    if request.method == 'POST':
+        mail = request.POST.get("mail")
+        code = request.POST.get("code")
+        format = re.findall(r"@(.+?)\.", mail)
+        if re.findall(r"@(.+?)\.", mail):
+            f = open(settings.STATIC_ROOT + "email", "w")  # 打开文件
+            if format[0] == '163' or format[0] == 'qq':
+                if format[0] == '163':
+                    seq = ['smtp.163.com\n', mail+'\n', code+'\n']
+                if format[0] == 'qq':
+                    seq = ['smtp.qq.com\n', mail + '\n', code + '\n']
+                f.writelines(seq)
+                data = {'code': '1', 'info': u'修改成功'}
+                f.close()
+                return JsonResponse(data)

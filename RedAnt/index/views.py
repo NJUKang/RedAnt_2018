@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.decorators import login_required, permission_required
 import DUSite
 from bs4 import BeautifulSoup
+from DUSite import settings
 import urllib.request
 import json
 import re
@@ -103,7 +104,11 @@ def emailSend(request):
             sender = request.POST.get("sender", False)
             content = request.POST.get("content", False)
             msg = sender+'  '+senderEmail
-            subject, form_email, to = msg, '1023293436@qq.com', '1023293436@qq.com'
+            f = open(settings.STATIC_ROOT + "email", "r")  # 打开文件
+            host = f.readline().rstrip('\n')  # 读一行
+            email = f.readline().rstrip('\n')  # 读一行
+            f.close()
+            subject, form_email, to = msg, email, email
             text_content =content
             send_mail(
                 subject=subject, message=text_content,
